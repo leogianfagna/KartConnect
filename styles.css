@@ -1,0 +1,69 @@
+#nav-bar {
+    background-image: linear-gradient(to bottom right, #333c42, #1D1E24);
+    padding-top: 7px;
+    padding-bottom: 7px;
+    font-family: 'Athletic', sans-serif;
+    letter-spacing: 1.5px;
+}
+
+.elementosNav a {
+    padding: 20px;
+    font-size: 22px;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    font-family: 'Athletic', sans-serif;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    max-height: 100%;
+}
+
+.elementosNav button {
+    margin-right: 30px;
+}
+
+.nav-bar-button {
+    background-color: transparent;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    border-color: #424242;
+    border-radius: 30px;
+    font-size: 16px;
+    letter-spacing: 2px;
+
+
+    width: 130px;
+    height: 50px;
+}
+
+.nav-bar-button:hover {
+    background-color: #ff5733;
+    border-color: #ff5733;
+}
+
+.nav-bar-button-destaque {
+    background-color: #ff5733;
+    border-color: #ff5733;
+}
+
+.nav-bar-button-destaque:hover {
+    background-color: #da3813;
+    border-color: #da3813;
+}
+
+.div-branca {
+    display: flex;
+    /* Precisei usar para conseguir centralizar os botões com a div pai */
+    justify-content: center;
+    align-items: center;
+}
+
+@font-face {
+    font-family: 'Athletic';
+    src: url('/fonts/NewAthleticM54.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}

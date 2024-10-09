@@ -1,0 +1,28 @@
+div.animacaoBarras a:before, div.animacaoBarras a:after
+{
+  position: absolute;
+  opacity: 0;
+  width: 0%;
+  height: 2px;
+  content: '';
+  background: #FFF;
+  transition: all 0.3s;
+}
+
+div.animacaoBarras a:before
+{
+  left: 0px;
+  top: 12px; 
+}
+
+div.animacaoBarras a:after
+{
+  right: 0px;
+  bottom: 12px;
+}
+
+div.animacaoBarras a:hover:before, div.animacaoBarras a:hover:after
+{
+  opacity: 1;
+  width: 100%;
+}
