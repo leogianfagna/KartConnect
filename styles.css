@@ -1,3 +1,7 @@
+body {
+    background-image: linear-gradient(to bottom right, #333c42, #1D1E24);
+}
+
 #nav-bar {
     background-image: linear-gradient(to bottom right, #333c42, #1D1E24);
     padding-top: 7px;
@@ -59,6 +63,33 @@
     /* Precisei usar para conseguir centralizar os botões com a div pai */
     justify-content: center;
     align-items: center;
+}
+
+.info-pages {
+    margin-top: 70px;
+    margin-bottom: 100px;
+}
+
+.info-pages h1 {
+    color: white;
+    font-family: 'Athletic', sans-serif;
+}
+
+.info-pages p {
+    color: white;
+    font-family: 'Athletic', sans-serif;
+}
+
+.info-pages button {
+    color: white;
+    font-family: 'Athletic', sans-serif;
+}
+
+.info-pages-white-button {
+    color: #1E1F25 !important;
+    font-family: 'Athletic', sans-serif;
+    background-color: #f7f2ed;
+    border-color: #f7f2ed;
 }
 
 @font-face {
