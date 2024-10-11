@@ -13,16 +13,48 @@
   <link rel="stylesheet" href="/src/main/web/css/scroll-bar.css">
 </head>
 
-<body>
+<body class="page-register">
   <div id="navbar-placeholder"></div>
   <script>
     fetch('/src/main/web/html/navbar.html')
       .then(response => response.text())
       .then(data => {
         document.getElementById('navbar-placeholder').innerHTML = data;
-      });
+      });     
   </script>
-  <h1>Página de login</h1>
+
+  <div class="container" style="max-width: 800px;">
+    <!-- <img src="/src/main/web/images/main-kart.png"> -->
+    <h1 class="text-center page-title" style="margin: 50px;">ENTRAR NA CONTA</h1>
+
+    <form class="row g-3 needs-validation forms-font" novalidate>
+      <div class="col-md-12">
+        <label for="validation-name" class="form-label">E-mail ou nome de usuário</label>
+        <input type="text" class="form-control" id="validation-name" required>
+        <div class="invalid-feedback">Campo não preenchido.</div>
+      </div>
+
+      <div class="col-md-12">
+        <label for="validation-password" class="form-label">Senha</label>
+        <input type="password" id="validation-password" class="form-control" aria-describedby="passwordHelpInline" required>
+        <div class="invalid-feedback">Campo não preenchido.</div>
+      </div>
+      
+      <div class="col-12">
+        <div class="form-check">
+          <input class="form-check-input was-validated" type="checkbox" id="remember-email">
+          <label for="remember-email">Lembrar do meu usuário</label>
+        </div>
+      </div>
+
+      <div class="col-12 d-flex justify-content-center" style="margin-top: 30px">
+        <button type="submit" class="btn btn-primary form-submit-button">ENTRAR</button>
+      </div>
+    </form>
+  </div>
+
+
+  <script src="/src/main/web/js/form-validation.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
