@@ -1,5 +1,6 @@
 body {
     background-image: linear-gradient(to bottom right, #333c42, #1D1E24);
+    overflow: overlay;
 }
 
 #nav-bar {
@@ -68,26 +69,29 @@ body {
 .info-pages {
     margin-top: 70px;
     margin-bottom: 100px;
+    font-family: 'ChakraPetchLight', sans-serif;
 }
 
 .info-pages h1 {
     color: white;
-    font-family: 'Athletic', sans-serif;
+    font-size: 50px;
+    font-family: 'ChakraPetchBold', sans-serif;
 }
 
 .info-pages p {
     color: white;
-    font-family: 'Athletic', sans-serif;
+    
 }
 
 .info-pages button {
     color: white;
-    font-family: 'Athletic', sans-serif;
+    font-family: 'ChakraPetchMedium', sans-serif;
+    letter-spacing: 0.8px;
+    font-weight: bold;
 }
 
 .info-pages-white-button {
     color: #1E1F25 !important;
-    font-family: 'Athletic', sans-serif;
     background-color: #f7f2ed;
     border-color: #f7f2ed;
 }
@@ -96,5 +100,26 @@ body {
     font-family: 'Athletic';
     src: url('/fonts/NewAthleticM54.ttf') format('opentype');
     font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ChakraPetchBold';
+    src: url('/fonts/ChakraPetch-BoldItalic.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ChakraPetchLight';
+    src: url('/fonts/ChakraPetch-Light.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ChakraPetchMedium';
+    src: url('/fonts/ChakraPetch-Medium.ttf') format('opentype');
+    font-weight: 500;
     font-style: normal;
 }
