@@ -98,28 +98,28 @@ body {
 
 @font-face {
     font-family: 'Athletic';
-    src: url('/fonts/NewAthleticM54.ttf') format('opentype');
+    src: url('/src/main/web/fonts/NewAthleticM54.ttf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'ChakraPetchBold';
-    src: url('/fonts/ChakraPetch-BoldItalic.ttf') format('opentype');
+    src: url('/src/main/web/fonts/ChakraPetch-BoldItalic.ttf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'ChakraPetchLight';
-    src: url('/fonts/ChakraPetch-Light.ttf') format('opentype');
+    src: url('/src/main/web/fonts/ChakraPetch-Light.ttf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'ChakraPetchMedium';
-    src: url('/fonts/ChakraPetch-Medium.ttf') format('opentype');
+    src: url('/src/main/web/fonts/ChakraPetch-Medium.ttf') format('opentype');
     font-weight: 500;
     font-style: normal;
 }
