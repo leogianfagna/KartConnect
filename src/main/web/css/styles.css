@@ -1,6 +1,20 @@
-body {
+body.page-home {
     background-image: linear-gradient(to bottom right, #333c42, #1D1E24);
-    overflow: overlay;
+}
+
+body.page-register {
+    /*
+    background-image: linear-gradient(
+        to bottom,
+        #da3a17 10%,
+        #f1cbc3 30%,
+        #1D1E24 80%
+    );
+    
+    */
+    background-image: linear-gradient(to bottom, #da3a17, #1D1E24);
+    background-repeat: no-repeat;
+    background-color: #1D1E24;
 }
 
 #nav-bar {
@@ -11,7 +25,7 @@ body {
     letter-spacing: 1.5px;
 }
 
-.elementosNav a {
+.nav-elements a {
     padding: 20px;
     font-size: 22px;
     color: white;
@@ -23,7 +37,7 @@ body {
     max-height: 100%;
 }
 
-.elementosNav button {
+.nav-elements button {
     margin-right: 30px;
 }
 
@@ -96,6 +110,39 @@ body {
     border-color: #f7f2ed;
 }
 
+.page-title {
+    color: white;
+    font-size: 50px;
+    font-family: 'ChakraPetchBold', sans-serif;
+}
+
+.forms-font {
+    font-family: 'ChakraPetchLight', sans-serif;
+    color: white;
+}
+
+.form-submit-button {
+    background-color: #ff5733;
+    border-color: #ff5733;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 30px;
+    font-size: 16px;
+    letter-spacing: 2px;
+
+
+    width: 280px;
+    height: 60px;
+}
+
+.form-submit-button:hover {
+    background-color: #da3813;
+    border-color: #da3813;
+}
+
 @font-face {
     font-family: 'Athletic';
     src: url('/src/main/web/fonts/NewAthleticM54.ttf') format('opentype');
@@ -122,4 +169,13 @@ body {
     src: url('/src/main/web/fonts/ChakraPetch-Medium.ttf') format('opentype');
     font-weight: 500;
     font-style: normal;
+}
+
+.invalid-feedback {
+    color: rgb(252, 55, 55);
+}
+
+/* Caso use a mensagem de sucesso dos forms do Boostrap */
+.valid-feedback {
+    color: rgb(82, 245, 82);
 }
