@@ -14,18 +14,14 @@
 </head>
 
 <body>
-  <div class="d-flex justify-content-between elementosNav animacaoBarras" style="background-color: black;" id="nav-bar">
-    <div class="d-flex justify-content-start" style="margin-left: 10%;">
-      <a href="/index.html">INÍCIO</a>
-      <a href="/index.html">PATROCINADORES</a>
-      <a href="/index.html">FUNCIONAMENTO</a>
-    </div>
-    <div class="d-flex justify-content-end div-branca" style="margin-right: 10%;">
-      <button type="button" class="btn btn-primary nav-bar-button">Contato</button>
-      <button type="button" class="btn btn-primary nav-bar-button">Login</button>
-      <button type="button" class="btn btn-primary nav-bar-button-destaque nav-bar-button">Cadastro</button>
-    </div>
-  </div>
+  <div id="navbar-placeholder"></div>
+  <script>
+    fetch('/src/main/web/html/navbar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-placeholder').innerHTML = data;
+      });
+  </script>
   
   <img src="/src/main/web/images/hero-bg-cut.png" width="100%" height="800px">
 
