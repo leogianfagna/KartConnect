@@ -13,6 +13,37 @@
             }
             
             form.classList.add('was-validated');
+            // feedbackEmailMessage();
+           
         }, false);
     });
 })();
+
+/*
+Função para usar quando for criar o botão de cadastro final, para mandar ao banco de dados.
+Só nessa hora é necessário ver se o email está de fato com os padrões.
+
+function isEmailValid() {
+    const emailInput = document.getElementById('validation-email');
+    if (emailInput != null) {
+        let inputValue = emailInput.value;
+        
+        if (!inputValue.includes("@")) {
+            return false;
+        }
+
+        if (!inputValue.includes(".com") || !inputValue.includes(".br")) {
+            return false;
+        }
+
+        return true;
+    }
+}
+
+function feedbackEmailMessage() {
+    console.log(isEmailValid());
+    if (!isEmailValid()) {
+        document.getElementById('multiple-reasons').innerText = "Este e-mail não é válido.";
+    }
+}
+*/
