@@ -305,14 +305,14 @@ footer {
     color: #ffffff;
 }
 
-/* Estilos para a mensagem de copyright */
+
 .footer-copyright {
-    text-align: center; /* Centraliza o texto */
-    margin-top: 20px; /* Adiciona um espaçamento entre as colunas e a mensagem de copyright */
-    font-size: 0.9em; /* Tamanho de fonte menor para o copyright */
-    color: #ffffff; /* Cor branca para o texto de copyright */
-  }
-  
-  .footer-copyright p {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #ffffff;
+}
+
+.footer-copyright p {
     margin: 0;
-  }
+}

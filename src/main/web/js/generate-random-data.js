@@ -45,8 +45,14 @@ function randomCelular() {
     return `(${ddd}) 9${firstPart}-${secondPart}`;
 }
 
+function isCamposValidos() {
+    const elementosComValidacao = document.querySelectorAll('.needs-validation.was-validated');
+    return elementosComValidacao.length;
+}
+
 function generateRandomData() {
-    for (let i = 0; i < 25; i++) {
+    const totalSimulations = document.getElementById('validation-simulations-total').value || 3;
+    for (let i = 0; i < totalSimulations; i++) {
         let name = randomName();
         let lapTime = randomTime();
         let email = randomEmail(name);
@@ -56,5 +62,3 @@ function generateRandomData() {
         console.log(name + ", " + lapTime + ", " + email + ", " + age + ", " + phone);
     }
 }
-
-generateRandomData();

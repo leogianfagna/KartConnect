@@ -13,7 +13,6 @@
             }
             
             form.classList.add('was-validated');
-            // feedbackEmailMessage();
            
         }, false);
     });
@@ -22,6 +21,12 @@
 /*
 Função para usar quando for criar o botão de cadastro final, para mandar ao banco de dados.
 Só nessa hora é necessário ver se o email está de fato com os padrões.
+
+Provavelmente, vai ser colocado na função ao lado do if:
+
+    if (!form.checkValidity() || !isEmailValid()) {
+        event.preventDefault();
+        ...
 
 function isEmailValid() {
     const emailInput = document.getElementById('validation-email');
