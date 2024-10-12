@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="/src/main/web/css/scroll-bar.css">
 </head>
 
-<body>
+<body class="gradient-headers">
   <div id="navbar-placeholder"></div>
   <script>
     fetch('/src/main/web/html/navbar.html')
@@ -22,7 +22,144 @@
         document.getElementById('navbar-placeholder').innerHTML = data;
       });
   </script>
-  <h1>Página dos resultados</h1>
+
+  <div class="text-center">
+    <h1 class="page-title" style="margin-top: 50px;">CLASSIFICAÇÕES</h1>
+    <p style="color: white; font-family: ChakraPetchLight;">
+      As classificações são divididas para cada kartódromo e organizadas<br>
+      de acordo com categoria de pesagem. Selecione sua busca para visualizar o que procura.
+    </p>
+  </div>
+
+  <div class="container">
+
+    <!-- Escolha de kartódromos (cartões) -->
+    <div class="d-flex text-center karts-cards">
+
+      <div class="card mx-1" style="width: 18rem;">
+        <img src="/src/main/web/images/temp/kartodromo-1.png" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Velocitá</h5>
+          <p class="card-text">São Paulo, Campinas.</p>
+          <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarKartodromo(this);">FILTRAR
+            RESULTADOS</button>
+        </div>
+      </div>
+      <div class="card mx-1" style="width: 18rem;">
+        <img src="/src/main/web/images/temp/kartodromo-2.png" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">ThunderSpeed</h5>
+          <p class="card-text">Rio de Janeiro, Niterói.</p>
+          <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarKartodromo(this);">FILTRAR
+            RESULTADOS</button>
+        </div>
+      </div>
+      <div class="card mx-1" style="width: 18rem;">
+        <img src="/src/main/web/images/temp/kartodromo-3.png" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">NitroRace</h5>
+          <p class="card-text">Minas Gerais, Belo Horizonte.</p>
+          <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarKartodromo(this);">FILTRAR
+            RESULTADOS</button>
+        </div>
+      </div>
+      <div class="card mx-1" style="width: 18rem;">
+        <img src="/src/main/web/images/temp/kartodromo-4.png" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">TurboKart</h5>
+          <p class="card-text">Paraná, Curitiba.</p>
+          <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarKartodromo(this);">FILTRAR
+            RESULTADOS</button>
+        </div>
+      </div>
+      <div class="card mx-1" style="width: 18rem;">
+        <img src="/src/main/web/images/temp/kartodromo-5.png" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Center VeloMax</h5>
+          <p class="card-text">Santa Catarina, Florianópolis.</p>
+          <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarKartodromo(this);">FILTRAR
+            RESULTADOS</button>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- Portal -->
+    <div class="container text-center" style="margin-top: 5%;">
+      <div class="row">
+
+        <!-- Seleção de categorias -->
+        <div class="col-2" style="font-family: ChakraPetchLight;">
+          <h4 class="page-title" style="font-size: 2em; margin-bottom: 20px;">CATEGORIAS</h1>
+            <div style="display: flex; flex-direction: column;" class="row-gap-3">
+              <button type="submit" class="btn btn-primary card-submit-button"
+                onclick="filtrarCategoria(this);">60KG</button>
+              <button type="submit" class="btn btn-primary card-submit-button"
+                onclick="filtrarCategoria(this);">70KG</button>
+              <button type="submit" class="btn btn-primary card-submit-button"
+                onclick="filtrarCategoria(this);">80KG</button>
+              <button type="submit" class="btn btn-primary card-submit-button"
+                onclick="filtrarCategoria(this);">90KG</button>
+              <button type="submit" class="btn btn-primary card-submit-button mb-3"
+                onclick="filtrarCategoria(this);">100KG</button>
+            </div>
+        </div>
+
+        <!-- Tabela resultados -->
+        <div class="col-10" style="font-family: ChakraPetchLight;">
+          <h4 class="page-title" style="font-size: 2em; margin-bottom: 20px;">RESULTADOS</h1>
+            <table class="table table-custom table-dark table-striped table-hover"
+              style="border-radius: 15px; overflow: hidden;">
+              <thead style="font-family: ChakraPetchMedium; letter-spacing: 1.7px;">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nome</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Peso</th>
+                  <th scope="col">Tempo</th>
+                </tr>
+              </thead>
+              <tbody class="table-group-divider">
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Leonardo</td>
+                  <td>SP</td>
+                  <td>68kg</td>
+                  <td>47.960s</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Enzo</td>
+                  <td>SP</td>
+                  <td>73kg</td>
+                  <td>48.120s</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>Pedro</td>
+                  <td>MG</td>
+                  <td>71kg</td>
+                  <td>48.740s</td>
+                </tr>
+              </tbody>
+            </table>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function filtrarCategoria() {
+      console.log("Categoria filtrada.");
+    }
+
+    function filtrarKartodromo() {
+      console.log("Kartódromo filtrado.");
+    }
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

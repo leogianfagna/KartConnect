@@ -2,16 +2,7 @@ body.page-home {
     background-image: linear-gradient(to bottom right, #333c42, #1D1E24);
 }
 
-body.page-register {
-    /*
-    background-image: linear-gradient(
-        to bottom,
-        #da3a17 10%,
-        #f1cbc3 30%,
-        #1D1E24 80%
-    );
-    
-    */
+body.gradient-headers {
     background-image: linear-gradient(to bottom, #da3a17, #1D1E24);
     background-repeat: no-repeat;
     background-color: #1D1E24;
@@ -104,6 +95,11 @@ body.page-register {
     font-weight: bold;
 }
 
+.info-pages a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .info-pages-white-button {
     color: #1E1F25 !important;
     background-color: #f7f2ed;
@@ -141,6 +137,39 @@ body.page-register {
 .form-submit-button:hover {
     background-color: #da3813;
     border-color: #da3813;
+}
+
+.card-submit-button {
+    background-color: #ff5733;
+    border-color: #ff5733;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 15px;
+    font-size: 1em;
+    letter-spacing: 1px;
+
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+.card-submit-button:hover {
+    background-color: #da3813;
+    border-color: #da3813;
+}
+
+.karts-cards {
+    font-family: 'ChakraPetchMedium', sans-serif;
+}
+
+.karts-cards p {
+    color: #939699 !important;
+    font-size: 0.75em;
+    margin-top: -3%;
+}
+
+.karts-cards h5 {
+    color: white !important;
 }
 
 @font-face {
@@ -200,4 +229,13 @@ body.page-register {
 /* Caso use a mensagem de sucesso dos forms do Boostrap */
 .valid-feedback {
     color: rgb(82, 245, 82);
+}
+
+.card {
+    background-image: linear-gradient(to bottom, #333c42 50%, #1D1E24);
+    border: transparent;
+}
+
+.table {
+    border-color: transparent;
 }
