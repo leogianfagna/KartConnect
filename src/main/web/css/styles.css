@@ -94,7 +94,7 @@ body.page-register {
 
 .info-pages p {
     color: white;
-    
+
 }
 
 .info-pages button {
@@ -169,6 +169,18 @@ body.page-register {
     src: url('/src/main/web/fonts/ChakraPetch-Medium.ttf') format('opentype');
     font-weight: 500;
     font-style: normal;
+}
+
+
+/* Boostrap styles */
+.form-control:focus {
+    box-shadow: 0 0.5rem 1rem rgba(214, 73, 18, 0.411);
+    border-color: rgb(255, 91, 41);
+}
+
+.form-select:focus {
+    box-shadow: 0 0.5rem 1rem rgba(214, 73, 18, 0.411);
+    border-color: rgb(255, 91, 41);
 }
 
 .invalid-feedback {
