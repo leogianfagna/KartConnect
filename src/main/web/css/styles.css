@@ -1,3 +1,8 @@
+body {
+    font-family: 'ChakraPetchLight', sans-serif;
+    color: white;
+}
+
 body.page-home {
     background-image: linear-gradient(to bottom right, #333c42, #1D1E24);
 }
@@ -6,6 +11,11 @@ body.gradient-headers {
     background-image: linear-gradient(to bottom, #da3a17, #1D1E24);
     background-repeat: no-repeat;
     background-color: #1D1E24;
+}
+
+thead {
+    font-family: ChakraPetchMedium;
+    letter-spacing: 1.7px;
 }
 
 #nav-bar {
@@ -74,7 +84,6 @@ body.gradient-headers {
 .info-pages {
     margin-top: 70px;
     margin-bottom: 100px;
-    font-family: 'ChakraPetchLight', sans-serif;
 }
 
 .info-pages h1 {
@@ -112,9 +121,12 @@ body.gradient-headers {
     font-family: 'ChakraPetchBold', sans-serif;
 }
 
-.forms-font {
-    font-family: 'ChakraPetchLight', sans-serif;
+.subtitle {
     color: white;
+    font-size: 50px;
+    font-family: 'ChakraPetchBold', sans-serif;
+    font-size: 2em;
+    margin-bottom: 20px; /* Se precisar remover esse margin, conferir os HTML que o utilizam antes */
 }
 
 .form-submit-button {
