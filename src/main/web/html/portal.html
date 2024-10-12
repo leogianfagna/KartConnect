@@ -34,7 +34,7 @@
   <div class="container">
 
     <!-- Escolha de kartódromos (cartões) -->
-    <div class="d-flex text-center karts-cards">
+    <div class="d-flex text-center karts-cards" id="kartodromos">
 
       <div class="card mx-1" style="width: 18rem;">
         <img src="/src/main/web/images/temp/kartodromo-1.png" class="card-img-top">
@@ -75,7 +75,7 @@
             RESULTADOS</button>
         </div>
       </div>
-      
+
       <div class="card mx-1" style="width: 18rem;">
         <img src="/src/main/web/images/temp/kartodromo-5.png" class="card-img-top">
         <div class="card-body">
@@ -95,17 +95,17 @@
         <!-- Seleção de categorias -->
         <div class="col-2">
           <h4 class="subtitle">CATEGORIAS</h1>
-            <div style="display: flex; flex-direction: column;" class="row-gap-3">
-              <button type="submit" class="btn btn-primary card-submit-button"
-                onclick="filtrarCategoria(this);">60KG</button>
-              <button type="submit" class="btn btn-primary card-submit-button"
-                onclick="filtrarCategoria(this);">70KG</button>
-              <button type="submit" class="btn btn-primary card-submit-button"
-                onclick="filtrarCategoria(this);">80KG</button>
-              <button type="submit" class="btn btn-primary card-submit-button"
-                onclick="filtrarCategoria(this);">90KG</button>
-              <button type="submit" class="btn btn-primary card-submit-button mb-3"
-                onclick="filtrarCategoria(this);">100KG</button>
+            <div style="display: flex; flex-direction: column;" class="row-gap-3" id="categorias">
+              <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarCategoria(this);"
+                id="cat-60">60KG</button>
+              <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarCategoria(this);"
+                id="cat-70">70KG</button>
+              <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarCategoria(this);"
+                id="cat-80">80KG</button>
+              <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarCategoria(this);"
+                id="cat-90">90KG</button>
+              <button type="submit" class="btn btn-primary card-submit-button mb-3" onclick="filtrarCategoria(this);"
+                id="cat-100">100KG</button>
             </div>
         </div>
 
@@ -154,16 +154,7 @@
 
   </div>
 
-  <script>
-    function filtrarCategoria() {
-      console.log("Categoria filtrada.");
-    }
-
-    function filtrarKartodromo() {
-      console.log("Kartódromo filtrado.");
-    }
-  </script>
-
+  <script src="/src/main/web/js/portal-filters-selector.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>

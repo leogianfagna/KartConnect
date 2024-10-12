@@ -170,6 +170,11 @@ thead {
     border-color: #da3813;
 }
 
+.option-button-selected {
+    background-color: #33beff !important;
+    border-color: #33beff !important;
+}
+
 .karts-cards {
     font-family: 'ChakraPetchMedium', sans-serif;
 }
