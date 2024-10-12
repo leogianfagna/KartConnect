@@ -126,7 +126,8 @@ thead {
     font-size: 50px;
     font-family: 'ChakraPetchBold', sans-serif;
     font-size: 2em;
-    margin-bottom: 20px; /* Se precisar remover esse margin, conferir os HTML que o utilizam antes */
+    margin-bottom: 20px;
+    /* Se precisar remover esse margin, conferir os HTML que o utilizam antes */
 }
 
 .form-submit-button {
@@ -256,3 +257,62 @@ thead {
 .table {
     border-color: transparent;
 }
+
+footer {
+    background-color: #333c42;
+    padding: 40px 0;
+    color: white;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-column {
+    width: 22%;
+}
+
+.footer-column h3 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    font-family: 'ChakraPetchMedium', sans-serif;
+}
+
+.footer-column ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-column ul li a:hover {
+    text-decoration: underline;
+}
+
+.footer-column ul li::before {
+    content: '› ';
+    margin-right: 5px;
+    color: #ffffff;
+}
+
+/* Estilos para a mensagem de copyright */
+.footer-copyright {
+    text-align: center; /* Centraliza o texto */
+    margin-top: 20px; /* Adiciona um espaçamento entre as colunas e a mensagem de copyright */
+    font-size: 0.9em; /* Tamanho de fonte menor para o copyright */
+    color: #ffffff; /* Cor branca para o texto de copyright */
+  }
+  
+  .footer-copyright p {
+    margin: 0;
+  }
