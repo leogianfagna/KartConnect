@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="/src/main/web/css/scroll-bar.css">
 </head>
 
-<body>
+<body class="gradient-headers">
   <div id="navbar-placeholder"></div>
   <script>
     fetch('/src/main/web/html/components/navbar.html')
@@ -22,8 +22,184 @@
         document.getElementById('navbar-placeholder').innerHTML = data;
       });
   </script>
-  <h1>Página dos kartódromos</h1>
 
+  <div class="container" id="kartodromos-view">
+
+    <h1 class="text-center page-title" style="margin: 50px;">KARTÓDROMOS</h1>
+
+    <div class="card text-center" id="kartodromo-velocita">
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+          <li class="nav-item kartodromo-overview-topic">
+            <p class="nav-link active" onclick="filtrarOpcao(this);">Principal</p>
+          </li>
+          <li class="nav-item kartodromo-overview-topic">
+            <p class="nav-link" onclick="filtrarOpcao(this);">Endereço</p>
+          </li>
+          <li class="nav-item kartodromo-overview-topic">
+            <p class="nav-link" onclick="filtrarOpcao(this);">Funcionamento</p>
+          </li>
+          <li class="nav-item kartodromo-overview-topic">
+            <p class="nav-link" onclick="filtrarOpcao(this);">Contato</p>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body" id="info-dos-kartodromos">
+        <h4 class="card-title" style="font-family: ChakraPetchMedium;">Kartódromo Velocitá</h4>
+        <p class="card-text" id="kartodromo-Principal" style="display: block;">O Kartódromo Velocitá é um complexo de corridas moderno, projetado para oferecer uma experiência emocionante tanto para pilotos amadores quanto profissionais. Localizado em meio a um cenário natural deslumbrante, o circuito conta com 1.2 km de pistas sinuosas e retas desafiadoras, perfeitas para testar a habilidade e destreza dos competidores.</p>
+        <p class="card-text" id="kartodromo-Endereço" style="display: none;">Rua das Corridas, 321 - Bairro Velocidade, Cidade da Aventura, SP, CEP 12345-678</p>
+        <p class="card-text" id="kartodromo-Funcionamento" style="display: none;">
+          Segunda-feira: fechado.<br>
+          Terça à sexta: 9h às 18h.<br>
+          Sábados e domingos: 9h às 22h.
+        </p>
+        <p class="card-text" id="kartodromo-Contato" style="display: none;">
+          Telefone: (11) 3456-7890<br>
+          WhatsApp: (11) 91234-5678<br>
+          Email: contato@kartodromovelocita.com
+        </p>
+      </div>
+    </div>
+
+    <div class="card text-center" style="margin-top: 40px" id="kartodromo-thunder">
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+          <li class="nav-item kartodromo-overview-topic">
+            <p class="nav-link active" onclick="filtrarOpcao(this);">Principal</p>
+          </li>
+          <li class="nav-item kartodromo-overview-topic">
+            <p class="nav-link" onclick="filtrarOpcao(this);">Endereço</p>
+          </li>
+          <li class="nav-item kartodromo-overview-topic">
+            <p class="nav-link" onclick="filtrarOpcao(this);">Funcionamento</p>
+          </li>
+          <li class="nav-item kartodromo-overview-topic">
+            <p class="nav-link" onclick="filtrarOpcao(this);">Contato</p>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body" id="info-dos-kartodromos">
+        <h4 class="card-title" style="font-family: ChakraPetchMedium;">Kartódromo Velocitá</h4>
+        <p class="card-text" id="kartodromo-Principal" style="display: block;">O Kartódromo Velocitá é um complexo de corridas moderno, projetado para oferecer uma experiência emocionante tanto para pilotos amadores quanto profissionais. Localizado em meio a um cenário natural deslumbrante, o circuito conta com 1.2 km de pistas sinuosas e retas desafiadoras, perfeitas para testar a habilidade e destreza dos competidores.</p>
+        <p class="card-text" id="kartodromo-Endereço" style="display: none;">Rua das Corridas, 321 - Bairro Velocidade, Cidade da Aventura, SP, CEP 12345-678</p>
+        <p class="card-text" id="kartodromo-Funcionamento" style="display: none;">
+          Segunda-feira: fechado.<br>
+          Terça à sexta: 9h às 18h.<br>
+          Sábados e domingos: 9h às 22h.
+        </p>
+        <p class="card-text" id="kartodromo-Contato" style="display: none;">
+          Telefone: (11) 3456-7890<br>
+          WhatsApp: (11) 91234-5678<br>
+          Email: contato@kartodromovelocita.com
+        </p>
+      </div>
+    </div>
+
+    <div class="card text-center" style="margin-top: 40px" id="kartodromo-nitro">
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+          <li class="nav-item kartodromo-overview-topic">
+            <p class="nav-link active" onclick="filtrarOpcao(this);">Principal</p>
+          </li>
+          <li class="nav-item kartodromo-overview-topic">
+            <p class="nav-link" onclick="filtrarOpcao(this);">Endereço</p>
+          </li>
+          <li class="nav-item kartodromo-overview-topic">
+            <p class="nav-link" onclick="filtrarOpcao(this);">Funcionamento</p>
+          </li>
+          <li class="nav-item kartodromo-overview-topic">
+            <p class="nav-link" onclick="filtrarOpcao(this);">Contato</p>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body" id="info-dos-kartodromos">
+        <h4 class="card-title" style="font-family: ChakraPetchMedium;">Kartódromo Velocitá</h4>
+        <p class="card-text" id="kartodromo-Principal" style="display: block;">O Kartódromo Velocitá é um complexo de corridas moderno, projetado para oferecer uma experiência emocionante tanto para pilotos amadores quanto profissionais. Localizado em meio a um cenário natural deslumbrante, o circuito conta com 1.2 km de pistas sinuosas e retas desafiadoras, perfeitas para testar a habilidade e destreza dos competidores.</p>
+        <p class="card-text" id="kartodromo-Endereço" style="display: none;">Rua das Corridas, 321 - Bairro Velocidade, Cidade da Aventura, SP, CEP 12345-678</p>
+        <p class="card-text" id="kartodromo-Funcionamento" style="display: none;">
+          Segunda-feira: fechado.<br>
+          Terça à sexta: 9h às 18h.<br>
+          Sábados e domingos: 9h às 22h.
+        </p>
+        <p class="card-text" id="kartodromo-Contato" style="display: none;">
+          Telefone: (11) 3456-7890<br>
+          WhatsApp: (11) 91234-5678<br>
+          Email: contato@kartodromovelocita.com
+        </p>
+      </div>
+    </div>
+
+    <div class="card text-center" style="margin-top: 40px" id="kartodromo-turbo">
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+          <li class="nav-item kartodromo-overview-topic">
+            <p class="nav-link active" onclick="filtrarOpcao(this);">Principal</p>
+          </li>
+          <li class="nav-item kartodromo-overview-topic">
+            <p class="nav-link" onclick="filtrarOpcao(this);">Endereço</p>
+          </li>
+          <li class="nav-item kartodromo-overview-topic">
+            <p class="nav-link" onclick="filtrarOpcao(this);">Funcionamento</p>
+          </li>
+          <li class="nav-item kartodromo-overview-topic">
+            <p class="nav-link" onclick="filtrarOpcao(this);">Contato</p>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body" id="info-dos-kartodromos">
+        <h4 class="card-title" style="font-family: ChakraPetchMedium;">Kartódromo Velocitá</h4>
+        <p class="card-text" id="kartodromo-Principal" style="display: block;">O Kartódromo Velocitá é um complexo de corridas moderno, projetado para oferecer uma experiência emocionante tanto para pilotos amadores quanto profissionais. Localizado em meio a um cenário natural deslumbrante, o circuito conta com 1.2 km de pistas sinuosas e retas desafiadoras, perfeitas para testar a habilidade e destreza dos competidores.</p>
+        <p class="card-text" id="kartodromo-Endereço" style="display: none;">Rua das Corridas, 321 - Bairro Velocidade, Cidade da Aventura, SP, CEP 12345-678</p>
+        <p class="card-text" id="kartodromo-Funcionamento" style="display: none;">
+          Segunda-feira: fechado.<br>
+          Terça à sexta: 9h às 18h.<br>
+          Sábados e domingos: 9h às 22h.
+        </p>
+        <p class="card-text" id="kartodromo-Contato" style="display: none;">
+          Telefone: (11) 3456-7890<br>
+          WhatsApp: (11) 91234-5678<br>
+          Email: contato@kartodromovelocita.com
+        </p>
+      </div>
+    </div>
+
+    <div class="card text-center" style="margin-top: 40px; margin-bottom: 100px;" id="kartodromo-velomax">
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+          <li class="nav-item kartodromo-overview-topic">
+            <p class="nav-link active" onclick="filtrarOpcao(this);">Principal</p>
+          </li>
+          <li class="nav-item kartodromo-overview-topic">
+            <p class="nav-link" onclick="filtrarOpcao(this);">Endereço</p>
+          </li>
+          <li class="nav-item kartodromo-overview-topic">
+            <p class="nav-link" onclick="filtrarOpcao(this);">Funcionamento</p>
+          </li>
+          <li class="nav-item kartodromo-overview-topic">
+            <p class="nav-link" onclick="filtrarOpcao(this);">Contato</p>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body" id="info-dos-kartodromos">
+        <h4 class="card-title" style="font-family: ChakraPetchMedium;">Kartódromo Velocitá</h4>
+        <p class="card-text" id="kartodromo-Principal" style="display: block;">O Kartódromo Velocitá é um complexo de corridas moderno, projetado para oferecer uma experiência emocionante tanto para pilotos amadores quanto profissionais. Localizado em meio a um cenário natural deslumbrante, o circuito conta com 1.2 km de pistas sinuosas e retas desafiadoras, perfeitas para testar a habilidade e destreza dos competidores.</p>
+        <p class="card-text" id="kartodromo-Endereço" style="display: none;">Rua das Corridas, 321 - Bairro Velocidade, Cidade da Aventura, SP, CEP 12345-678</p>
+        <p class="card-text" id="kartodromo-Funcionamento" style="display: none;">
+          Segunda-feira: fechado.<br>
+          Terça à sexta: 9h às 18h.<br>
+          Sábados e domingos: 9h às 22h.
+        </p>
+        <p class="card-text" id="kartodromo-Contato" style="display: none;">
+          Telefone: (11) 3456-7890<br>
+          WhatsApp: (11) 91234-5678<br>
+          Email: contato@kartodromovelocita.com
+        </p>
+      </div>
+    </div>
+    
+  </div>
+
+  <script src="/src/main/web/js/kartodromo-list-tabs.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
