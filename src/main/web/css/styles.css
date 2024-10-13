@@ -240,6 +240,13 @@ thead {
     border-color: #ff5733;
 }
 
+/* Colocar esse estilo em todo <input> que está em um <form> do bootstrap que NÃO é preciso ser validado.
+    O Bootstrap vê ele como validação e troca as cores das bordas, mas as vezes o botão não precisa ser validado
+    como "Lembrar meu usuário" */
+.form-check-dont-validate {
+    border-color: transparent !important;
+}
+
 .invalid-feedback {
     color: rgb(252, 55, 55);
 }
