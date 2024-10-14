@@ -7,7 +7,9 @@ Repositório do **time 2** do Projeto Integrador IV, realizado em 2024 pela univ
 Esse projeto cria um servidor em Java que hospeda uma aplicação web que consiste em um portal dos melhores resultados mensais de kartódromos em tempo real em uma interface interativa e amigável usando o MongoDB como banco de dados não relacional.
 
 # Como usar
-TO-DO
+Instalar o maven apache no computador.
+Adicionar nas variáveis do sistema MAVEN_HOME com diretoria na pasta deszipada do maven.
+Adicionar na variável PATH do usuário %MAVEN_HOME%\bin
 
 # Membros:
 - Enzo Marola 
