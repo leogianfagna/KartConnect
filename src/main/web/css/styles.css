@@ -190,6 +190,16 @@ thead {
     color: white !important;
 }
 
+.kartodromo-overview-topic p {
+    cursor: pointer;
+    color: white;
+}
+
+.kartodromo-overview-topic p:hover {
+    cursor: pointer;
+    color: #ff5733;
+}
+
 @font-face {
     font-family: 'Athletic';
     src: url('/src/main/web/fonts/NewAthleticM54.ttf') format('opentype');
@@ -256,9 +266,21 @@ thead {
     color: rgb(82, 245, 82);
 }
 
-.card {
+#kartodromos .card {
     background-image: linear-gradient(to bottom, #333c42 50%, #1D1E24);
     border: transparent;
+}
+
+#kartodromos-view .card {
+    background-color: #b0b2b3;
+}
+
+#kartodromos-view .card-header {
+    background-color: #333c42;
+}
+
+#kartodromos-view .active {
+    background-color: #b0b2b3;
 }
 
 .table {
