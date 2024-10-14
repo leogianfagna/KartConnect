@@ -4,25 +4,31 @@
 function filtrarOpcao(element) {
     const cardElement = element.closest('.card'); // Mesma coisa que "element.parentElement.parentElement.parentElement.parentElement"
     clearSelection(cardElement);
-    showContent(element.innerText);
+    console.log(cardElement);
+    showContent(cardElement.id, element.innerText);
     element.classList.add('active');
 }
 
 function clearSelection(element) {
     let div = element;
-    const elementos = div.querySelectorAll('.active');
-    elementos.forEach(function (elemento) {
+
+    // Limpa os demais tabs selecionados, da div element (que é o kart do kartódromo), removendo o estilo active
+    const todosCardTab = div.querySelectorAll('.active');
+    todosCardTab.forEach(function (elemento) {
         elemento.classList.remove('active');
     });
 
-    div = document.getElementById('info-dos-kartodromos');
-    const elementos2 = div.querySelectorAll('.card-text');
-    elementos2.forEach(function (elemento) {
+    // Esconde o texto antigo, da div element (que é o kart do kartódromo), para aparecer o texto respectivo ao tab selecionado
+    const todosCardText = div.querySelectorAll('.card-text');
+    todosCardText.forEach(function (elemento) {
         elemento.style.display = 'none';
     });
 }
 
-function showContent(option) {
+function showContent(card, option) {
     const elementoParaExibir = "kartodromo-" + option;
-    document.getElementById(elementoParaExibir).style.display = 'block';
+    const divKartodromoSelecionado = card;
+
+    let element = document.querySelector("#" + divKartodromoSelecionado + " ." + elementoParaExibir);
+    element.style.display = 'block';
 }
