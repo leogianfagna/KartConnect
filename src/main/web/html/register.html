@@ -130,3 +130,42 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
 </body>
+
+<script>
+    document.getElementById('form-cadastro').addEventListener('submit', function(event) {
+        event.preventDefault(); // Previne o comportamento padrão do formulário
+
+        const nome = document.getElementById('validation-name').value;
+        const sobrenome = document.getElementById('validation-surname').value;
+        const email = document.getElementById('validation-email').value;
+        const estado = document.getElementById('validation-state').value;
+        const cidade = document.getElementById('validation-city').value;
+        const senha = document.getElementById('validation-password').value;
+
+        const novoUsuario = {
+            nome: nome + ' ' + sobrenome,
+            email: email,
+            estado: estado,
+            cidade: cidade,
+            senha: senha
+        };
+
+        fetch('http://localhost:8080/api/usuarios', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(novoUsuario)
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Usuário cadastrado com sucesso:', data);
+                alert("Cadastro realizado com sucesso!");
+                // Redirecionar para outra página se necessário
+            })
+            .catch(error => {
+                console.error('Erro ao cadastrar usuário:', error);
+                alert("Erro ao cadastrar, tente novamente.");
+            });
+    });
+</script>

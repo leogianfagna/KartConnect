@@ -31,7 +31,7 @@
     <!-- Divisão em 3 -->
     <div class="row info-pages">
       
-      <div class="col"">
+      <div class="col">
         <h1>KARTÓDROMOS</h1>
         <p>Encontre todos os kartódromos que disponibilizam um portal de resultados aqui na plataforma, junto com as informações necessárias do estabelecimento.</p>
         <button type="button" class="btn btn-primary nav-bar-button info-pages-white-button" style="margin-right: 5px;">GALERIA</button>
@@ -70,3 +70,41 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
 </body>
+
+<script>
+    // Função para buscar kartódromos do backend
+    function buscarKartodromos() {
+        fetch('http://localhost:8080/api/kartodromos')  // URL do backend
+            .then(response => response.json())
+            .then(kartodromos => {
+                // Exibir kartódromos na página
+                const kartodromosContainer = document.getElementById('kartodromos-container');
+                kartodromosContainer.innerHTML = '';
+
+                kartodromos.forEach(kartodromo => {
+                    const kartodromoElement = document.createElement('div');
+                    kartodromoElement.className = "kartodromo-item";
+                    kartodromoElement.innerHTML = `
+            <h3>${kartodromo.nome}</h3>
+            <p>Endereço: ${kartodromo.endereco}</p>
+            <p>Telefone: ${kartodromo.telefone}</p>
+            <p>Email: ${kartodromo.email}</p>
+          `;
+                    kartodromosContainer.appendChild(kartodromoElement);
+                });
+            })
+            .catch(error => {
+                console.error('Erro ao buscar kartódromos:', error);
+            });
+    }
+
+    // Chama a função quando a página carregar
+    document.addEventListener('DOMContentLoaded', function() {
+        buscarKartodromos();
+    });
+</script>
+
+<!-- Container onde os kartódromos serão exibidos -->
+<div id="kartodromos-container" class="container">
+    <h2>Kartódromos Disponíveis</h2>
+</div>
