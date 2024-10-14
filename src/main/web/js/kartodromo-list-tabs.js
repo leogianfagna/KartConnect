@@ -4,7 +4,6 @@
 function filtrarOpcao(element) {
     const cardElement = element.closest('.card'); // Mesma coisa que "element.parentElement.parentElement.parentElement.parentElement"
     clearSelection(cardElement);
-    console.log(cardElement);
     showContent(cardElement.id, element.innerText);
     element.classList.add('active');
 }
