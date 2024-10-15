@@ -45,7 +45,7 @@ function filtrarKartodromo(element) {
 
 // Função para resgatar os valores do banco de dados, já com os filtros aplicados na página pelo usuário
 function buscarClassificacoes() {
-    console.log(`Kartodromo selecionado: ${selectedKartodromo}\nCategoria selecionada: ${selectedCategoria}`);
+    let tdId = 1;
 
     fetch('http://localhost:8080/api/classificacoes', { method: "GET" })
         .then(response => response.json())
@@ -58,7 +58,7 @@ function buscarClassificacoes() {
                 // Cria uma nova linha na tabela
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <th scope="row">${index + 1}</th>
+                    <th scope="row">${tdId}</th>
                     <td>${classificacao.nome}</td>
                     <td>${classificacao.estado}</td>
                     <td>${classificacao.peso}</td>
@@ -69,8 +69,10 @@ function buscarClassificacoes() {
                 if (classificacao.kartodromo === selectedKartodromo) {
                     if (selectedCategoria === 'all') {
                         tbody.appendChild(tr);
+                        tdId++;
                     } else if (pertenceCategoria(classificacao.peso) === true) {
                         tbody.appendChild(tr);
+                        tdId++;
                     }
                 }
             });
