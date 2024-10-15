@@ -13,6 +13,7 @@ import com.sun.net.httpserver.HttpExchange;
 import java.io.*;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,6 +65,7 @@ public class ClassificacaoHandler implements HttpHandler {
 
     private void getAllClassificacoes(HttpExchange exchange) throws IOException {
         List<Classificacao> classificacoes = collection.find().into(new ArrayList<>());
+        Collections.sort(classificacoes, (c1, c2) -> Long.compare(c1.getTempoEmMilissegundos(), c2.getTempoEmMilissegundos()));
         if (classificacoes.isEmpty()) {
             System.out.println("Nenhuma classificacao encontrada.");
         } else {

@@ -8,9 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <link rel="stylesheet" href="/src/main/web/css/styles.css">
-  <link rel="stylesheet" href="/src/main/web/css/animation.css">
-  <link rel="stylesheet" href="/src/main/web/css/scroll-bar.css">
+  <link rel="stylesheet" href="src/main/web/css/styles.css">
+  <link rel="stylesheet" href="src/main/web/css/animation.css">
+  <link rel="stylesheet" href="src/main/web/css/scroll-bar.css">
 </head>
 
 <body class="page-home">
@@ -72,6 +72,62 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
 </body>
+
+<script>
+  function inserirClassificacao() {
+    // Dados da nova classificação
+    const novaClassificacao = {
+      nome: document.getElementById('nome').value,
+      tempo: document.getElementById('tempo').value,
+      estado: document.getElementById('estado').value,
+      kartodromo: document.getElementById('kartodromo').value,
+      peso: document.getElementById('peso').value
+    };
+
+    fetch('http://localhost:8080/api/classificacoes', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(novaClassificacao) // Converte os dados em JSON
+    })
+            .then(response => {
+              if (response.ok) {
+                return response.json();
+              } else {
+                throw new Error('Erro ao inserir a classificação');
+              }
+            })
+            .then(data => {
+              console.log('Classificação inserida com sucesso:', data);
+              alert('Classificação inserida com sucesso!');
+            })
+            .catch(error => {
+              console.error('Erro ao inserir classificação:', error);
+              alert('Erro ao inserir classificação. Tente novamente.');
+            });
+  }
+</script>
+
+<form onsubmit="event.preventDefault(); inserirClassificacao();">
+  <label for="nome">Nome:</label>
+  <input type="text" id="nome" required><br>
+
+  <label for="tempo">Tempo:</label>
+  <input type="text" id="tempo" required><br>
+
+  <label for="estado">Estado:</label>
+  <input type="text" id="estado" required><br>
+
+  <label for="kartodromo">Kartódromo:</label>
+  <input type="text" id="kartodromo" required><br>
+
+  <label for="peso">Peso:</label>
+  <input type="text" id="peso" required><br>
+
+  <button type="submit">Inserir Classificação</button>
+</form>
+
 <script>
   function buscarClassificacoes(){
     fetch('http://localhost:8080/api/classificacoes',{method:"GET"})
