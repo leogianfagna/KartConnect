@@ -53,6 +53,15 @@ public class Classificacao {
         this.tempo = tempo;
     }
 
+    public long getTempoEmMilissegundos() {
+        String[] parts = tempo.split(":");
+        int minutos = Integer.parseInt(parts[0]);
+        int segundos = Integer.parseInt(parts[1]);
+        int milissegundos = Integer.parseInt(parts[2]);
+
+        return (minutos * 60 * 1000) + (segundos * 1000) + milissegundos;
+    }
+
     @Override
     public String toString() {
         return nome + tempo + peso + kartodromo + estado;

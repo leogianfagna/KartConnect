@@ -17,18 +17,45 @@ function randomName() {
 }
 
 function randomTime() {
-    const min = 49.9;
-    const max = 51.9;
-  
-    return (Math.random() * (max - min) + min).toFixed(3) + "s";
+    // Gerar um valor aleatório de tempo total em milissegundos (por exemplo, de 1 a 2 minutos)
+    const totalMilliseconds = Math.floor(Math.random() * 300 * 1000) + 50 * 1000; // Entre 30 e 90 segundos
+
+    // Converter para minutos, segundos e milissegundos
+    const minutes = Math.floor(totalMilliseconds / 60000); // 1 minuto = 60000 milissegundos
+    const seconds = Math.floor((totalMilliseconds % 60000) / 1000); // 1 segundo = 1000 milissegundos
+    const milliseconds = totalMilliseconds % 1000; // Pega os milissegundos restantes
+
+    // Formatar para 2 dígitos nos segundos e 3 dígitos nos milissegundos
+    const formattedTime = `${minutes}:${seconds.toString().padStart(2, '0')}:${milliseconds.toString().padStart(3, '0')}`;
+
+    return formattedTime;
 }
 
 function randomEmail(nome) {
-    const emailProviders = ["gmail.com", "outlook.com", "hotmail.com", "yahoo.com"];
+    const emailProviders = ["AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MS","MT","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"];
     const provider = emailProviders[Math.floor(Math.random() * emailProviders.length)];
   
     const email = nome.toLowerCase().replace(" ", ".") + "@" + provider;
     return email;
+}
+
+function randomWeight(){
+    const min = 60;
+    const max = 110;
+
+    return (Math.random() * (max - min) + min).toFixed(0)
+}
+
+function randomKartodromo(){
+    const kartodromos = ["Velocitá","ThunderSpeed","NitroRace","TurboKart","VeloMax"]
+
+    return kartodromos[Math.floor(Math.random() * kartodromos.length)];
+}
+
+function randomState() {
+    const states = ["AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MS","MT","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"];
+
+    return states[Math.floor(Math.random() * states.length)];
 }
 
 function randomIdade() {
@@ -50,15 +77,46 @@ function isCamposValidos() {
     return elementosComValidacao.length;
 }
 
+function inserirNovaClassificacao(novaClassificacao) {
+
+    fetch('http://localhost:8080/api/classificacoes', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(novaClassificacao) // Converte os dados em JSON
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Erro ao inserir a classificação');
+            }
+        })
+        .then(data => {
+            console.log('Classificação inserida com sucesso:', data);
+            alert('Classificação inserida com sucesso!');
+        })
+        .catch(error => {
+            console.error('Erro ao inserir classificação:', error);
+            alert('Erro ao inserir classificação. Tente novamente.');
+        });
+}
+
+
 function generateRandomData() {
     const totalSimulations = document.getElementById('validation-simulations-total').value || 3;
     for (let i = 0; i < totalSimulations; i++) {
-        let name = randomName();
-        let lapTime = randomTime();
-        let email = randomEmail(name);
-        let age = randomIdade();
-        let phone = randomCelular();
+        let novaClassificacao = {
+            nome: randomName(),
+            tempo: randomTime(),
+            kartodromo: randomKartodromo(),
+            estado: randomState(),
+            peso: randomWeight()
+        };
 
-        console.log(name + ", " + lapTime + ", " + email + ", " + age + ", " + phone);
+        console.log(novaClassificacao);
+
+        inserirNovaClassificacao(novaClassificacao);
     }
 }
