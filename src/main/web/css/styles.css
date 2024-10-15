@@ -271,7 +271,7 @@ thead {
     border: transparent;
 }
 
-#kartodromos-view {
+#lista-kartodromos {
     & .card {
         border: transparent;
     }

@@ -1,129 +1,151 @@
 // Script que cria "tabs" interativos no header do card, para ver a opção do que quiser ver do kartódromo.
 // O script interativamente exibe os elementos escondidos <p>, assim como também trocar as classes de active nos cards
+let filtro = '';
 
 function filtrarOpcao(element) {
-    const cardElement = element.closest('.card'); // Mesma coisa que "element.parentElement.parentElement.parentElement.parentElement"
-    clearSelection(cardElement);
-    showContent(cardElement.id, element.innerText);
-    element.classList.add('active');
+  const cardElement = element.closest('.card'); // Mesma coisa que "element.parentElement.parentElement.parentElement.parentElement"
+  clearSelection(cardElement);
+  showContent(cardElement.id, element.innerText);
+  element.classList.add('active');
 }
 
 function clearSelection(element) {
-    let div = element;
+  let div = element;
 
-    // Limpa os demais tabs selecionados, da div element (que é o kart do kartódromo), removendo o estilo active
-    const todosCardTab = div.querySelectorAll('.active');
-    todosCardTab.forEach(function (elemento) {
-        elemento.classList.remove('active');
-    });
+  // Limpa os demais tabs selecionados, da div element (que é o kart do kartódromo), removendo o estilo active
+  const todosCardTab = div.querySelectorAll('.active');
+  todosCardTab.forEach(function (elemento) {
+    elemento.classList.remove('active');
+  });
 
-    // Esconde o texto antigo, da div element (que é o kart do kartódromo), para aparecer o texto respectivo ao tab selecionado
-    const todosCardText = div.querySelectorAll('.card-text');
-    todosCardText.forEach(function (elemento) {
-        elemento.style.display = 'none';
-    });
+  // Esconde o texto antigo, da div element (que é o kart do kartódromo), para aparecer o texto respectivo ao tab selecionado
+  const todosCardText = div.querySelectorAll('.card-text');
+  todosCardText.forEach(function (elemento) {
+    elemento.style.display = 'none';
+  });
 }
 
 function showContent(card, option) {
-    const elementoParaExibir = "kartodromo-" + option;
-    const divKartodromoSelecionado = card;
+  const elementoParaExibir = "kartodromo-" + option;
+  const divKartodromoSelecionado = card;
 
-    let element = document.querySelector("#" + divKartodromoSelecionado + " ." + elementoParaExibir);
-    element.style.display = 'block';
+  let element = document.querySelector("#" + divKartodromoSelecionado + " ." + elementoParaExibir);
+  element.style.display = 'block';
 }
 
 function buscarKartodromos() {
-    fetch('http://localhost:8080/api/kartodromos')
-        .then(response => response.json())
-        .then(kartodromos => {
+  fetch('http://localhost:8080/api/kartodromos')
+    .then(response => response.json())
+    .then(kartodromos => {
 
-            console.log(kartodromos);
-            criarCardKartodromo(kartodromos);
-        })
-        .catch(error => {
-            console.error('Erro ao buscar kartódromos:', error);
-        });
+      console.log(kartodromos);
+      criarCardKartodromo(kartodromos);
+    })
+    .catch(error => {
+      console.error('Erro ao buscar kartódromos:', error);
+    });
 }
 
 function criarCardKartodromo(kartodromosArray) {
 
-    kartodromosArray.forEach(kartodromo => {
+  kartodromosArray.forEach(kartodromo => {
+    if (!(kartodromo.nome).includes(filtro) && filtro !== undefined) {
+      return;
+    }
 
-        const divCard = document.createElement('div');
-        divCard.className = 'card text-center';
-        divCard.style.marginTop = '40px';
-        divCard.id = `kartodromo-${(kartodromo.nome).replace(/ /g, '')}`;
+    const divCard = document.createElement('div');
+    divCard.className = 'card text-center';
+    divCard.style.marginTop = '40px';
+    divCard.id = `kartodromo-${(kartodromo.nome).replace(/ /g, '')}`;
 
-        const divCardHeader = document.createElement('div');
-        divCardHeader.className = 'card-header';
+    const divCardHeader = document.createElement('div');
+    divCardHeader.className = 'card-header';
 
-        const ulNavTabs = document.createElement('ul');
-        ulNavTabs.className = 'nav nav-tabs card-header-tabs';
+    const ulNavTabs = document.createElement('ul');
+    ulNavTabs.className = 'nav nav-tabs card-header-tabs';
 
-        const opcoes = ['Principal', 'Endereço', 'Funcionamento', 'Contato'];
+    const opcoes = ['Principal', 'Endereço', 'Funcionamento', 'Contato'];
 
-        opcoes.forEach(opcao => {
-            const liNavItem = document.createElement('li');
-            liNavItem.className = 'nav-item kartodromo-overview-topic';
+    opcoes.forEach(opcao => {
+      const liNavItem = document.createElement('li');
+      liNavItem.className = 'nav-item kartodromo-overview-topic';
 
-            const pNavLink = document.createElement('p');
-            pNavLink.className = 'nav-link';
-            if (opcao === 'Principal') {
-                pNavLink.classList.add('active');
-            }
-            pNavLink.innerText = opcao;
-            pNavLink.setAttribute('onclick', 'filtrarOpcao(this);');
+      const pNavLink = document.createElement('p');
+      pNavLink.className = 'nav-link';
+      if (opcao === 'Principal') {
+        pNavLink.classList.add('active');
+      }
+      pNavLink.innerText = opcao;
+      pNavLink.setAttribute('onclick', 'filtrarOpcao(this);');
 
-            liNavItem.appendChild(pNavLink);
-            ulNavTabs.appendChild(liNavItem);
-        });
-
-        divCardHeader.appendChild(ulNavTabs);
-
-        const divCardBody = document.createElement('div');
-        divCardBody.className = 'card-body';
-
-        const h4Title = document.createElement('h4');
-        h4Title.className = 'card-title';
-        h4Title.style.fontFamily = 'ChakraPetchMedium';
-        h4Title.innerText = `Kartódromo ${kartodromo.nome}`;
-
-        const pPrincipal = document.createElement('p');
-        pPrincipal.className = 'card-text kartodromo-Principal';
-        pPrincipal.style.display = 'block';
-        pPrincipal.innerText = kartodromo.desc;
-
-        const pEndereco = document.createElement('p');
-        pEndereco.className = 'card-text kartodromo-Endereço';
-        pEndereco.style.display = 'none';
-        pEndereco.innerText = kartodromo.endereco;
-
-        const pFuncionamento = document.createElement('p');
-        pFuncionamento.className = 'card-text kartodromo-Funcionamento';
-        pFuncionamento.style.display = 'none';
-        pFuncionamento.innerHTML = kartodromo.horario_funcionamento;
-
-        const pContato = document.createElement('p');
-        pContato.className = 'card-text kartodromo-Contato';
-        pContato.style.display = 'none';
-        pContato.innerHTML = `Telefone: ${kartodromo.telefone}<br>WhatsApp: ${kartodromo.whatsapp}<br>Email: ${kartodromo.email}`;
-
-        divCardBody.appendChild(h4Title);
-        divCardBody.appendChild(pPrincipal);
-        divCardBody.appendChild(pEndereco);
-        divCardBody.appendChild(pFuncionamento);
-        divCardBody.appendChild(pContato);
-
-        divCard.appendChild(divCardHeader);
-        divCard.appendChild(divCardBody);
-
-        document.getElementById('kartodromos-view').appendChild(divCard);
+      liNavItem.appendChild(pNavLink);
+      ulNavTabs.appendChild(liNavItem);
     });
+
+    divCardHeader.appendChild(ulNavTabs);
+
+    const divCardBody = document.createElement('div');
+    divCardBody.className = 'card-body';
+
+    const h4Title = document.createElement('h4');
+    h4Title.className = 'card-title';
+    h4Title.style.fontFamily = 'ChakraPetchMedium';
+    h4Title.innerText = `Kartódromo ${kartodromo.nome}`;
+
+    const pPrincipal = document.createElement('p');
+    pPrincipal.className = 'card-text kartodromo-Principal';
+    pPrincipal.style.display = 'block';
+    pPrincipal.innerText = kartodromo.desc;
+
+    const pEndereco = document.createElement('p');
+    pEndereco.className = 'card-text kartodromo-Endereço';
+    pEndereco.style.display = 'none';
+    pEndereco.innerText = kartodromo.endereco;
+
+    const pFuncionamento = document.createElement('p');
+    pFuncionamento.className = 'card-text kartodromo-Funcionamento';
+    pFuncionamento.style.display = 'none';
+    pFuncionamento.innerHTML = kartodromo.horario_funcionamento;
+
+    const pContato = document.createElement('p');
+    pContato.className = 'card-text kartodromo-Contato';
+    pContato.style.display = 'none';
+    pContato.innerHTML = `Telefone: ${kartodromo.telefone}<br>WhatsApp: ${kartodromo.whatsapp}<br>Email: ${kartodromo.email}`;
+
+    divCardBody.appendChild(h4Title);
+    divCardBody.appendChild(pPrincipal);
+    divCardBody.appendChild(pEndereco);
+    divCardBody.appendChild(pFuncionamento);
+    divCardBody.appendChild(pContato);
+
+    divCard.appendChild(divCardHeader);
+    divCard.appendChild(divCardBody);
+
+    document.getElementById('lista-kartodromos').appendChild(divCard);
+  });
+}
+
+// Função chamada na busca de kartódromos específicos pelo usuário
+function filtrarLista() {
+  const buscaUsuario = document.getElementById('user-query').value;
+
+  if (buscaUsuario.length < 1) {
+    // TO-DO: Lógica para mostrar erros bootstrap
+  } else {
+    filtro = buscaUsuario;
+    limparConteudo();
+    buscarKartodromos();
+  }
+}
+
+function limparConteudo() {
+  const divListaKarts = document.getElementById('lista-kartodromos');
+  divListaKarts.innerHTML = '';
 }
 
 // Chama a função quando a página carregar
 document.addEventListener('DOMContentLoaded', function () {
-    buscarKartodromos();
+  buscarKartodromos();
 });
 
 /* Feito para reproduzir esse elemento aqui

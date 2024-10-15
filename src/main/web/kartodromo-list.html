@@ -23,11 +23,22 @@
       });
   </script>
 
-  <div class="container" id="kartodromos-view" style="margin-bottom: 100px;">
+  <div class="container" style="margin-bottom: 100px;">
 
     <h1 class="text-center page-title" style="margin: 50px;">KARTÓDROMOS</h1>
+    <form class="row g-3">
+      <div class="col-auto ms-auto">
+        <button type="button" class="btn btn-primary mb-3" onclick="filtrarLista();">Buscar</button>
+      </div>
+      <div class="col-4">
+        <label for="user-query" class="visually-hidden">Buscar</label>
+        <input type="text" class="form-control" id="user-query" placeholder="Buscar">
+      </div>
+    </form>
 
-    <!-- Será preenchido com os resultados do banco de dados -->
+    <div id="lista-kartodromos">
+      <!-- Será preenchido com os resultados do banco de dados -->
+    </div>
 
   </div>
 
