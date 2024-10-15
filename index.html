@@ -74,59 +74,42 @@
 </body>
 
 <script>
-  function inserirClassificacao() {
-    // Dados da nova classificação
-    const novaClassificacao = {
-      nome: document.getElementById('nome').value,
-      tempo: document.getElementById('tempo').value,
-      estado: document.getElementById('estado').value,
-      kartodromo: document.getElementById('kartodromo').value,
-      peso: document.getElementById('peso').value
-    };
+    // Função para buscar kartódromos do backend
+    function buscarKartodromos() {
+        fetch('http://localhost:8080/api/kartodromos')  // URL do backend
+            .then(response => response.json())
+            .then(kartodromos => {
+                // Exibir kartódromos na página
+                const kartodromosContainer = document.getElementById('kartodromos-container');
+                kartodromosContainer.innerHTML = '';
 
-    fetch('http://localhost:8080/api/classificacoes', {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(novaClassificacao) // Converte os dados em JSON
-    })
-            .then(response => {
-              if (response.ok) {
-                return response.json();
-              } else {
-                throw new Error('Erro ao inserir a classificação');
-              }
-            })
-            .then(data => {
-              console.log('Classificação inserida com sucesso:', data);
-              alert('Classificação inserida com sucesso!');
+                kartodromos.forEach(kartodromo => {
+                    const kartodromoElement = document.createElement('div');
+                    kartodromoElement.className = "kartodromo-item";
+                    kartodromoElement.innerHTML = `
+            <h3>${kartodromo.nome}</h3>
+            <p>Endereço: ${kartodromo.endereco}</p>
+            <p>Telefone: ${kartodromo.telefone}</p>
+            <p>Email: ${kartodromo.email}</p>
+          `;
+                    kartodromosContainer.appendChild(kartodromoElement);
+                });
             })
             .catch(error => {
-              console.error('Erro ao inserir classificação:', error);
-              alert('Erro ao inserir classificação. Tente novamente.');
+                console.error('Erro ao buscar kartódromos:', error);
             });
-  }
+    }
+
+    // Chama a função quando a página carregar
+    document.addEventListener('DOMContentLoaded', function() {
+        buscarKartodromos();
+    });
 </script>
 
-<form onsubmit="event.preventDefault(); inserirClassificacao();">
-  <label for="nome">Nome:</label>
-  <input type="text" id="nome" required><br>
-
-  <label for="tempo">Tempo:</label>
-  <input type="text" id="tempo" required><br>
-
-  <label for="estado">Estado:</label>
-  <input type="text" id="estado" required><br>
-
-  <label for="kartodromo">Kartódromo:</label>
-  <input type="text" id="kartodromo" required><br>
-
-  <label for="peso">Peso:</label>
-  <input type="text" id="peso" required><br>
-
-  <button type="submit">Inserir Classificação</button>
-</form>
+<!-- Container onde os kartódromos serão exibidos -->
+<div id="kartodromos-container" class="container">
+    <h2>Kartódromos Disponíveis</h2>
+</div>
 
 <script>
   function buscarClassificacoes(){
@@ -135,7 +118,6 @@
             .then(classificacoes =>{
               const classificacoesContainer = document.getElementById('classificacoes-container')
               classificacoesContainer.innerHTML = '';
-
               classificacoes.forEach(classificacao => {
                 const classificacaoElement = document.createElement('div');
                 classificacaoElement.className = "kartodromo-item"
@@ -159,47 +141,6 @@
     buscarClassificacoes();
   });
 </script>
-
 <div id="classificacoes-container" class="container">
   <h2>Classificações</h2>
-</div>
-
-<script>
-    // Função para buscar kartódromos do backend
-    function buscarKartodromos() {
-        fetch('http://localhost:8080/api/kartodromos',{method:"GET"}) // URL do backend
-            .then(response => response.json())
-            .then(kartodromos => {
-                // Exibir kartódromos na página
-                const kartodromosContainer = document.getElementById('kartodromos-container');
-                kartodromosContainer.innerHTML = '';
-
-                kartodromos.forEach(kartodromo => {
-                    const kartodromoElement = document.createElement('div');
-                    kartodromoElement.className = "kartodromo-item";
-                    kartodromoElement.innerHTML = `
-            <h3>${kartodromo.nome}</h3>
-            <p>Endereço: ${kartodromo.endereco}</p>
-            <p>Telefone: ${kartodromo.telefone}</p>
-            <p>Email: ${kartodromo.email}</p>
-          `;
-                    kartodromosContainer.appendChild(kartodromoElement);
-
-                });
-              console.log(kartodromos)
-            })
-            .catch(error => {
-                console.error('Erro ao buscar kartódromos:', error);
-            });
-    }
-
-    // Chama a função quando a página carregar
-    document.addEventListener('DOMContentLoaded', function() {
-        buscarKartodromos();
-    });
-</script>
-
-<!-- Container onde os kartódromos serão exibidos -->
-<div id="kartodromos-container" class="container">
-    <h2>Kartódromos Disponíveis</h2>
 </div>

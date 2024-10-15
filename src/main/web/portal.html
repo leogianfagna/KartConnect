@@ -8,9 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <link rel="stylesheet" href="/css/styles.css">
-  <link rel="stylesheet" href="/css/animation.css">
-  <link rel="stylesheet" href="/css/scroll-bar.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/animation.css">
+  <link rel="stylesheet" href="css/scroll-bar.css">
 </head>
 
 <body class="gradient-headers">
@@ -37,51 +37,56 @@
     <div class="d-flex text-center karts-cards" id="kartodromos">
 
       <div class="card mx-1" style="width: 18rem;">
-        <img src="/images/temp/kartodromo-1.png" class="card-img-top">
+        <img src="images/temp/kartodromo-1.png" class="card-img-top">
         <div class="card-body">
           <h5 class="card-title">Velocitá</h5>
           <p class="card-text">São Paulo, Campinas.</p>
-          <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarKartodromo(this);">FILTRAR
+          <button type="submit" class="btn btn-primary card-submit-button" id="card-kart-Velocitá"
+            onclick="filtrarKartodromo(this);">FILTRAR
             RESULTADOS</button>
         </div>
       </div>
 
       <div class="card mx-1" style="width: 18rem;">
-        <img src="/images/temp/kartodromo-2.png" class="card-img-top">
+        <img src="images/temp/kartodromo-2.png" class="card-img-top">
         <div class="card-body">
           <h5 class="card-title">ThunderSpeed</h5>
           <p class="card-text">Rio de Janeiro, Niterói.</p>
-          <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarKartodromo(this);">FILTRAR
+          <button type="submit" class="btn btn-primary card-submit-button" id="card-kart-ThunderSpeed"
+            onclick="filtrarKartodromo(this);">FILTRAR
             RESULTADOS</button>
         </div>
       </div>
 
       <div class="card mx-1" style="width: 18rem;">
-        <img src="/images/temp/kartodromo-3.png" class="card-img-top">
+        <img src="images/temp/kartodromo-3.png" class="card-img-top">
         <div class="card-body">
           <h5 class="card-title">NitroRace</h5>
           <p class="card-text">Minas Gerais, Belo Horizonte.</p>
-          <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarKartodromo(this);">FILTRAR
+          <button type="submit" class="btn btn-primary card-submit-button" id="card-kart-NitroRace"
+            onclick="filtrarKartodromo(this);">FILTRAR
             RESULTADOS</button>
         </div>
       </div>
 
       <div class="card mx-1" style="width: 18rem;">
-        <img src="/images/temp/kartodromo-4.png" class="card-img-top">
+        <img src="images/temp/kartodromo-4.png" class="card-img-top">
         <div class="card-body">
           <h5 class="card-title">TurboKart</h5>
           <p class="card-text">Paraná, Curitiba.</p>
-          <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarKartodromo(this);">FILTRAR
+          <button type="submit" class="btn btn-primary card-submit-button" id="card-kart-TurboKart"
+            onclick="filtrarKartodromo(this);">FILTRAR
             RESULTADOS</button>
         </div>
       </div>
 
       <div class="card mx-1" style="width: 18rem;">
-        <img src="/images/temp/kartodromo-5.png" class="card-img-top">
+        <img src="images/temp/kartodromo-5.png" class="card-img-top">
         <div class="card-body">
           <h5 class="card-title">Center VeloMax</h5>
           <p class="card-text">Santa Catarina, Florianópolis.</p>
-          <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarKartodromo(this);">FILTRAR
+          <button type="submit" class="btn btn-primary card-submit-button" id="card-kart-VeloMax"
+            onclick="filtrarKartodromo(this);">FILTRAR
             RESULTADOS</button>
         </div>
       </div>
@@ -89,13 +94,15 @@
 
 
     <!-- Portal -->
-    <div class="container text-center" style="margin-top: 5%;">
+    <div class="container text-center table-portal" id="table-portal" style="margin-top: 5%;">
       <div class="row">
 
         <!-- Seleção de categorias -->
         <div class="col-2">
           <h4 class="subtitle">CATEGORIAS</h1>
             <div style="display: flex; flex-direction: column;" class="row-gap-3" id="categorias">
+              <button type="submit" class="btn btn-primary card-submit-button option-button-selected"
+                onclick="filtrarCategoria(this);" id="cat-all">TUDO</button>
               <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarCategoria(this);"
                 id="cat-60">60KG</button>
               <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarCategoria(this);"
@@ -123,28 +130,8 @@
                   <th scope="col">Tempo</th>
                 </tr>
               </thead>
-              <tbody class="table-group-divider">
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Leonardo</td>
-                  <td>SP</td>
-                  <td>68kg</td>
-                  <td>47.960s</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Enzo</td>
-                  <td>SP</td>
-                  <td>73kg</td>
-                  <td>48.120s</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Pedro</td>
-                  <td>MG</td>
-                  <td>71kg</td>
-                  <td>48.740s</td>
-                </tr>
+              <tbody class="table-group-divider" id="tempos-banco">
+                <!-- Preenchido com o resultado do banco de dados -->
               </tbody>
             </table>
 
@@ -154,7 +141,7 @@
 
   </div>
 
-  <script src="/js/portal-filters-selector.js"></script>
+  <script src="js/portal-filters-selector.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
