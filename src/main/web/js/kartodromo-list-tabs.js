@@ -133,19 +133,25 @@ function criarCardKartodromo(kartodromosArray) {
 
 }
 
-// Função chamada na busca de kartódromos específicos pelo usuário
 function filtrarLista() {
+  const form = document.querySelector('.needs-validation');
   const buscaUsuario = document.getElementById('user-query').value;
 
-  if (buscaUsuario.length < 1) {
-    // TO-DO: Lógica para mostrar erros bootstrap
-  } else {
+  // Campo inválido
+  if (!form.checkValidity()) { // checkValidity() é uma função do Boostrap
+    form.classList.add('was-validated');
+    return;
+  }
+
+  // Campo válido
+  if (buscaUsuario.length >= 1) {
     filtro = buscaUsuario;
     mostrarElemento();
     limparConteudo();
     buscarKartodromos();
   }
 }
+
 
 function notFoundMessage(style) {
   document.getElementById('not-found').style.display = style;
