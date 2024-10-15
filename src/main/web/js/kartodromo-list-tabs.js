@@ -50,7 +50,8 @@ function criarCardKartodromo(kartodromosArray) {
   notFoundMessage('none');
 
   kartodromosArray.forEach(kartodromo => {
-    if (!(kartodromo.nome).includes(filtro) && filtro !== undefined) {
+    let nomeKartodromoBusca = (kartodromo.nome).toLowerCase();
+    if (!nomeKartodromoBusca.includes(filtro) && filtro !== undefined) {
       return;
     }
 
