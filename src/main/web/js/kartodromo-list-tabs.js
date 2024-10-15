@@ -133,9 +133,23 @@ function filtrarLista() {
     // TO-DO: Lógica para mostrar erros bootstrap
   } else {
     filtro = buscaUsuario;
+    mostrarElemento();
     limparConteudo();
     buscarKartodromos();
   }
+}
+
+function mostrarElemento() {
+  document.getElementById('remove-filters').style.display = 'inline';
+}
+
+function removerFiltro() {
+  document.getElementById('user-query').value = '';
+  document.getElementById('remove-filters').style.display = 'none';
+  filtro = undefined;
+
+  limparConteudo();
+  buscarKartodromos();
 }
 
 function limparConteudo() {
@@ -146,6 +160,7 @@ function limparConteudo() {
 // Chama a função quando a página carregar
 document.addEventListener('DOMContentLoaded', function () {
   buscarKartodromos();
+  console.log("AAAAAA");
 });
 
 /* Feito para reproduzir esse elemento aqui
