@@ -157,8 +157,11 @@ function notFoundMessage(style) {
   document.getElementById('not-found').style.display = style;
 }
 
+// Função executada em caso de busca bem sucedida, portanto, mostra o botão para remover filtros aplicados e tira as validações do Bootstrap
 function mostrarElemento() {
   document.getElementById('remove-filters').style.display = 'inline';
+  const form = document.querySelector('.needs-validation');
+  form.classList.remove('was-validated');
 }
 
 function removerFiltro() {

@@ -18,6 +18,77 @@ thead {
     letter-spacing: 1.7px;
 }
 
+footer {
+    background-color: var(--light-bg-color);
+    padding: 40px 0;
+    color: var(--main-font-color);
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-column {
+    width: 22%;
+}
+
+.footer-column h3 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    font-family: 'ChakraPetchMedium', sans-serif;
+}
+
+.footer-column ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+    color: var(--main-font-color);
+    text-decoration: none;
+}
+
+.footer-column ul li a:hover {
+    text-decoration: underline;
+}
+
+.footer-column ul li::before {
+    content: '› ';
+    margin-right: 5px;
+    color: #ffffff;
+}
+
+
+.footer-copyright {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #ffffff;
+}
+
+.footer-copyright p {
+    margin: 0;
+}
+
+:root {
+    --light-bg-color: #333c42;
+    --dark-bg-color: #1D1E24;
+
+    --main-font-color: white;
+
+    --secondary-button-color: #f7f2ed;
+
+    --main-orange: #ff5733;
+    --main-orange-hover: #da3813;
+}
+
 #nav-bar {
     background-image: linear-gradient(to bottom right, var(--light-bg-color), var(--dark-bg-color));
     padding-top: 7px;
@@ -200,6 +271,25 @@ thead {
     color: var(--main-orange);
 }
 
+.query-simple-button {
+    display: inline-block;
+    padding: 0px 20px 0px;
+    font-size: 1.4em;
+    font-family: ChakraPetchMedium;
+    color: white; /* Cor de texto inicial */
+    transition: color 0.3s ease, text-shadow 0.3s ease; /* Transição suave */
+    cursor: pointer; /* Mostra que o texto é interativo */
+}
+
+.query-simple-button:hover {
+    color: #c9c7c7; /* Cor do texto ao passar o mouse */
+}
+
+.not-found-message {
+    margin: 5%;
+    display: none;
+}
+
 @font-face {
     font-family: 'Athletic';
     src: url('/src/main/web/fonts/NewAthleticM54.ttf') format('opentype');
@@ -281,82 +371,6 @@ thead {
     }
 }
 
-.not-found-message {
-    margin: 5%;
-    display: none;
-}
-
 .table {
     border-color: transparent;
-}
-
-footer {
-    background-color: var(--light-bg-color);
-    padding: 40px 0;
-    color: var(--main-font-color);
-}
-
-.footer-container {
-    display: flex;
-    justify-content: space-around;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.footer-column {
-    width: 22%;
-}
-
-.footer-column h3 {
-    font-size: 1.5em;
-    margin-bottom: 20px;
-    font-family: 'ChakraPetchMedium', sans-serif;
-}
-
-.footer-column ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.footer-column ul li {
-    margin-bottom: 10px;
-}
-
-.footer-column ul li a {
-    color: var(--main-font-color);
-    text-decoration: none;
-}
-
-.footer-column ul li a:hover {
-    text-decoration: underline;
-}
-
-.footer-column ul li::before {
-    content: '› ';
-    margin-right: 5px;
-    color: #ffffff;
-}
-
-
-.footer-copyright {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 0.9em;
-    color: #ffffff;
-}
-
-.footer-copyright p {
-    margin: 0;
-}
-
-:root {
-    --light-bg-color: #333c42;
-    --dark-bg-color: #1D1E24;
-
-    --main-font-color: white;
-
-    --secondary-button-color: #f7f2ed;
-
-    --main-orange: #ff5733;
-    --main-orange-hover: #da3813;
 }
