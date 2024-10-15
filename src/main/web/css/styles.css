@@ -271,16 +271,14 @@ thead {
     border: transparent;
 }
 
-#kartodromos-view .card {
-    background-color: #b0b2b3;
-}
+#kartodromos-view {
+    & .card {
+        border: transparent;
+    }
 
-#kartodromos-view .card-header {
-    background-color: var(--light-bg-color);
-}
-
-#kartodromos-view .active {
-    background-color: #b0b2b3;
+    & .card-header {
+        background-image: linear-gradient(to right, var(--light-bg-color), var(--dark-bg-color));
+    }
 }
 
 .table {
