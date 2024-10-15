@@ -1,3 +1,7 @@
+// Script com documentação do Bootstrap para validar os campos de inserção de dados, para conferir se todos os
+// campos estão preenchidos corretamente ou possuem sua formatação válida.
+
+
 // Aguarda o carregamento da página antes de executar o script
 // Docs: https://getbootstrap.com/docs/5.3/forms/validation/
 (() => {

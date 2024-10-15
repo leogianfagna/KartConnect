@@ -1,3 +1,7 @@
+// Script que insere os resultados no portal de classificações no HTML, baseado nos filtros aplicados pelo usuário na página.
+// As funções são todas chamadas através dos botões de filtro dentro da página.
+
+
 // Variáveis globais para identificar os filtros de resultados
 let selectedKartodromo = '';
 let selectedCategoria = 'all';
@@ -12,14 +16,6 @@ function setKartodromo(element) {
 function setCategoria(element) {
     const categoria = (element.id).replace('cat-', '');
     selectedCategoria = categoria;
-}
-
-function getKartodromo() {
-    return selectedKartodromo;
-}
-
-function getCategoria() {
-    return selectedCategoria;
 }
 
 
@@ -66,14 +62,9 @@ function buscarClassificacoes() {
                 `;
 
                 // Filtragem de resultados baseado nos filtros do usuário
-                if (classificacao.kartodromo === selectedKartodromo) {
-                    if (selectedCategoria === 'all') {
-                        tbody.appendChild(tr);
-                        tdId++;
-                    } else if (pertenceCategoria(classificacao.peso) === true) {
-                        tbody.appendChild(tr);
-                        tdId++;
-                    }
+                if (classificacao.kartodromo === selectedKartodromo && pertenceCategoria(classificacao.peso) === true) {
+                    tbody.appendChild(tr);
+                    tdId++;
                 }
             });
         })

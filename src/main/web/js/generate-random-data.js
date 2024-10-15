@@ -9,10 +9,10 @@ function randomName() {
     const firstNames = ["Gabriel", "Felipe", "Lucas", "André", "Bruno", "Thiago", "Mateus", "Rafael", "Ricardo", "Pedro", "Daniel", "Caio", "Vitor", "Gustavo", "Rodrigo", "Fernando", "Eduardo", "Alexandre", "Marcelo", "Igor", "Diego", "Paulo", "Murilo", "Bruno", "Henrique", "Vinícius", "João", "Antônio", "Miguel", "Beatriz", "Gabriela"];
     const lastNames = ["Silva", "Santos", "Oliveira", "Pereira", "Souza", "Costa", "Ferreira", "Rodrigues", "Almeida", "Nascimento", "Lima", "Carvalho", "Araujo", "Ribeiro", "Martins", "Rocha", "Mendes", "Barros", "Vieira", "Cavalcanti", "Gomes", "Monteiro", "Correia", "Moura", "Batista", "Freitas", "Andrade", "Dias", "Teixeira", "Barbosa"];
 
-  
+
     const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
     const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
-  
+
     return `${firstName} ${lastName}`;
 }
 
@@ -32,28 +32,28 @@ function randomTime() {
 }
 
 function randomEmail(nome) {
-    const emailProviders = ["AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MS","MT","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"];
+    const emailProviders = ["AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MS", "MT", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"];
     const provider = emailProviders[Math.floor(Math.random() * emailProviders.length)];
-  
+
     const email = nome.toLowerCase().replace(" ", ".") + "@" + provider;
     return email;
 }
 
-function randomWeight(){
+function randomWeight() {
     const min = 60;
     const max = 110;
 
     return (Math.random() * (max - min) + min).toFixed(0)
 }
 
-function randomKartodromo(){
-    const kartodromos = ["Velocitá","ThunderSpeed","NitroRace","TurboKart","VeloMax"]
+function randomKartodromo() {
+    const kartodromos = ["Velocitá", "ThunderSpeed", "NitroRace", "TurboKart", "VeloMax"]
 
     return kartodromos[Math.floor(Math.random() * kartodromos.length)];
 }
 
 function randomState() {
-    const states = ["AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MS","MT","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"];
+    const states = ["AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MS", "MT", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"];
 
     return states[Math.floor(Math.random() * states.length)];
 }
@@ -65,10 +65,10 @@ function randomIdade() {
 function randomCelular() {
     const ddds = [19, 11];
     const ddd = ddds[Math.floor(Math.random() * ddds.length)];
-  
+
     const firstPart = Math.floor(90000 + Math.random() * 10000);
     const secondPart = Math.floor(1000 + Math.random() * 9000);
-  
+
     return `(${ddd}) 9${firstPart}-${secondPart}`;
 }
 
@@ -106,6 +106,7 @@ function inserirNovaClassificacao(novaClassificacao) {
 
 function generateRandomData() {
     const totalSimulations = document.getElementById('validation-simulations-total').value || 3;
+
     for (let i = 0; i < totalSimulations; i++) {
         let novaClassificacao = {
             nome: randomName(),
@@ -114,8 +115,6 @@ function generateRandomData() {
             estado: randomState(),
             peso: randomWeight()
         };
-
-        console.log(novaClassificacao);
 
         inserirNovaClassificacao(novaClassificacao);
     }

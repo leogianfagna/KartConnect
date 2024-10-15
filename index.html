@@ -22,19 +22,21 @@
         document.getElementById('navbar-placeholder').innerHTML = data;
       });
   </script>
-  
+
   <img src="/src/main/web/images/hero-bg-cut.png" width="100%" height="800px">
 
   <!-- Info area -->
   <div class="container text-center">
-    
+
     <!-- Divisão em 3 -->
     <div class="row info-pages">
-      
+
       <div class="col">
         <h1>KARTÓDROMOS</h1>
-        <p>Encontre todos os kartódromos que disponibilizam um portal de resultados aqui na plataforma, junto com as informações necessárias do estabelecimento.</p>
-        <button type="button" class="btn btn-primary nav-bar-button info-pages-white-button" style="margin-right: 5px;">GALERIA</button>
+        <p>Encontre todos os kartódromos que disponibilizam um portal de resultados aqui na plataforma, junto com as
+          informações necessárias do estabelecimento.</p>
+        <button type="button" class="btn btn-primary nav-bar-button info-pages-white-button"
+          style="margin-right: 5px;">GALERIA</button>
         <button type="button" class="btn btn-primary nav-bar-button">
           <a href="/src/main/web/kartodromo-list.html">ABRIR</a>
         </button>
@@ -42,8 +44,10 @@
 
       <div class="col">
         <h1>CLASSIFICAÇÕES</h1>
-        <p>Acesse o portal de resultados e veja a tabela de classificação dos melhores tempos, separados por categorias.</p>
-        <button type="button" class="btn btn-primary nav-bar-button info-pages-white-button" style="margin-right: 5px;">RECORDES</button>
+        <p>Acesse o portal de resultados e veja a tabela de classificação dos melhores tempos, separados por categorias.
+        </p>
+        <button type="button" class="btn btn-primary nav-bar-button info-pages-white-button"
+          style="margin-right: 5px;">RECORDES</button>
         <button type="button" class="btn btn-primary nav-bar-button-destaque nav-bar-button">
           <a href="/src/main/web/portal.html">ABRIR</a>
         </button>
@@ -51,8 +55,10 @@
 
       <div class="col">
         <h1>PARTICIPAR</h1>
-        <p>Os kartódromos disponíveis na nossa plataforma são nossos parceiros, se você é dono de um kartódromo e procura uma parceria clique abaixo.</p>
-        <button type="button" class="btn btn-primary nav-bar-button info-pages-white-button" style="margin-right: 5px;">TERMOS</button>
+        <p>Os kartódromos disponíveis na nossa plataforma são nossos parceiros, se você é dono de um kartódromo e
+          procura uma parceria clique abaixo.</p>
+        <button type="button" class="btn btn-primary nav-bar-button info-pages-white-button"
+          style="margin-right: 5px;">TERMOS</button>
         <button type="button" class="btn btn-primary nav-bar-button">ENTRAR</button>
       </div>
 
@@ -72,75 +78,3 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
 </body>
-
-<script>
-    // Função para buscar kartódromos do backend
-    function buscarKartodromos() {
-        fetch('http://localhost:8080/api/kartodromos')  // URL do backend
-            .then(response => response.json())
-            .then(kartodromos => {
-                // Exibir kartódromos na página
-                const kartodromosContainer = document.getElementById('kartodromos-container');
-                kartodromosContainer.innerHTML = '';
-
-                kartodromos.forEach(kartodromo => {
-                    const kartodromoElement = document.createElement('div');
-                    kartodromoElement.className = "kartodromo-item";
-                    kartodromoElement.innerHTML = `
-            <h3>${kartodromo.nome}</h3>
-            <p>Endereço: ${kartodromo.endereco}</p>
-            <p>Telefone: ${kartodromo.telefone}</p>
-            <p>Email: ${kartodromo.email}</p>
-          `;
-                    kartodromosContainer.appendChild(kartodromoElement);
-                });
-            })
-            .catch(error => {
-                console.error('Erro ao buscar kartódromos:', error);
-            });
-    }
-
-    // Chama a função quando a página carregar
-    document.addEventListener('DOMContentLoaded', function() {
-        buscarKartodromos();
-    });
-</script>
-
-<!-- Container onde os kartódromos serão exibidos -->
-<div id="kartodromos-container" class="container">
-    <h2>Kartódromos Disponíveis</h2>
-</div>
-
-<script>
-  function buscarClassificacoes(){
-    fetch('http://localhost:8080/api/classificacoes',{method:"GET"})
-            .then(response => response.json())
-            .then(classificacoes =>{
-              const classificacoesContainer = document.getElementById('classificacoes-container')
-              classificacoesContainer.innerHTML = '';
-              classificacoes.forEach(classificacao => {
-                const classificacaoElement = document.createElement('div');
-                classificacaoElement.className = "kartodromo-item"
-                classificacaoElement.innerHTML = `
-                <h4>${classificacao.nome}</h4>
-            <p>Tempo: ${classificacao.tempo}</p>
-            <p>Peso: ${classificacao.peso}</p>
-            <p>Estado: ${classificacao.estado}</p>
-            <p>Kartodromo: ${classificacao.kartodromo}</p>
-        `;
-                classificacoesContainer.appendChild(classificacaoElement);
-              });
-              console.log("classificacoes")
-              console.log(classificacoes)
-            })
-            .catch(error => {
-              console.error('Erro ao buscar kartódromos:', error);
-            });
-  }
-  document.addEventListener('DOMContentLoaded', function() {
-    buscarClassificacoes();
-  });
-</script>
-<div id="classificacoes-container" class="container">
-  <h2>Classificações</h2>
-</div>
