@@ -38,7 +38,6 @@ function buscarKartodromos() {
     .then(response => response.json())
     .then(kartodromos => {
 
-      console.log(kartodromos);
       criarCardKartodromo(kartodromos);
     })
     .catch(error => {
@@ -131,6 +130,14 @@ function criarCardKartodromo(kartodromosArray) {
     notFoundMessage('block');
   }
 
+  const content = document.getElementById('lista-kartodromos');
+
+  // Confere se já não está exibido para não exibir novamente ou esconder
+  if (!content.classList.contains('show')) {
+      content.style.display = 'block';
+      content.classList.add('show');
+  }
+
 }
 
 function filtrarLista() {
@@ -182,7 +189,6 @@ function limparConteudo() {
 // Chama a função quando a página carregar
 document.addEventListener('DOMContentLoaded', function () {
   buscarKartodromos();
-  console.log("AAAAAA");
 });
 
 /* Feito para reproduzir esse elemento aqui
