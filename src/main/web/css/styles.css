@@ -1,16 +1,16 @@
 body {
     font-family: 'ChakraPetchLight', sans-serif;
-    color: white;
+    color: var(--main-font-color);
 }
 
 body.page-home {
-    background-image: linear-gradient(to bottom right, #333c42, #1D1E24);
+    background-image: linear-gradient(to bottom right, var(--light-bg-color), var(--dark-bg-color));
 }
 
 body.gradient-headers {
-    background-image: linear-gradient(to bottom, #da3a17, #1D1E24);
+    background-image: linear-gradient(to bottom, #da3a17, var(--dark-bg-color));
     background-repeat: no-repeat;
-    background-color: #1D1E24;
+    background-color: var(--dark-bg-color);
 }
 
 thead {
@@ -19,7 +19,7 @@ thead {
 }
 
 #nav-bar {
-    background-image: linear-gradient(to bottom right, #333c42, #1D1E24);
+    background-image: linear-gradient(to bottom right, var(--light-bg-color), var(--dark-bg-color));
     padding-top: 7px;
     padding-bottom: 7px;
     font-family: 'Athletic', sans-serif;
@@ -29,7 +29,7 @@ thead {
 .nav-elements a {
     padding: 20px;
     font-size: 22px;
-    color: white;
+    color: var(--main-font-color);
     cursor: pointer;
     position: relative;
     font-family: 'Athletic', sans-serif;
@@ -44,7 +44,7 @@ thead {
 
 .nav-bar-button {
     background-color: transparent;
-    color: white;
+    color: var(--main-font-color);
     padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;
@@ -60,18 +60,18 @@ thead {
 }
 
 .nav-bar-button:hover {
-    background-color: #ff5733;
-    border-color: #ff5733;
+    background-color: var(--main-orange);
+    border-color: var(--main-orange);
 }
 
 .nav-bar-button-destaque {
-    background-color: #ff5733;
-    border-color: #ff5733;
+    background-color: var(--main-orange);
+    border-color: var(--main-orange);
 }
 
 .nav-bar-button-destaque:hover {
-    background-color: #da3813;
-    border-color: #da3813;
+    background-color: var(--main-orange-hover);
+    border-color: var(--main-orange-hover);
 }
 
 .div-branca {
@@ -87,18 +87,18 @@ thead {
 }
 
 .info-pages h1 {
-    color: white;
+    color: var(--main-font-color);
     font-size: 50px;
     font-family: 'ChakraPetchBold', sans-serif;
 }
 
 .info-pages p {
-    color: white;
+    color: var(--main-font-color);
 
 }
 
 .info-pages button {
-    color: white;
+    color: var(--main-font-color);
     font-family: 'ChakraPetchMedium', sans-serif;
     letter-spacing: 0.8px;
     font-weight: bold;
@@ -111,18 +111,18 @@ thead {
 
 .info-pages-white-button {
     color: #1E1F25 !important;
-    background-color: #f7f2ed;
-    border-color: #f7f2ed;
+    background-color: var(--secondary-button-color);
+    border-color: var(--secondary-button-color);
 }
 
 .page-title {
-    color: white;
+    color: var(--main-font-color);
     font-size: 50px;
     font-family: 'ChakraPetchBold', sans-serif;
 }
 
 .subtitle {
-    color: white;
+    color: var(--main-font-color);
     font-size: 50px;
     font-family: 'ChakraPetchBold', sans-serif;
     font-size: 2em;
@@ -131,9 +131,9 @@ thead {
 }
 
 .form-submit-button {
-    background-color: #ff5733;
-    border-color: #ff5733;
-    color: white;
+    background-color: var(--main-orange);
+    border-color: var(--main-orange);
+    color: var(--main-font-color);
     padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;
@@ -148,14 +148,14 @@ thead {
 }
 
 .form-submit-button:hover {
-    background-color: #da3813;
-    border-color: #da3813;
+    background-color: var(--main-orange-hover);
+    border-color: var(--main-orange-hover);
 }
 
 .card-submit-button {
-    background-color: #ff5733;
-    border-color: #ff5733;
-    color: white;
+    background-color: var(--main-orange);
+    border-color: var(--main-orange);
+    color: var(--main-font-color);
     cursor: pointer;
     text-decoration: none;
     border-radius: 15px;
@@ -167,8 +167,8 @@ thead {
 }
 
 .card-submit-button:hover {
-    background-color: #da3813;
-    border-color: #da3813;
+    background-color: var(--main-orange-hover);
+    border-color: var(--main-orange-hover);
 }
 
 .option-button-selected {
@@ -187,17 +187,17 @@ thead {
 }
 
 .karts-cards h5 {
-    color: white !important;
+    color: var(--main-font-color) !important;
 }
 
 .kartodromo-overview-topic p {
     cursor: pointer;
-    color: white;
+    color: var(--main-font-color);
 }
 
 .kartodromo-overview-topic p:hover {
     cursor: pointer;
-    color: #ff5733;
+    color: var(--main-orange);
 }
 
 @font-face {
@@ -246,8 +246,8 @@ thead {
 }
 
 .form-check-input:checked {
-    background-color: #ff5733;
-    border-color: #ff5733;
+    background-color: var(--main-orange);
+    border-color: var(--main-orange);
 }
 
 /* Colocar esse estilo em todo <input> que está em um <form> do bootstrap que NÃO é preciso ser validado.
@@ -267,7 +267,7 @@ thead {
 }
 
 #kartodromos .card {
-    background-image: linear-gradient(to bottom, #333c42 50%, #1D1E24);
+    background-image: linear-gradient(to bottom, var(--light-bg-color) 50%, var(--dark-bg-color));
     border: transparent;
 }
 
@@ -276,7 +276,7 @@ thead {
 }
 
 #kartodromos-view .card-header {
-    background-color: #333c42;
+    background-color: var(--light-bg-color);
 }
 
 #kartodromos-view .active {
@@ -288,9 +288,9 @@ thead {
 }
 
 footer {
-    background-color: #333c42;
+    background-color: var(--light-bg-color);
     padding: 40px 0;
-    color: white;
+    color: var(--main-font-color);
 }
 
 .footer-container {
@@ -320,7 +320,7 @@ footer {
 }
 
 .footer-column ul li a {
-    color: white;
+    color: var(--main-font-color);
     text-decoration: none;
 }
 
@@ -344,4 +344,16 @@ footer {
 
 .footer-copyright p {
     margin: 0;
+}
+
+:root {
+    --light-bg-color: #333c42;
+    --dark-bg-color: #1D1E24;
+
+    --main-font-color: white;
+
+    --secondary-button-color: #f7f2ed;
+
+    --main-orange: #ff5733;
+    --main-orange-hover: #da3813;
 }
