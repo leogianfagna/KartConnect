@@ -47,12 +47,15 @@ function buscarKartodromos() {
 }
 
 function criarCardKartodromo(kartodromosArray) {
+  let elementosEncontradosFiltro = 0;
+  notFoundMessage('none');
 
   kartodromosArray.forEach(kartodromo => {
     if (!(kartodromo.nome).includes(filtro) && filtro !== undefined) {
       return;
     }
 
+    elementosEncontradosFiltro++;
     const divCard = document.createElement('div');
     divCard.className = 'card text-center';
     divCard.style.marginTop = '40px';
@@ -123,6 +126,11 @@ function criarCardKartodromo(kartodromosArray) {
 
     document.getElementById('lista-kartodromos').appendChild(divCard);
   });
+
+  if (elementosEncontradosFiltro === 0) {
+    notFoundMessage('block');
+  }
+
 }
 
 // Função chamada na busca de kartódromos específicos pelo usuário
@@ -139,6 +147,10 @@ function filtrarLista() {
   }
 }
 
+function notFoundMessage(style) {
+  document.getElementById('not-found').style.display = style;
+}
+
 function mostrarElemento() {
   document.getElementById('remove-filters').style.display = 'inline';
 }
@@ -148,6 +160,7 @@ function removerFiltro() {
   document.getElementById('remove-filters').style.display = 'none';
   filtro = undefined;
 
+  notFoundMessage('none');
   limparConteudo();
   buscarKartodromos();
 }

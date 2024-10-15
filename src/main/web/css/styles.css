@@ -281,6 +281,11 @@ thead {
     }
 }
 
+.not-found-message {
+    margin: 5%;
+    display: none;
+}
+
 .table {
     border-color: transparent;
 }

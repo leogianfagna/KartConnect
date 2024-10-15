@@ -26,8 +26,10 @@
   <div class="container" style="margin-bottom: 100px;">
 
     <h1 class="text-center page-title" style="margin: 50px;">KARTÓDROMOS</h1>
-    <form class="row g-3">
-      <div class="col-auto ms-auto">
+    <p id="not-found" class="text-center not-found-message">Não foi encontrado nenhum kartódromo com a sua busca. Que tal tentar outra busca?</p>
+    
+    <form class="row g-3 justify-content-center text-center">
+      <div class="col-auto">
         <button type="button" class="btn btn-primary mb-3" onclick="removerFiltro();" id="remove-filters" style="display: none;">Remover filtro</button>
         <button type="button" class="btn btn-primary mb-3" onclick="filtrarLista();">Buscar</button>
       </div>
@@ -36,6 +38,7 @@
         <input type="text" class="form-control" id="user-query" placeholder="Buscar">
       </div>
     </form>
+    
 
     <div id="lista-kartodromos">
       <!-- Será preenchido com os resultados do banco de dados -->
