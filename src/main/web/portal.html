@@ -89,13 +89,15 @@
 
 
     <!-- Portal -->
-    <div class="container text-center" style="margin-top: 5%;">
+    <div class="container text-center table-portal" id="table-portal" style="margin-top: 5%;">
       <div class="row">
 
         <!-- Seleção de categorias -->
         <div class="col-2">
           <h4 class="subtitle">CATEGORIAS</h1>
             <div style="display: flex; flex-direction: column;" class="row-gap-3" id="categorias">
+              <button type="submit" class="btn btn-primary card-submit-button option-button-selected" onclick="filtrarCategoria(this);"
+                id="cat-all">TUDO</button>
               <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarCategoria(this);"
                 id="cat-60">60KG</button>
               <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarCategoria(this);"

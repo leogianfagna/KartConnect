@@ -55,10 +55,11 @@ function buscarClassificacoes(kartodromoFiltrado) {
     fetch('http://localhost:8080/api/classificacoes', { method: "GET" })
         .then(response => response.json())
         .then(classificacoes => {
+            toggleContent();
             const tbody = document.getElementById('tempos-banco');
             limparTabelaBody(tbody);
             classificacoes.forEach((classificacao, index) => {
-                
+
                 // Cria uma nova linha na tabela
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
@@ -68,11 +69,11 @@ function buscarClassificacoes(kartodromoFiltrado) {
                     <td>${classificacao.peso}</td>
                     <td>${classificacao.tempo}</td>
                 `;
-                
+
                 if (classificacao.kartodromo == kartodromoFiltrado) {
                     tbody.appendChild(tr); // Adicionar linha
                 }
-                
+
             });
             console.log("classificações carregadas:", classificacoes);
         })
@@ -83,4 +84,14 @@ function buscarClassificacoes(kartodromoFiltrado) {
 
 function limparTabelaBody(tbody) {
     tbody.innerHTML = '';
+}
+
+function toggleContent() {
+    const content = document.getElementById('table-portal');
+
+    // Confere se já não está exibido para não exibir novamente ou esconder
+    if (!content.classList.contains('show')) {
+        content.style.display = 'block';
+        content.classList.add('show');
+    }
 }
