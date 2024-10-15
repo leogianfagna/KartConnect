@@ -23,7 +23,7 @@ public class KartodromoHandler implements HttpHandler {
     private final ObjectMapper objectMapper;
 
     public KartodromoHandler() {
-        this.collection = MongoDBConnection.getDatabase().getCollection("kartodromos", Kartodromo.class);
+        this.collection = MongoDBConnection.getDatabase().getCollection("Kartodromo", Kartodromo.class);
         this.objectMapper = new ObjectMapper();
     }
 
@@ -44,12 +44,7 @@ public class KartodromoHandler implements HttpHandler {
             }
 
             if ("GET".equalsIgnoreCase(method)) {
-                if (pathParts.length == 4 && !pathParts[3].isEmpty()) {
-                    String id = pathParts[3];
-                    getKartodromoById(exchange, id);
-                } else {
-                    getAllKartodromos(exchange);
-                }
+                getAllKartodromos(exchange);
             } else if ("POST".equalsIgnoreCase(method)) {
                 createKartodromo(exchange);
             } else if ("PUT".equalsIgnoreCase(method)) {
@@ -79,9 +74,18 @@ public class KartodromoHandler implements HttpHandler {
 
     private void getAllKartodromos(HttpExchange exchange) throws IOException {
         List<Kartodromo> kartodromos = collection.find().into(new ArrayList<>());
+        if (kartodromos.isEmpty()) {
+            System.out.println("Nenhum kartódromo encontrado.");
+        } else {
+            System.out.println("Kartódromos recuperados do banco de dados:");
+            for (Kartodromo kartodromo : kartodromos) {
+                System.out.println(kartodromo);
+            }
+        }
         String response = objectMapper.writeValueAsString(kartodromos);
         sendResponse(exchange, 200, response);
     }
+
 
     private void getKartodromoById(HttpExchange exchange, String id) throws IOException {
         Kartodromo kartodromo = collection.find(eq("_id", new ObjectId(id))).first();
@@ -106,7 +110,6 @@ public class KartodromoHandler implements HttpHandler {
         String body = new BufferedReader(new InputStreamReader(exchange.getRequestBody()))
                 .lines().collect(Collectors.joining("\n"));
         Kartodromo updatedKartodromo = objectMapper.readValue(body, Kartodromo.class);
-        updatedKartodromo.setId(new ObjectId(id));
         collection.replaceOne(eq("_id", new ObjectId(id)), updatedKartodromo);
         String response = objectMapper.writeValueAsString(updatedKartodromo);
         sendResponse(exchange, 200, response);

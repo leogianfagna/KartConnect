@@ -13,6 +13,7 @@ public class Main {
         try {
             int port = 8080;
 
+
             HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
 
             server.createContext("/api/kartodromos", new KartodromoHandler());

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.client.MongoCollection;
 import grupopi4.kartconnect.MongoDBConnection;
 import grupopi4.kartconnect.model.Classificacao;
+import grupopi4.kartconnect.model.Kartodromo;
 import org.bson.types.ObjectId;
 
 import com.sun.net.httpserver.HttpHandler;
@@ -23,7 +24,7 @@ public class ClassificacaoHandler implements HttpHandler {
     private final ObjectMapper objectMapper;
 
     public ClassificacaoHandler() {
-        this.collection = MongoDBConnection.getDatabase().getCollection("classificacoes", Classificacao.class);
+        this.collection = MongoDBConnection.getDatabase().getCollection("Classificacoes", Classificacao.class);
         this.objectMapper = new ObjectMapper();
     }
 
@@ -44,31 +45,15 @@ public class ClassificacaoHandler implements HttpHandler {
             }
 
             if ("GET".equalsIgnoreCase(method)) {
-                if (pathParts.length == 4 && !pathParts[3].isEmpty()) {
-                    String id = pathParts[3];
-                    getClassificacaoById(exchange, id);
-                } else {
-                    getAllClassificacoes(exchange);
-                }
-            } else if ("POST".equalsIgnoreCase(method)) {
+                getAllClassificacoes(exchange);
+            }
+            else if ("POST".equalsIgnoreCase(method)) {
                 createClassificacao(exchange);
-            } else if ("PUT".equalsIgnoreCase(method)) {
-                if (pathParts.length == 4 && !pathParts[3].isEmpty()) {
-                    String id = pathParts[3];
-                    updateClassificacao(exchange, id);
-                } else {
-                    sendResponse(exchange, 400, "{\"message\":\"ID inválido\"}");
-                }
-            } else if ("DELETE".equalsIgnoreCase(method)) {
-                if (pathParts.length == 4 && !pathParts[3].isEmpty()) {
-                    String id = pathParts[3];
-                    deleteClassificacao(exchange, id);
-                } else {
-                    sendResponse(exchange, 400, "{\"message\":\"ID inválido\"}");
-                }
-            } else {
+            }
+            else {
                 sendResponse(exchange, 405, "{\"message\":\"Método não permitido\"}");
             }
+
         } catch (Exception e) {
             e.printStackTrace();
             sendResponse(exchange, 500, "{\"message\":\"Erro interno do servidor\"}");
@@ -79,18 +64,16 @@ public class ClassificacaoHandler implements HttpHandler {
 
     private void getAllClassificacoes(HttpExchange exchange) throws IOException {
         List<Classificacao> classificacoes = collection.find().into(new ArrayList<>());
+        if (classificacoes.isEmpty()) {
+            System.out.println("Nenhuma classificacao encontrada.");
+        } else {
+            System.out.println("Classificacoes recuperados do banco de dados:");
+            for (Classificacao classificacao : classificacoes) {
+                System.out.println(classificacao);
+            }
+        }
         String response = objectMapper.writeValueAsString(classificacoes);
         sendResponse(exchange, 200, response);
-    }
-
-    private void getClassificacaoById(HttpExchange exchange, String id) throws IOException {
-        Classificacao classificacao = collection.find(eq("_id", new ObjectId(id))).first();
-        if (classificacao != null) {
-            String response = objectMapper.writeValueAsString(classificacao);
-            sendResponse(exchange, 200, response);
-        } else {
-            sendResponse(exchange, 404, "{\"message\":\"Classificação não encontrada\"}");
-        }
     }
 
     private void createClassificacao(HttpExchange exchange) throws IOException {
@@ -100,21 +83,6 @@ public class ClassificacaoHandler implements HttpHandler {
         collection.insertOne(classificacao);
         String response = objectMapper.writeValueAsString(classificacao);
         sendResponse(exchange, 201, response);
-    }
-
-    private void updateClassificacao(HttpExchange exchange, String id) throws IOException {
-        String body = new BufferedReader(new InputStreamReader(exchange.getRequestBody()))
-                .lines().collect(Collectors.joining("\n"));
-        Classificacao updatedClassificacao = objectMapper.readValue(body, Classificacao.class);
-        updatedClassificacao.setId(new ObjectId(id));
-        collection.replaceOne(eq("_id", new ObjectId(id)), updatedClassificacao);
-        String response = objectMapper.writeValueAsString(updatedClassificacao);
-        sendResponse(exchange, 200, response);
-    }
-
-    private void deleteClassificacao(HttpExchange exchange, String id) throws IOException {
-        collection.deleteOne(eq("_id", new ObjectId(id)));
-        sendResponse(exchange, 204, "");
     }
 
     private void sendResponse(HttpExchange exchange, int statusCode, String response) throws IOException {
