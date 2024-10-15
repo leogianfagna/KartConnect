@@ -10,6 +10,8 @@ Esse projeto cria um servidor em Java que hospeda uma aplicação web que consis
 Instalar o maven apache no computador.
 Adicionar nas variáveis do sistema MAVEN_HOME com diretoria na pasta deszipada do maven.
 Adicionar na variável PATH do usuário %MAVEN_HOME%\bin
+> Buildar com VSCode: mvn exec:java
+> O caminho para a main já está especificado em `pom.xml`
 
 # Membros:
 - Enzo Marola 
