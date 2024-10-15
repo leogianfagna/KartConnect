@@ -41,7 +41,7 @@
         <div class="card-body">
           <h5 class="card-title">Velocitá</h5>
           <p class="card-text">São Paulo, Campinas.</p>
-          <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarKartodromo(this);">FILTRAR
+          <button type="submit" class="btn btn-primary card-submit-button" id="card-kart-Velocitá" onclick="filtrarKartodromo(this);">FILTRAR
             RESULTADOS</button>
         </div>
       </div>
@@ -51,7 +51,7 @@
         <div class="card-body">
           <h5 class="card-title">ThunderSpeed</h5>
           <p class="card-text">Rio de Janeiro, Niterói.</p>
-          <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarKartodromo(this);">FILTRAR
+          <button type="submit" class="btn btn-primary card-submit-button" id="card-kart-ThunderSpeed" onclick="filtrarKartodromo(this);">FILTRAR
             RESULTADOS</button>
         </div>
       </div>
@@ -61,7 +61,7 @@
         <div class="card-body">
           <h5 class="card-title">NitroRace</h5>
           <p class="card-text">Minas Gerais, Belo Horizonte.</p>
-          <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarKartodromo(this);">FILTRAR
+          <button type="submit" class="btn btn-primary card-submit-button" id="card-kart-NitroRace" onclick="filtrarKartodromo(this);">FILTRAR
             RESULTADOS</button>
         </div>
       </div>
@@ -71,7 +71,7 @@
         <div class="card-body">
           <h5 class="card-title">TurboKart</h5>
           <p class="card-text">Paraná, Curitiba.</p>
-          <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarKartodromo(this);">FILTRAR
+          <button type="submit" class="btn btn-primary card-submit-button" id="card-kart-TurboKart" onclick="filtrarKartodromo(this);">FILTRAR
             RESULTADOS</button>
         </div>
       </div>
@@ -81,7 +81,7 @@
         <div class="card-body">
           <h5 class="card-title">Center VeloMax</h5>
           <p class="card-text">Santa Catarina, Florianópolis.</p>
-          <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarKartodromo(this);">FILTRAR
+          <button type="submit" class="btn btn-primary card-submit-button" id="card-kart-VeloMax" onclick="filtrarKartodromo(this);">FILTRAR
             RESULTADOS</button>
         </div>
       </div>
@@ -123,28 +123,8 @@
                   <th scope="col">Tempo</th>
                 </tr>
               </thead>
-              <tbody class="table-group-divider">
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Leonardo</td>
-                  <td>SP</td>
-                  <td>68kg</td>
-                  <td>47.960s</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Enzo</td>
-                  <td>SP</td>
-                  <td>73kg</td>
-                  <td>48.120s</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Pedro</td>
-                  <td>MG</td>
-                  <td>71kg</td>
-                  <td>48.740s</td>
-                </tr>
+              <tbody class="table-group-divider" id="tempos-banco">
+                <!-- Preenchido com o resultado do banco de dados -->
               </tbody>
             </table>
 
