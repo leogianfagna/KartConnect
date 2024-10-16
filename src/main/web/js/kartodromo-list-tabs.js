@@ -50,6 +50,7 @@ function criarCardKartodromo(kartodromosArray) {
   notFoundMessage('none');
 
   kartodromosArray.forEach(kartodromo => {
+    
     let nomeKartodromoBusca = (kartodromo.nome).toLowerCase();
     if (!nomeKartodromoBusca.includes(filtro) && filtro !== undefined) {
       return;
@@ -153,7 +154,7 @@ function filtrarLista() {
 
   // Campo válido
   if (buscaUsuario.length >= 1) {
-    filtro = buscaUsuario;
+    filtro = buscaUsuario.toLowerCase();
     mostrarElemento();
     limparConteudo();
     buscarKartodromos();
