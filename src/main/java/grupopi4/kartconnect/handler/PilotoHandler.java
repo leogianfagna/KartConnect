@@ -5,7 +5,6 @@ import com.mongodb.client.MongoCollection;
 import grupopi4.kartconnect.MongoDBConnection;
 import grupopi4.kartconnect.model.Piloto;
 import org.bson.types.ObjectId;
-import org.mindrot.jbcrypt.BCrypt;
 
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpExchange;
@@ -96,8 +95,12 @@ public class PilotoHandler implements HttpHandler {
     }
 
     private void createPiloto(HttpExchange exchange) throws IOException {
-        String body = new BufferedReader(new InputStreamReader(exchange.getRequestBody()))
-                .lines().collect(Collectors.joining("\n"));
+        String body;
+        
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(exchange.getRequestBody()))) {
+            body = reader.lines().collect(Collectors.joining("\n"));
+        }
+
         Piloto piloto = objectMapper.readValue(body, Piloto.class);
 
         collection.insertOne(piloto);
@@ -106,8 +109,12 @@ public class PilotoHandler implements HttpHandler {
     }
 
     private void updatePiloto(HttpExchange exchange, String id) throws IOException {
-        String body = new BufferedReader(new InputStreamReader(exchange.getRequestBody()))
-                .lines().collect(Collectors.joining("\n"));
+        String body;
+        
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(exchange.getRequestBody()))) {
+            body = reader.lines().collect(Collectors.joining("\n"));
+        }
+        
         Piloto updatedPiloto = objectMapper.readValue(body, Piloto.class);
         updatedPiloto.setId(new ObjectId(id));
 

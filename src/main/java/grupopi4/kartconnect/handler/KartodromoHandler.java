@@ -87,8 +87,10 @@ public class KartodromoHandler implements HttpHandler {
     }
 
 
+    @SuppressWarnings("unused")
     private void getKartodromoById(HttpExchange exchange, String id) throws IOException {
         Kartodromo kartodromo = collection.find(eq("_id", new ObjectId(id))).first();
+        
         if (kartodromo != null) {
             String response = objectMapper.writeValueAsString(kartodromo);
             sendResponse(exchange, 200, response);
@@ -98,8 +100,12 @@ public class KartodromoHandler implements HttpHandler {
     }
 
     private void createKartodromo(HttpExchange exchange) throws IOException {
-        String body = new BufferedReader(new InputStreamReader(exchange.getRequestBody()))
-                .lines().collect(Collectors.joining("\n"));
+        String body;
+        
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(exchange.getRequestBody()))) {
+            body = reader.lines().collect(Collectors.joining("\n"));
+        }
+        
         Kartodromo kartodromo = objectMapper.readValue(body, Kartodromo.class);
         collection.insertOne(kartodromo);
         String response = objectMapper.writeValueAsString(kartodromo);
@@ -107,8 +113,12 @@ public class KartodromoHandler implements HttpHandler {
     }
 
     private void updateKartodromo(HttpExchange exchange, String id) throws IOException {
-        String body = new BufferedReader(new InputStreamReader(exchange.getRequestBody()))
-                .lines().collect(Collectors.joining("\n"));
+        String body;
+        
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(exchange.getRequestBody()))) {
+            body = reader.lines().collect(Collectors.joining("\n"));
+        }
+
         Kartodromo updatedKartodromo = objectMapper.readValue(body, Kartodromo.class);
         collection.replaceOne(eq("_id", new ObjectId(id)), updatedKartodromo);
         String response = objectMapper.writeValueAsString(updatedKartodromo);

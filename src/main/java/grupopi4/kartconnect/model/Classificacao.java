@@ -1,7 +1,5 @@
 package grupopi4.kartconnect.model;
 
-import org.bson.types.ObjectId;
-
 public class Classificacao {
     private String peso;
     private String nome;
@@ -9,9 +7,7 @@ public class Classificacao {
     private String estado;
     private String kartodromo;
 
-    // Getters e Setters
-
-
+    
     public String getEstado() {
         return estado;
     }

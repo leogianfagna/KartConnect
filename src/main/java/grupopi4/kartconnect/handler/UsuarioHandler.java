@@ -95,8 +95,12 @@ public class UsuarioHandler implements HttpHandler {
     }
 
     private void createUsuario(HttpExchange exchange) throws IOException {
-        String body = new BufferedReader(new InputStreamReader(exchange.getRequestBody()))
-                .lines().collect(Collectors.joining("\n"));
+        String body;
+        
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(exchange.getRequestBody()))) {
+            body = reader.lines().collect(Collectors.joining("\n"));
+        }
+
         Usuario usuario = objectMapper.readValue(body, Usuario.class);
 
         // criptografia
@@ -109,12 +113,16 @@ public class UsuarioHandler implements HttpHandler {
     }
 
     private void updateUsuario(HttpExchange exchange, String id) throws IOException {
-        String body = new BufferedReader(new InputStreamReader(exchange.getRequestBody()))
-                .lines().collect(Collectors.joining("\n"));
+        String body;
+        
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(exchange.getRequestBody()))) {
+            body = reader.lines().collect(Collectors.joining("\n"));
+        }
+        
         Usuario updatedUsuario = objectMapper.readValue(body, Usuario.class);
         updatedUsuario.setId(new ObjectId(id));
 
-        // criptografia ao atualizar senha
+        // Criptografia ao atualizar senha
         if (updatedUsuario.getSenha() != null && !updatedUsuario.getSenha().isEmpty()) {
             String senhaCriptografada = BCrypt.hashpw(updatedUsuario.getSenha(), BCrypt.gensalt());
             updatedUsuario.setSenha(senhaCriptografada);

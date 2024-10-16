@@ -4,20 +4,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.client.MongoCollection;
 import grupopi4.kartconnect.MongoDBConnection;
 import grupopi4.kartconnect.model.Classificacao;
-import grupopi4.kartconnect.model.Kartodromo;
-import org.bson.types.ObjectId;
-
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpExchange;
 
 import java.io.*;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static com.mongodb.client.model.Filters.eq;
 
 public class ClassificacaoHandler implements HttpHandler {
 
@@ -31,13 +25,10 @@ public class ClassificacaoHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        // configurar CORS
+        // Configurar CORS
         setCorsHeaders(exchange);
 
         String method = exchange.getRequestMethod();
-        URI requestURI = exchange.getRequestURI();
-        String path = requestURI.getPath();
-        String[] pathParts = path.split("/");
 
         try {
             if ("OPTIONS".equalsIgnoreCase(method)) {
@@ -79,13 +70,18 @@ public class ClassificacaoHandler implements HttpHandler {
     }
 
     private void createClassificacao(HttpExchange exchange) throws IOException {
-        String body = new BufferedReader(new InputStreamReader(exchange.getRequestBody()))
-                .lines().collect(Collectors.joining("\n"));
+        String body;
+        
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(exchange.getRequestBody()))) {
+            body = reader.lines().collect(Collectors.joining("\n"));
+        }
+
         Classificacao classificacao = objectMapper.readValue(body, Classificacao.class);
         collection.insertOne(classificacao);
         String response = objectMapper.writeValueAsString(classificacao);
         sendResponse(exchange, 201, response);
     }
+    
 
     private void sendResponse(HttpExchange exchange, int statusCode, String response) throws IOException {
         byte[] bytes = response.getBytes("UTF-8");
@@ -97,7 +93,7 @@ public class ClassificacaoHandler implements HttpHandler {
     }
 
     private void setCorsHeaders(HttpExchange exchange) {
-        exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*"); // url do front
+        exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*"); // URL do front
         exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
         exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type");
     }
