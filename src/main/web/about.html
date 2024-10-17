@@ -8,12 +8,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/animation.css">
   <link rel="stylesheet" href="css/scroll-bar.css">
 </head>
 
-<body>
+<body class="gradient-headers">
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48;
+      color: black; /* Cor do ícone */
+      background-color: white; /* Preenchimento branco ao redor do ícone */
+      border: 2px solid white; /* Borda preta */
+      border-radius: 50%; /* Deixa a borda circular */
+      padding: 10px; /* Espaço interno para o ícone não encostar na borda */
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 7em;
+    }
+    </style>
+
+
   <div id="navbar-placeholder"></div>
   <script>
     fetch('/src/main/web/html/components/navbar.html')
@@ -22,7 +44,98 @@
         document.getElementById('navbar-placeholder').innerHTML = data;
       });
   </script>
-  <h1>Página sobre funcionamento</h1>
+
+  <div class="text-center">
+    <h1 class="page-title" style="margin-top: 50px;">FUNCIONAMENTO</h1>
+    <p>
+      Entenda como funciona o KartConnect, seu portal de recordes de<br>
+      desempenho no automobilismo de diversos kartódromos do Brasil.
+    </p>
+  </div>
+
+  <!-- About para usuários (pilotos) -->
+  <div class="text-center" style="margin-top: 80px;">
+    <h1 class="page-title" style="margin-top: 50px;">PARA USUÁRIOS</h1>
+    <p style="margin-bottom: 50px;">Se você é um piloto e busca entender como você pode competir por posições na tabela de classificação, veja abaixo.</p>
+
+    <div class="container text-center">
+      <div class="row">
+  
+        <!-- Etapa 1: Correr -->
+        <div class="col">
+          <span class="material-symbols-outlined">acute</span>
+          <p class="about-step">CORRIDA</p>
+          <p class="about-step-description">Tudo começa com uma emocionante adrenalina na pista de corrida. Finalize uma corrida em qualquer kartódromo para prosseguir.</p>
+        </div>
+  
+        <!-- Etapa 2: Recorde -->
+        <div class="col">
+          <span class="material-symbols-outlined">save</span>
+          <p class="about-step">RECORDE</p>
+          <p class="about-step-description">Finalizar uma corrida vai registrar o tempo da sua melhor volta. Espero que você tenha dado o melhor de si!</p>
+        </div>
+  
+        <!-- Etapa 3: Salvo -->
+        <div class="col">
+          <span class="material-symbols-outlined">variable_insert</span>
+          <p class="about-step">SALVAMENTO</p>
+          <p class="about-step-description">O tempo da sua melhor volta é enviado para nós, que é salvo com muito carinho nos tempos respectivo ao kartódromo que você pilotou.</p>
+        </div>
+  
+        <!-- Etapa 4: Visualização -->
+        <div class="col">
+          <span class="material-symbols-outlined">table_eye</span>
+          <p class="about-step">VISUALIZAR</p>
+          <p class="about-step-description">Agora você pode visualizar a tabela de classificação gerada com todos esses dados e acompanhar seus resultados, tudo organizado por categorias.</p>
+        </div>
+  
+      </div>
+    </div>
+
+  </div>
+
+  <div class="text-center" style="margin-top: 80px;">
+    <h1 class="page-title" style="margin-top: 50px;">PARA KARTÓDROMOS</h1>
+    <p style="margin-bottom: 50px;">Se você é um dono de kartódromo e busca aumentar a competitividade do seu estabelecimento, aumentando as fontes de renda<br>e agradando os clientes com plataformas modernas, veja abaixo como isso é possível.</p>
+
+    <div class="container text-center">
+      <div class="row">
+  
+        <!-- Etapa 1: Correr -->
+        <div class="col">
+          <span class="material-symbols-outlined">handshake</span>
+          <p class="about-step">ASSINATURA</p>
+          <p class="about-step-description">Você assina uma parceria com o KartConnect, instalando nossos recursos e inserindo as informações do seu kartódromo na nossa plataforma.</p>
+        </div>
+  
+        <!-- Etapa 2: Recorde -->
+        <div class="col">
+          <span class="material-symbols-outlined">search_hands_free</span>
+          <p class="about-step">CORRIDA</p>
+          <p class="about-step-description">O piloto corre e você não tem nenhuma preocupação. Os resultados que o sistema usa são aqueles ao final da corrida.</p>
+        </div>
+  
+        <!-- Etapa 3: Salvo -->
+        <div class="col">
+          <span class="material-symbols-outlined">cloud_upload</span>
+          <p class="about-step">DADOS</p>
+          <p class="about-step-description">Automaticamente, os dados são transferidos para a nossa plataforma. Todos os resultados já são organizados pelas categorias e kartódromos.</p>
+        </div>
+  
+        <!-- Etapa 4: Visualização -->
+        <div class="col">
+          <span class="material-symbols-outlined">person_play</span>
+          <p class="about-step">USUÁRIO</p>
+          <p class="about-step-description">Sem demora, o usuário já pode ver seus resultados na plataforma e comparar com os demais, procurando subir na classificação.</p>
+        </div>
+  
+      </div>
+    </div>
+
+  </div>
+
+  
+
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

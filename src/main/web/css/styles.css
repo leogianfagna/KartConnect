@@ -289,6 +289,14 @@ footer {
     display: none;
 }
 
+.about-step {
+    font-size: 1.3em;
+    font-family: ChakraPetchMedium;
+    letter-spacing: 1.4px;
+    font-weight: bold;
+    margin-top: 16px;
+}
+
 @font-face {
     font-family: 'Athletic';
     src: url('/src/main/web/fonts/NewAthleticM54.ttf') format('opentype');
