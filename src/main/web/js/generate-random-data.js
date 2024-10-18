@@ -17,13 +17,13 @@ function randomName() {
 }
 
 function randomTime() {
-    // Gerar um valor aleatório de tempo total em milissegundos (por exemplo, de 1 a 2 minutos)
-    const totalMilliseconds = Math.floor(Math.random() * 300 * 1000) + 50 * 1000; // Entre 30 e 90 segundos
+    // Gerar um valor aleatório de tempo total em milissegundos (entre 1 minuto e 1 minuto e 6 segundos)
+    const totalMilliseconds = Math.floor(Math.random() * 6000) + 60000; // Entre 60.000 e 66.000 milissegundos (1 min a 1 min 6 seg)
 
     // Converter para minutos, segundos e milissegundos
-    const minutes = Math.floor(totalMilliseconds / 60000); // 1 minuto = 60000 milissegundos
-    const seconds = Math.floor((totalMilliseconds % 60000) / 1000); // 1 segundo = 1000 milissegundos
-    const milliseconds = totalMilliseconds % 1000; // Pega os milissegundos restantes
+    const minutes = Math.floor(totalMilliseconds / 60000); // 1 minuto = 60.000 milissegundos
+    const seconds = Math.floor((totalMilliseconds % 60000) / 1000); // Segundos restantes
+    const milliseconds = totalMilliseconds % 1000; // Milissegundos restantes
 
     // Formatar para 2 dígitos nos segundos e 3 dígitos nos milissegundos
     const formattedTime = `${minutes}:${seconds.toString().padStart(2, '0')}:${milliseconds.toString().padStart(3, '0')}`;
@@ -31,8 +31,9 @@ function randomTime() {
     return formattedTime;
 }
 
+
 function randomEmail(nome) {
-    const emailProviders = ["AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MS", "MT", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"];
+    const emailProviders = ["gmail.com", "outlook.com", "hotmail.com", "yahoo.com"];
     const provider = emailProviders[Math.floor(Math.random() * emailProviders.length)];
 
     const email = nome.toLowerCase().replace(" ", ".") + "@" + provider;
@@ -40,16 +41,22 @@ function randomEmail(nome) {
 }
 
 function randomWeight() {
-    const min = 60;
-    const max = 110;
+    const inputWeight = parseInt(document.getElementById('input-category').value) || 80;
+    const min = inputWeight;
+    const max = inputWeight + 9;
 
     return (Math.random() * (max - min) + min).toFixed(0)
 }
 
 function randomKartodromo() {
-    const kartodromos = ["Velocitá", "ThunderSpeed", "NitroRace", "TurboKart", "VeloMax"]
+    const selectedKart = document.getElementById('input-name').value;
 
-    return kartodromos[Math.floor(Math.random() * kartodromos.length)];
+    if (selectedKart === '') {
+        const kartodromos = ["Velocitá", "ThunderSpeed", "NitroRace", "TurboKart", "VeloMax"]
+        return kartodromos[Math.floor(Math.random() * kartodromos.length)];
+    }
+
+    return selectedKart;
 }
 
 function randomState() {
@@ -95,17 +102,17 @@ function inserirNovaClassificacao(novaClassificacao) {
         })
         .then(data => {
             console.log('Classificação inserida com sucesso:', data);
-            alert('Classificação inserida com sucesso!');
+            document.getElementById('success-message').style.display = 'block';
         })
         .catch(error => {
             console.error('Erro ao inserir classificação:', error);
-            alert('Erro ao inserir classificação. Tente novamente.');
+            document.getElementById('fail-message').style.display = 'block';
         });
 }
 
 
 function generateRandomData() {
-    const totalSimulations = document.getElementById('validation-simulations-total').value || 3;
+    const totalSimulations = document.getElementById('input-simulations-total').value || 3;
 
     for (let i = 0; i < totalSimulations; i++) {
         let novaClassificacao = {

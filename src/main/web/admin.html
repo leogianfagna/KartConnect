@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/animation.css">
   <link rel="stylesheet" href="css/scroll-bar.css">
@@ -30,16 +31,16 @@
       com objetivo de simular resultados.
     </p>
 
-    <form class="row g-3 needs-validation" novalidate>
+    <form class="row g-3">
       <div class="col-md-12">
-        <label for="validation-name" class="form-label">Nome do kartódromo</label>
-        <input type="text" class="form-control" id="validation-name" required>
+        <label for="input-name" class="form-label">Nome do kartódromo</label>
+        <input type="text" class="form-control" id="input-name">
         <div class="invalid-feedback">Campo não preenchido.</div>
       </div>
 
       <div class="col-md-6">
-        <label for="validation-category" class="form-label">Categoria dos resultados</label>
-        <select class="form-select" id="validation-category" required>
+        <label for="input-category" class="form-label">Categoria dos resultados</label>
+        <select class="form-select" id="input-category">
           <option selected disabled value="">Selecione...</option>
           <option value="60">60kg</option>
           <option value="70">70kg</option>
@@ -51,18 +52,37 @@
       </div>
 
       <div class="col-md-6">
-        <label for="validation-simulations-total" class="form-label">Total de simulações</label>
-        <input type="number" id="validation-simulations-total" class="form-control" aria-describedby="passwordHelpInline" required>
+        <label for="input-simulations-total" class="form-label">Total de simulações</label>
+        <input type="number" id="input-simulations-total" class="form-control">
         <div class="invalid-feedback">Campo não preenchido.</div>
       </div>
 
       <div class="col-12 d-flex justify-content-center" style="margin-top: 30px">
-        <button type="submit" class="btn btn-primary form-submit-button" onclick="generateRandomData();">GERAR DADOS</button>
+        <button type="button" class="btn btn-primary form-submit-button" onclick="generateRandomData();">GERAR
+          DADOS</button>
       </div>
+
+      <p class="text-center" id="success-message" style="display: none;">
+        Dados foram gerados com sucesso!
+        <a href="/src/main/web/portal.html">Clique aqui</a>
+        para visualizá-los.
+      </p>
+
+      <p class="text-center" id="fail-message" style="display: none;">
+        Os dados não foram gerados devido a uma falha. Contacte um administrador.
+      </p>
     </form>
   </div>
-  
-  <script src="js/form-validation.js"></script>
+
+  <div class="text-center" style="margin-top: 50px;">
+    <span class="material-symbols-outlined pagination-symbol">error</span>
+    <p>
+      Deixar os campos em branco vão gerar dados completamente aleatórios,<br>
+      de todas as categorias e possíveis kartódromos.
+    </p>
+  </div>
+
+
   <script src="js/generate-random-data.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
