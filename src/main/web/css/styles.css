@@ -410,3 +410,8 @@ footer {
     cursor: pointer;
     transition: color 0.3s ease, text-shadow 0.3s ease;
 }
+
+#terms h4 {
+    font-family: ChakraPetchBold;
+    margin-top: 40px;
+}
