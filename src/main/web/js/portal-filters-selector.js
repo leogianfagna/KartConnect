@@ -3,18 +3,22 @@
 
 
 // Variáveis globais para identificar os filtros de resultados
+const resultsPerPage = 20;
 let selectedKartodromo = '';
 let selectedCategoria = 'all';
-
+let selectedPageNumber = 1;
+let resultadosBuscados;
 
 // Gettters e setters para resgatar os filtros aplicados pelo usuário na página
 function setKartodromo(element) {
     const kartodromoEscolhido = element.id;
+    selectedPageNumber = 1;
     selectedKartodromo = kartodromoEscolhido.replace('card-kart-', '');
 }
 
 function setCategoria(element) {
     const categoria = (element.id).replace('cat-', '');
+    selectedPageNumber = 1;
     selectedCategoria = categoria;
 }
 
@@ -46,9 +50,16 @@ function buscarClassificacoes() {
     fetch('http://localhost:8080/api/classificacoes', { method: "GET" })
         .then(response => response.json())
         .then(classificacoes => {
+            console.log(classificacoes);
             showPortal();
+            
             const tbody = document.getElementById('tempos-banco');
             limparTabelaBody(tbody);
+
+            resultadosBuscados = classificacoes.filter(classificacao => 
+                classificacao.kartodromo === selectedKartodromo && pertenceCategoria(classificacao.peso)
+            ).length;
+
             classificacoes.forEach((classificacao, index) => {
 
                 // Cria uma nova linha na tabela
@@ -63,8 +74,11 @@ function buscarClassificacoes() {
 
                 // Filtragem de resultados baseado nos filtros do usuário
                 if (classificacao.kartodromo === selectedKartodromo && pertenceCategoria(classificacao.peso) === true) {
-                    tbody.appendChild(tr);
                     tdId++;
+                    if (getNumberOfResults(tdId)) {
+                        tbody.appendChild(tr);
+                    }
+                    
                 }
             });
         })
@@ -141,4 +155,36 @@ function showPortal() {
         content.style.display = 'block';
         content.classList.add('show');
     }
+}
+
+// Função que vai mudar de página na tabela dos resultados, que está limitada a "resultsPerPage" resultados. Essa função vai inserior novamente os resultados, mas somente
+// aqueles que pertencem ao número da página. Essa função confere se já está na página um (pois não pode ser menor que isso) e também se a página seguinte é valida (possui algum
+// resultado nela), para não passar para uma página vazia.
+function changePage(i) {
+    if (selectedPageNumber === 1 && i < 1) {
+        return;
+    }
+
+    if (selectedPageNumber + i > maximoPaginas(resultadosBuscados)) {
+        return;
+    }
+
+    selectedPageNumber = selectedPageNumber + i;
+    buscarClassificacoes();    
+}
+
+// Função auxiliar que retorna o máximo de páginas de resultados que pode haver, para usar como auxilio para não acessar uma página que não há resultados.
+function maximoPaginas(results) {
+    return Math.ceil(results / resultsPerPage);
+}
+
+// Função auxiliar que é usada na hora de inserir um elemento na tabela, que verifica se aquele elemento pertence àquela página. Por exemplo, o piloto de posição 31 não pertence
+// à página 1 e isso é calculado baseado na quantia de resultados por página (resultsPerPage) somado com 1, para funcionar corretamente.
+function getNumberOfResults(num) {
+    const finalResult = selectedPageNumber * resultsPerPage + 1;
+    const firstResult = finalResult - (resultsPerPage - 1);
+
+    if (num > finalResult) return false;
+    if (num < firstResult) return false;
+    return true;
 }

@@ -1,3 +1,15 @@
+:root {
+    --light-bg-color: #333c42;
+    --dark-bg-color: #1D1E24;
+
+    --main-font-color: white;
+
+    --secondary-button-color: #f7f2ed;
+
+    --main-orange: #ff5733;
+    --main-orange-hover: #da3813;
+}
+
 body {
     font-family: 'ChakraPetchLight', sans-serif;
     color: var(--main-font-color);
@@ -75,18 +87,6 @@ footer {
 
 .footer-copyright p {
     margin: 0;
-}
-
-:root {
-    --light-bg-color: #333c42;
-    --dark-bg-color: #1D1E24;
-
-    --main-font-color: white;
-
-    --secondary-button-color: #f7f2ed;
-
-    --main-orange: #ff5733;
-    --main-orange-hover: #da3813;
 }
 
 #nav-bar {
@@ -275,13 +275,13 @@ footer {
     padding: 0px 20px 0px;
     font-size: 1.4em;
     font-family: ChakraPetchMedium;
-    color: white; /* Cor de texto inicial */
-    transition: color 0.3s ease, text-shadow 0.3s ease; /* Transição suave */
-    cursor: pointer; /* Mostra que o texto é interativo */
+    color: white;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    cursor: pointer;
 }
 
 .query-simple-button:hover {
-    color: #c9c7c7; /* Cor do texto ao passar o mouse */
+    color: #c9c7c7;
 }
 
 .not-found-message {
@@ -380,4 +380,33 @@ footer {
 
 .table {
     border-color: transparent;
+}
+
+#about-us .material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48;
+    color: black;
+    background-color: white;
+    border: 2px solid white;
+    border-radius: 50%;
+    padding: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 7em;
+}
+
+.pagination-symbol {
+    color: white;
+    text-decoration: none;
+    user-select: none;
+}
+
+.pagination-symbol:hover {
+    color: var(--main-orange);
+    cursor: pointer;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
 }
