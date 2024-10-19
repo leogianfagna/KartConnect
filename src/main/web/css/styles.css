@@ -382,7 +382,30 @@ footer {
     border-color: transparent;
 }
 
-#about-us .material-symbols-outlined {
+.about-step-arrow {
+
+    max-width: fit-content;
+    margin: 0;
+    padding: 0;
+    max-width: 0px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transform: translateY(-25%);
+}
+
+.about-step-arrow span {
+    font-size: 2em;
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+}
+
+.large-steps-icons {
     font-variation-settings:
         'FILL' 0,
         'wght' 400,
@@ -398,6 +421,8 @@ footer {
     align-items: center;
     font-size: 7em;
 }
+
+
 
 .pagination-symbol {
     color: white;
