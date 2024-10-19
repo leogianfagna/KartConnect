@@ -33,18 +33,75 @@
 
     <form class="row g-3 needs-validation" novalidate>
       <div class="col-md-12">
-        <label for="validation-name" class="form-label">Nome do piloto</label>
-        <input type="text" class="form-control" id="validation-name" required>
+        <label for="pilot-name" class="form-label">Nome do piloto</label>
+        <input type="text" class="form-control" id="pilot-name" required>
         <div class="invalid-feedback">Campo não preenchido.</div>
       </div>
 
       <div class="col-12 d-flex justify-content-center" style="margin-top: 30px">
         <button type="submit" class="btn btn-primary form-submit-button">PROCURAR</button>
       </div>
+    </form>
+  </div>
+
+  <!-- Portal de análise -->
+  <div class="container text-center table-portal" id="table-portal" style="margin-top: 5%; display: block;">
+    <div class="row">
+
+      <!-- Seleção de categorias -->
+      <div class="col">
+        <h4 class="subtitle">CATEGORIAS</h1>
+          <div style="display: flex; flex-direction: column;" class="row-gap-3" id="categorias">
+            <button type="submit" class="btn btn-primary card-submit-button option-button-selected"
+              onclick="filtrarCategoria(this);" id="cat-all">TUDO</button>
+            <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarCategoria(this);"
+              id="cat-60">60KG</button>
+            <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarCategoria(this);"
+              id="cat-70">70KG</button>
+            <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarCategoria(this);"
+              id="cat-80">80KG</button>
+            <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarCategoria(this);"
+              id="cat-90">90KG</button>
+            <button type="submit" class="btn btn-primary card-submit-button mb-3" onclick="filtrarCategoria(this);"
+              id="cat-100">100KG</button>
+          </div>
+      </div>
+
+      <!-- Tabela resultados -->
+      <div class="col">
+        <h4 class="subtitle">RESULTADOS</h1>
+          <table class="table table-custom table-dark table-striped table-hover"
+            style="border-radius: 15px; overflow: hidden;">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Peso</th>
+                <th scope="col">Tempo</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider" id="tempos-banco">
+              <!-- Preenchido com o resultado do banco de dados -->
+
+            </tbody>
+          </table>
+
+          <div id="pagination-button">
+            <span class="material-symbols-outlined">
+              <a class="pagination-symbol" style="margin-right: 200px;" onclick="changePage(-1);">arrow_back_ios</a>
+            </span>
+            <span class="material-symbols-outlined pagination-symbol">
+              <a class="pagination-symbol" onclick="changePage(1);">arrow_forward_ios</a>
+            </span>
+          </div>
+
+      </div>
+    </div>
   </div>
 
   <script src="js/form-validation.js"></script>
-  <script src="js/portal-filters-selector.js"></script>
+  <script src="js/single-results-portal.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>

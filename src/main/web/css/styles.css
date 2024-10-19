@@ -23,6 +23,7 @@ body.gradient-headers {
     background-image: linear-gradient(to bottom, #da3a17, var(--dark-bg-color));
     background-repeat: no-repeat;
     background-color: var(--dark-bg-color);
+    margin-bottom: 100px;
 }
 
 thead {
@@ -383,7 +384,6 @@ footer {
 }
 
 .about-step-arrow {
-
     max-width: fit-content;
     margin: 0;
     padding: 0;
@@ -422,8 +422,6 @@ footer {
     font-size: 7em;
 }
 
-
-
 .pagination-symbol {
     color: white;
     text-decoration: none;
@@ -439,4 +437,16 @@ footer {
 #terms h4 {
     font-family: ChakraPetchBold;
     margin-top: 40px;
+}
+
+.rounded-image {
+    max-height: 600px;
+    border-radius: 20px;
+    border: 2px solid white;
+    object-fit: cover;
+}
+
+.contact-icon {
+    user-select: none;
+    margin: 0px 6px;
 }
