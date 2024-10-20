@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/animation.css">
   <link rel="stylesheet" href="css/scroll-bar.css">
+  <link rel="stylesheet" href="css/velocimeter.css">
 </head>
 
 <body class="gradient-headers">
@@ -39,31 +40,33 @@
       </div>
 
       <div class="col-12 d-flex justify-content-center" style="margin-top: 30px">
-        <button type="submit" class="btn btn-primary form-submit-button">PROCURAR</button>
+        <button type="button" class="btn btn-primary form-submit-button"
+          onclick="buscarClassificacoes();">PROCURAR</button>
       </div>
     </form>
   </div>
 
   <!-- Portal de análise -->
-  <div class="container text-center table-portal" id="table-portal" style="margin-top: 5%; display: block;">
+  <div class="container text-center table-portal" id="table-portal" style="margin-top: 5%; display: none;">
     <div class="row">
 
-      <!-- Seleção de categorias -->
+      <!-- Seleção de kartódromos -->
+      <!-- TO-DO: Resgatar os kartódromos do banco -->
       <div class="col">
-        <h4 class="subtitle">CATEGORIAS</h1>
-          <div style="display: flex; flex-direction: column;" class="row-gap-3" id="categorias">
+        <h4 class="subtitle">KARTÓDROMOS</h1>
+          <div style="display: flex; flex-direction: column;" class="row-gap-3" id="kartodromos-filtro">
             <button type="submit" class="btn btn-primary card-submit-button option-button-selected"
-              onclick="filtrarCategoria(this);" id="cat-all">TUDO</button>
+              onclick="filtrarCategoria(this);" id="kart-all">TODOS</button>
             <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarCategoria(this);"
-              id="cat-60">60KG</button>
+              id="kart-NitroRace">Nitro Race</button>
             <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarCategoria(this);"
-              id="cat-70">70KG</button>
+              id="kart-Velocitá">Velocitá</button>
             <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarCategoria(this);"
-              id="cat-80">80KG</button>
+              id="kart-TurboKart">Turbo Kart</button>
             <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarCategoria(this);"
-              id="cat-90">90KG</button>
+              id="kart-VeloMax">Center VeloMax</button>
             <button type="submit" class="btn btn-primary card-submit-button mb-3" onclick="filtrarCategoria(this);"
-              id="cat-100">100KG</button>
+              id="kart-ThunderSpeed">Thunder Speed</button>
           </div>
       </div>
 
@@ -74,11 +77,11 @@
             style="border-radius: 15px; overflow: hidden;">
             <thead>
               <tr>
-                <th scope="col">#</th>
                 <th scope="col">Nome</th>
-                <th scope="col">Estado</th>
                 <th scope="col">Peso</th>
+                <th scope="col">Kartódromo</th>
                 <th scope="col">Tempo</th>
+                <th scope="col">Ação</th>
               </tr>
             </thead>
             <tbody class="table-group-divider" id="tempos-banco">
@@ -96,6 +99,51 @@
             </span>
           </div>
 
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="container text-center" style="margin-top: 50px; display: none;">
+    <div class="row">
+      <div class="col dashboard-background">
+        <p><b>Comparação dos melhores</b></p>
+        <div class="speedometer-container">
+          <div class="speedometer text-center">
+            <div class="speedometer-ranges"></div>
+
+            <div class="speedometer-background" id="speedometer-background">
+              <div class="speedometer-center"></div>
+            </div>
+
+            <div class="speedometer-background-hide pt-4">
+              <h1 class="status-txt fw-bold" id="status-txt">Neutral</h1>
+            </div>
+
+            <div class="speedometer-needle"></div>
+
+            <div class="range-text range-text-1">Strong<br />Sell</div>
+            <div class="range-text range-text-2">Sell</div>
+            <div class="range-text range-text-3">Neutral</div>
+            <div class="range-text range-text-4">Buy</div>
+            <div class="range-text range-text-5">Strong<br />Buy</div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col dashboard-background">
+        <p><b>Diferenças</b></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col dashboard-background">
+        <p><b>Diferença por categoria</b></p>
+      </div>
+
+      <div class="col dashboard-background">
+        <p><b>Melhorias</b></p>
       </div>
     </div>
   </div>
