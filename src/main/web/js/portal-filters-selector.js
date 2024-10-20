@@ -47,6 +47,12 @@ function filtrarKartodromo(element) {
 function buscarClassificacoes() {
     let tdId = 1;
 
+    //Exemplo de utilização do fetch com um filtro
+
+    //let filter = {nome: "Felipe Almeida"};
+    //const queryParams = new URLSearchParams(filter).toString();
+    //fetch(`http://localhost:8080/api/classificacoes?${queryParams}`, { method: "GET" })
+
     fetch('http://localhost:8080/api/classificacoes', { method: "GET" })
         .then(response => response.json())
         .then(classificacoes => {
