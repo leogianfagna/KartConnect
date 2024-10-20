@@ -127,11 +127,7 @@ async function showDashboard(kartodromoAnalisado) {
     document.getElementById('dif-media').innerHTML = getDifTime(tempoPiloto, mediaTempoTotal);
 
     definirVelocimetro(melhorTempo, piorTempo, mediaTempo, meioMelhorMedia, meioPiorMedia, tempoPiloto);
-    console.log("Melhor tempo = " + millisecondsToTime(melhorTempo));
-    console.log("Pior tempo = " + millisecondsToTime(piorTempo));
-    console.log("Média dos 20 tempos = " + millisecondsToTime(mediaTempo));
-    console.log("Meio entre o melhor tempo e a média = " + millisecondsToTime(meioMelhorMedia));
-    console.log("Meio entre o pior tempo e a média = " + millisecondsToTime(meioPiorMedia));
+    
 
     // Confere se já não está exibido para não exibir novamente ou esconder
     const content = document.getElementById('dashboard-portal');
@@ -143,17 +139,25 @@ async function showDashboard(kartodromoAnalisado) {
 
 // to-do: Fix
 function definirVelocimetro(melhorTempo, piorTempo, mediaTempo, meioMelhorMedia, meioPiorMedia, tempoPiloto) {
+    tempoPiloto = timeToMilliseconds(tempoPiloto);
+    console.log("Tempo piloto: " + tempoPiloto);
+    console.log("Primeira entrada: " + meioMelhorMedia);
+    console.log("Segunda entrada: " + mediaTempo);
+    console.log("Terceira entrada: " + meioPiorMedia);
+    console.log("Quarta entrada: " + piorTempo);
+
+
     switch (true) {
-        case (millisecondsToTime(tempoPiloto) < millisecondsToTime(meioMelhorMedia)):
+        case (tempoPiloto < meioMelhorMedia):
             setScore(2);
             break;
-        case (millisecondsToTime(tempoPiloto) < millisecondsToTime(mediaTempo)):
+        case (tempoPiloto < mediaTempo):
             setScore(1);
             break;
-        case (millisecondsToTime(tempoPiloto) < millisecondsToTime(meioPiorMedia)):
+        case (tempoPiloto < meioPiorMedia):
             setScore(0);
             break;
-        case (millisecondsToTime(tempoPiloto) < millisecondsToTime(piorTempo)):
+        case (tempoPiloto < piorTempo):
             setScore(-1);
             break;
         default:
