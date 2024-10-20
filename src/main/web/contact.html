@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/animation.css">
   <link rel="stylesheet" href="css/scroll-bar.css">
@@ -29,7 +29,7 @@
   </div>
 
   <div class="container text-center table-portal" id="table-portal" style="margin-top: 5%; display: block;">
-    <div class="row">
+    <div id="suporte" class="row">
 
       <!-- Contato para suporte -->
       <div class="col">
@@ -48,21 +48,23 @@
 
     </div>
 
-    <div class="row">
+    <div id="parceria" class="row">
 
       <!-- Contato para parcerias -->
       <div class="col">
         <div class="d-flex flex-column justify-content-center align-items-center" style="height: 100%;">
           <h1><b>Contatar por parceria</b></h1>
-          <p>KartConnect está aberto para parceria e patrocinadores. Você pode nos enviar um email para <b>contato@kartconnect.com.br</b> com sua proposta e informações da empresa, estaremos muito felizes em retribuir o contato!</p>
+          <p>KartConnect está aberto para parceria e patrocinadores. Você pode nos enviar um email para
+            <b>contato@kartconnect.com.br</b> com sua proposta e informações da empresa, estaremos muito felizes em
+            retribuir o contato!</p>
           <p>Se preferir, você pode deixar seu e-mail que entraremos em contato o mais rápido possível.</p>
-     
+
           <div class="container">
             <input type="text" class="form-control" id="email" placeholder="meu@email.com.br">
-            <button type="submit" class="btn btn-primary form-submit-button" style="margin-top: 30px" onclick="document.getElementById('email-feedback').style.display = 'block'">SOLICITAR CONTATO</button>
+            <button type="submit" class="btn btn-primary form-submit-button" style="margin-top: 30px"
+              onclick="document.getElementById('email-feedback').style.display = 'block'">SOLICITAR CONTATO</button>
           </div>
           <p id="email-feedback" style="margin-top: 20px; display: none;">E-mail enviado! Entraremos em contato.</p>
-          
 
         </div>
       </div>
@@ -70,11 +72,8 @@
       <div class="col">
         <img src="/src/main/web/images/partner-up.png" class="rounded-image">
       </div>
-
     </div>
-
   </div>
-
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

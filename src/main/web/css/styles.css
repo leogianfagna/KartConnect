@@ -10,6 +10,9 @@
     --main-orange-hover: #da3813;
 }
 
+html {
+    scroll-behavior: smooth;
+}
 body {
     font-family: 'ChakraPetchLight', sans-serif;
     color: var(--main-font-color);
