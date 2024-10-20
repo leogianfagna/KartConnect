@@ -32,7 +32,7 @@
 
   <div class="container" style="max-width: 800px; margin-top: 50px;">
 
-    <form class="row g-3 needs-validation" novalidate>
+    <form class="row g-3 needs-validation" id="name-form" novalidate>
       <div class="col-md-12">
         <label for="pilot-name" class="form-label">Nome do piloto</label>
         <input type="text" class="form-control" id="pilot-name" required>
@@ -86,7 +86,6 @@
             </thead>
             <tbody class="table-group-divider" id="tempos-banco">
               <!-- Preenchido com o resultado do banco de dados -->
-
             </tbody>
           </table>
 
@@ -104,8 +103,10 @@
   </div>
 
   <!-- Dashboard -->
-  <div class="container text-center" style="margin-top: 50px; display: none;">
+  <div class="container text-center" style="margin-top: 50px; display: none;" id="dashboard-portal">
     <div class="row">
+
+      <!-- Velocímetro TOP 20-->
       <div class="col dashboard-background">
         <p><b>Comparação dos melhores</b></p>
         <div class="speedometer-container">
@@ -132,18 +133,22 @@
         </div>
       </div>
 
+      <!-- Diferença de tempo -->
       <div class="col dashboard-background">
         <p><b>Diferenças</b></p>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col dashboard-background">
-        <p><b>Diferença por categoria</b></p>
-      </div>
-
-      <div class="col dashboard-background">
-        <p><b>Melhorias</b></p>
+        <!-- TO-DO: Uma boa solução talvez seja criar tabela -->
+        <div class="d-flex" style="gap: 15px;">
+          <p id="dif-first">+1.5s</p>
+          <p id="dif-top10">+1.5s</p>
+          <p id="dif-media">+1.5s</p>
+        </div>
+        <div class="d-flex" style="gap: 15px;">
+          <p>Diferença primeiro</p>
+          <p>Diferença do top 10</p>
+          <p>Diferença da média</p>
+        </div>
+        
       </div>
     </div>
   </div>
