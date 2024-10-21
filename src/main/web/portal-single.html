@@ -58,21 +58,22 @@
             <button type="submit" class="btn btn-primary card-submit-button option-button-selected"
               onclick="filtrarCategoria(this);" id="kart-all">TODOS</button>
             <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarCategoria(this);"
-              id="kart-NitroRace">Nitro Race</button>
+              id="kart-NitroRace">NITRO RACE</button>
             <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarCategoria(this);"
-              id="kart-Velocitá">Velocitá</button>
+              id="kart-Velocitá">VELOCITÁ</button>
             <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarCategoria(this);"
-              id="kart-TurboKart">Turbo Kart</button>
+              id="kart-TurboKart">TURBO KART</button>
             <button type="submit" class="btn btn-primary card-submit-button" onclick="filtrarCategoria(this);"
-              id="kart-VeloMax">Center VeloMax</button>
+              id="kart-VeloMax">CENTER VELOMAX</button>
             <button type="submit" class="btn btn-primary card-submit-button mb-3" onclick="filtrarCategoria(this);"
-              id="kart-ThunderSpeed">Thunder Speed</button>
+              id="kart-ThunderSpeed">THUNDER SPEED</button>
           </div>
       </div>
 
       <!-- Tabela resultados -->
       <div class="col">
-        <h4 class="subtitle">RESULTADOS</h1>
+        <h4 class="subtitle">RESULTADOS</h4>
+        <div id="tabela-resultados">
           <table class="table table-custom table-dark table-striped table-hover"
             style="border-radius: 15px; overflow: hidden;">
             <thead>
@@ -97,6 +98,9 @@
               <a class="pagination-symbol" onclick="changePage(1);">arrow_forward_ios</a>
             </span>
           </div>
+        </div>
+        
+        <p id="nothing-found">Nenhum resultado para esse kartódromo ou piloto foi encontrado.</p>
 
       </div>
     </div>
@@ -109,6 +113,7 @@
       <!-- Velocímetro TOP 20-->
       <div class="col dashboard-background">
         <p class="dashboard-title"><b>Comparação dos melhores</b></p>
+        <p class="dashboard-time-desc">Compara seu desempenho com os 20 melhores.</p>
         <div class="speedometer-container">
           <div class="speedometer text-center">
             <div class="speedometer-ranges"></div>
@@ -137,7 +142,7 @@
       <div class="col dashboard-background">
         <p class="dashboard-title"><b>Diferença de performance</b></p>
 
-        <div class="d-flex" style="margin-top: 10%;">
+        <div class="d-flex" style="margin-top: 15%;">
           <div class="col-md-6">
             <span class="material-symbols-outlined dashboard-icons" id="dif-first-icon">info</span>
             <p id="dif-first" class="dashboard-time-dif">+1.5s</p>

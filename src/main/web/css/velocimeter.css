@@ -15,7 +15,6 @@
 
 
 .speedometer-container {
-    background-color: #1E222D;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -55,11 +54,11 @@
     position: absolute;
     width: 400px;
     height: 125px;
-    background-color: #1E222D;
+    background-color: var(--dark-bg-color);
     bottom: 0;
     display: flex;
     justify-content: center;
-    box-shadow: 0px 0px 20px 10px #1E222D;
+    box-shadow: 0px 0px 20px 10px var(--dark-bg-color);
 }
 
 .status-txt {
@@ -89,8 +88,8 @@
     height: 7px;
     border-radius: 50%;
     border: solid 2px #B7BBC7;
-    background-color: #1e222d;
-    outline: solid 7px #1E222D;
+    background-color: var(--dark-bg-color);
+    outline: solid 7px var(--dark-bg-color);
     z-index: 2;
 }
 
@@ -111,12 +110,12 @@
 }
 
 .range-text-1 {
-    left: 27px;
-    top: 220px;
+    left: 35px;
+    top: 225px;
 }
 
 .range-text-2 {
-    left: 85px;
+    left: 65px;
     top: 155px;
 }
 
@@ -132,11 +131,6 @@
 }
 
 .range-text-5 {
-    right: 27px;
-    top: 220px;
-}
-
-.dashboard-background {
-    background-color: #1E222D;
-    margin: 5px
+    right: 8px;
+    top: 225px;
 }

@@ -23,13 +23,16 @@ function buscarClassificacoes() {
     let tdId = 1;
     const filtro = getFiltros();
     limparTabelaBody();
+    refreshDivs();
 
     fetch(`http://localhost:8080/api/classificacoes?${filtro}`, { method: "GET" })
         .then(response => response.json())
         .then(classificacoes => {
             showPortal();
 
+            let existeResultado = false;
             classificacoes.forEach((classificacao) => {
+                existeResultado = true;
 
                 // Cria uma nova linha na tabela
                 const tr = document.createElement('tr');
@@ -45,6 +48,7 @@ function buscarClassificacoes() {
                 const btn = document.createElement('p'); // Usando 'p' como botão
                 btn.className = "mb-3 query-simple-button";
                 btn.style.fontSize = "1em";
+                btn.style.marginTop = "16px";
                 btn.textContent = "ANALISAR";
 
                 // Adiciona o evento 'onclick' corretamente
@@ -55,16 +59,31 @@ function buscarClassificacoes() {
                 // Adiciona o botão na célula e a célula na linha
                 td.appendChild(btn);
                 tr.appendChild(td);
+                tr.className = "align-middle";
 
                 tdId++;
                 tbody.appendChild(tr);
             });
+
+            if (!existeResultado) {
+                showNothingFound();
+            }
+
         })
         .catch(error => {
             console.error('Erro ao buscar classificações:', error);
         });
 }
 
+function showNothingFound() {
+    document.getElementById('tabela-resultados').style.display = 'none';
+    document.getElementById('nothing-found').style.display = 'block';
+}
+
+function refreshDivs() {
+    document.getElementById('tabela-resultados').style.display = 'block';
+    document.getElementById('nothing-found').style.display = 'none';
+}
 
 async function showDashboard(kartodromoAnalisado) {
     const newFilter = { "kartodromo": kartodromoAnalisado };
@@ -135,7 +154,6 @@ async function showDashboard(kartodromoAnalisado) {
 
 
     definirVelocimetro(melhorTempo, piorTempo, mediaTempo, meioMelhorMedia, meioPiorMedia, tempoPiloto);
-    
 
     // Confere se já não está exibido para não exibir novamente ou esconder
     const content = document.getElementById('dashboard-portal');
@@ -158,7 +176,7 @@ function getRespectiveIcon(time) {
     if (compare < 1000) {
         return "timeline";
     }
-    
+
     return "trending_down";
 }
 
@@ -173,7 +191,7 @@ function getRespectiveColor(time) {
     if (compare < 1000) {
         return "#fae039";
     }
-    
+
     return "#de3b26";
 }
 

@@ -13,6 +13,7 @@
 html {
     scroll-behavior: smooth;
 }
+
 body {
     font-family: 'ChakraPetchLight', sans-serif;
     color: var(--main-font-color);
@@ -496,4 +497,10 @@ footer {
 
 .material-symbols-outlined {
     user-select: none;
+}
+
+.dashboard-background {
+    background-color: var(--dark-bg-color);
+    margin: 5px;
+    border-radius: 10px;
 }
