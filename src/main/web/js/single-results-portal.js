@@ -368,3 +368,32 @@ function scrollToBottom() {
         behavior: 'smooth'
     });
 }
+
+function listarKartodromos() {
+    fetch('http://localhost:8080/api/kartodromos')
+        .then(response => response.json())
+        .then(kartodromos => {
+            const container = document.getElementById('kartodromos-filtro');
+
+            kartodromos.forEach(kartodromo => {
+                const button = document.createElement('button');
+                button.type = 'submit';
+                button.className = 'btn btn-primary card-submit-button';
+                button.textContent = kartodromo.nome;
+                button.id = `kart-${kartodromo.nome.replace(/\s+/g, '')}`; // Define o ID do botão baseado no nome do kartódromo
+
+                // Adicionar o evento de clique em cada botão (que é cada kartódromo)
+                button.addEventListener('click', function() {
+                    filtrarCategoria(this);
+                });
+
+                container.appendChild(button);
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao buscar kartódromos:', error);
+        });
+}
+
+listarKartodromos();
+
