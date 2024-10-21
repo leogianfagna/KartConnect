@@ -108,7 +108,7 @@
 
       <!-- Velocímetro TOP 20-->
       <div class="col dashboard-background">
-        <p><b>Comparação dos melhores</b></p>
+        <p class="dashboard-title"><b>Comparação dos melhores</b></p>
         <div class="speedometer-container">
           <div class="speedometer text-center">
             <div class="speedometer-ranges"></div>
@@ -118,16 +118,16 @@
             </div>
 
             <div class="speedometer-background-hide pt-4">
-              <h1 class="status-txt fw-bold" id="status-txt">Neutral</h1>
+              <h1 class="status-txt fw-bold" id="status-txt">Regular</h1>
             </div>
 
             <div class="speedometer-needle"></div>
 
-            <div class="range-text range-text-1">Strong<br />Sell</div>
-            <div class="range-text range-text-2">Sell</div>
-            <div class="range-text range-text-3">Neutral</div>
-            <div class="range-text range-text-4">Buy</div>
-            <div class="range-text range-text-5">Strong<br />Buy</div>
+            <div class="range-text range-text-1">Ruim</div>
+            <div class="range-text range-text-2">Precário</div>
+            <div class="range-text range-text-3">Regular</div>
+            <div class="range-text range-text-4">Bom</div>
+            <div class="range-text range-text-5">Excelente</div>
 
           </div>
         </div>
@@ -135,20 +135,25 @@
 
       <!-- Diferença de tempo -->
       <div class="col dashboard-background">
-        <p><b>Diferenças</b></p>
+        <p class="dashboard-title"><b>Diferença de performance</b></p>
 
-        <!-- TO-DO: Uma boa solução talvez seja criar tabela -->
-        <div class="d-flex" style="gap: 15px;">
-          <p id="dif-first">+1.5s</p>
-          <p id="dif-top10">+1.5s</p>
-          <p id="dif-media">+1.5s</p>
+        <div class="d-flex" style="margin-top: 10%;">
+          <div class="col-md-6">
+            <span class="material-symbols-outlined dashboard-icons" id="dif-first-icon">info</span>
+            <p id="dif-first" class="dashboard-time-dif">+1.5s</p>
+            <p class="dashboard-time-desc">Diferença do recordista</p>
+          </div>
+          <div class="col-md-6">
+            <span class="material-symbols-outlined dashboard-icons" id="dif-top10-icon">info</span>
+            <p id="dif-top10" class="dashboard-time-dif">+1.5s</p>
+            <p class="dashboard-time-desc">Diferença do 10°</p>
+          </div>
         </div>
-        <div class="d-flex" style="gap: 15px;">
-          <p>Diferença primeiro</p>
-          <p>Diferença do top 10</p>
-          <p>Diferença da média</p>
-        </div>
-        
+
+        <span class="material-symbols-outlined dashboard-icons" id="dif-media-icon">info</span>
+        <p id="dif-media" class="dashboard-time-dif">+1.5s</p>
+        <p class="dashboard-time-desc">Diferença da média</p>
+
       </div>
     </div>
   </div>

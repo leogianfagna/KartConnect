@@ -23,7 +23,6 @@ function buscarClassificacoes() {
     let tdId = 1;
     const filtro = getFiltros();
     limparTabelaBody();
-    console.log("Filtro aplicado = " + filtro);
 
     fetch(`http://localhost:8080/api/classificacoes?${filtro}`, { method: "GET" })
         .then(response => response.json())
@@ -107,7 +106,6 @@ async function showDashboard(kartodromoAnalisado) {
         classificacoes.forEach((classificacao) => {
             if (classificacao.nome === document.getElementById('pilot-name').value) {
                 tempoPiloto = classificacao.tempo;
-                console.log("Tempo do piloto encontrado = " + tempoPiloto);
             }
 
             i++;
@@ -121,10 +119,20 @@ async function showDashboard(kartodromoAnalisado) {
         return;
     }
 
-    mediaTempoTotal = millisecondsToTime((mediaTempoTotal / i))
-    document.getElementById('dif-first').innerHTML = getDifTime(tempoPiloto, pos1Tempo);
-    document.getElementById('dif-top10').innerHTML = getDifTime(tempoPiloto, pos10Tempo);
-    document.getElementById('dif-media').innerHTML = getDifTime(tempoPiloto, mediaTempoTotal);
+    mediaTempoTotal = millisecondsToTime((mediaTempoTotal / i));
+    const diferencaPrimeiro = getDifTime(tempoPiloto, pos1Tempo);
+    const diferencaTop10 = getDifTime(tempoPiloto, pos10Tempo);
+    const diferencaDaMedia = getDifTime(tempoPiloto, mediaTempoTotal);
+    document.getElementById('dif-first').innerHTML = diferencaPrimeiro;
+    document.getElementById('dif-top10').innerHTML = diferencaTop10;
+    document.getElementById('dif-media').innerHTML = diferencaDaMedia;
+    document.getElementById('dif-first-icon').innerHTML = getRespectiveIcon(diferencaPrimeiro);
+    document.getElementById('dif-top10-icon').innerHTML = getRespectiveIcon(diferencaTop10);
+    document.getElementById('dif-media-icon').innerHTML = getRespectiveIcon(diferencaDaMedia);
+    document.getElementById('dif-first-icon').style.backgroundColor = getRespectiveColor(diferencaPrimeiro);
+    document.getElementById('dif-top10-icon').style.backgroundColor = getRespectiveColor(diferencaTop10);
+    document.getElementById('dif-media-icon').style.backgroundColor = getRespectiveColor(diferencaDaMedia);
+
 
     definirVelocimetro(melhorTempo, piorTempo, mediaTempo, meioMelhorMedia, meioPiorMedia, tempoPiloto);
     
@@ -135,17 +143,43 @@ async function showDashboard(kartodromoAnalisado) {
         content.style.display = 'block';
         content.classList.add('show');
     }
+
+    scrollToBottom();
 }
 
-// to-do: Fix
+function getRespectiveIcon(time) {
+    const compare = timeToMilliseconds(time);
+
+    // Precisa comparar com sinal de negativo pois a diferença em milissegundos não consegue reconher o negativo
+    if (time.includes("-") || compare === 0) {
+        return "trending_up";
+    }
+
+    if (compare < 1000) {
+        return "timeline";
+    }
+    
+    return "trending_down";
+}
+
+function getRespectiveColor(time) {
+    const compare = timeToMilliseconds(time);
+
+    // Precisa comparar com sinal de negativo pois a diferença em milissegundos não consegue reconher o negativo
+    if (time.includes("-") || compare === 0) {
+        return "#8dfa4d";
+    }
+
+    if (compare < 1000) {
+        return "#fae039";
+    }
+    
+    return "#de3b26";
+}
+
+// to-do: improve
 function definirVelocimetro(melhorTempo, piorTempo, mediaTempo, meioMelhorMedia, meioPiorMedia, tempoPiloto) {
     tempoPiloto = timeToMilliseconds(tempoPiloto);
-    console.log("Tempo piloto: " + tempoPiloto);
-    console.log("Primeira entrada: " + meioMelhorMedia);
-    console.log("Segunda entrada: " + mediaTempo);
-    console.log("Terceira entrada: " + meioPiorMedia);
-    console.log("Quarta entrada: " + piorTempo);
-
 
     switch (true) {
         case (tempoPiloto < meioMelhorMedia):
@@ -254,35 +288,35 @@ const background = document.getElementById("speedometer-background");
 function setSpeedometerValue(degrees) {
     if (degrees == -72) {
         speedometerNeedle.style.transform = `rotate(${degrees}deg) translateX(-50%)`;
-        statusText.innerHTML = "Strong Sell";
+        statusText.innerHTML = "Ruim";
         statusText.style.color = "#f44336";
         background.style.backgroundImage = "radial-gradient(#f4433600,#f443361c, #f443365b)";
 
 
     } else if (degrees == -36) {
         speedometerNeedle.style.transform = `rotate(${degrees}deg) translateX(-50%)`;
-        statusText.innerHTML = "Sell";
+        statusText.innerHTML = "Precário";
         statusText.style.color = "#d33a2f";
         background.style.backgroundImage = "radial-gradient(#d33a2f00,#d33a2f0c, #d33a2f5b)";
 
 
     } else if (degrees == 0) {
         speedometerNeedle.style.transform = `rotate(${degrees}deg) translateX(-50%)`;
-        statusText.innerHTML = "Neutral";
+        statusText.innerHTML = "Regular";
         statusText.style.color = "#787B86";
         background.style.backgroundImage = "radial-gradient(#787B8600,#787B860c, #787B865b)";
 
 
     } else if (degrees == 36) {
         speedometerNeedle.style.transform = `rotate(${degrees}deg) translateX(-50%)`;
-        statusText.innerHTML = "Buy";
+        statusText.innerHTML = "Bom";
         statusText.style.color = "#2457e6";
         background.style.backgroundImage = "radial-gradient(#2457e600,#2457e60c, #2457e65b)";
 
 
     } else if (degrees == 72) {
         speedometerNeedle.style.transform = `rotate(${degrees}deg) translateX(-50%)`;
-        statusText.innerHTML = "Strong Buy";
+        statusText.innerHTML = "Excelente";
         statusText.style.color = "#2962ff";
         background.style.backgroundImage = "radial-gradient(#2962ff00,#2962ff1c, #2962ff5b)";
 
@@ -308,4 +342,11 @@ function setScore(score) {
         alert("Invalid Score");
     }
     setSpeedometerValue(degrees);
+}
+
+function scrollToBottom() {
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+    });
 }
