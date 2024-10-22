@@ -56,7 +56,22 @@
     <h1 style="font-family: ChakraPetchMedium;" id="track-name"></h1>
     <p id="track-desc"></p>
     <p id="track-location"></p>
-    <button type="submit" class="btn btn-primary form-submit-button" style="margin-top: 30px">AGENDAR</button>
+    <button type="submit" class="btn btn-primary form-submit-button" style="margin-top: 30px" data-bs-toggle="modal" data-bs-target="#aviso-inacessibilidade">AGENDAR</button>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="aviso-inacessibilidade" tabindex="-1" aria-labelledby="modal-aviso" aria-hidden="true" data-bs-theme="dark">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modal-aviso">Sem agendamentos</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          No momento, não estamos aceitando agendamentos remotamente.
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="js/images-carousel.js"></script>
