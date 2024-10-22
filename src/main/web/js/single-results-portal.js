@@ -1,78 +1,107 @@
 const tbody = document.getElementById('tempos-banco');
+let kartFilter, nameFilter;
 
-let filter = { "nome": 0, "kartodromo": "" };
-let kartFilter = undefined;
-
-function getFiltros() {
-    const name = document.getElementById('pilot-name').value;
+// Função que vai transformar as variáveis "kartFilter" e "nameFilter" (que são definidas dinâmicamente ao longo do uso da página) em um object, e tranformar esse
+// object em um filtro para usar na busca da API no banco de dados, já passando vazio caso o filtro não exista, que faz com que busque todos os resultados. 
+function getQueryFilter() {
+    let filter = { "nome": nameFilter, "kartodromo": kartFilter };
+    
+    if (nameFilter === undefined) {
+        delete filter.nome;
+    }
 
     if (kartFilter === undefined) {
         delete filter.kartodromo;
-    } else {
-        filter.kartodromo = kartFilter;
     }
 
-    filter.nome = name;
-
-    const queryParams = new URLSearchParams(filter).toString();
-    return queryParams;
+    return new URLSearchParams(filter).toString();
 }
 
-// Função para resgatar os valores do banco de dados, já com os filtros aplicados na página pelo usuário
-function buscarClassificacoes() {
+// Setters de filtro: vão setar a variável global para o filtro selecionado dinamicamente durante o uso da página.
+function setName(value) {
+    nameFilter = value;
+}
+
+function setKartodromo(element) {
+    const kartodromoSelecionado = (element.id).replace('kart-', '');
+    if (kartodromoSelecionado === 'all') {
+        kartFilter = undefined;
+    } else {
+        kartFilter = kartodromoSelecionado;
+    }
+}
+
+// Busca todos os dados no banco da coleção classificacoes baseado no que está no filtro. Passar como parâmetro um filtro vazio (filter = {}) vai buscar todos os dados do banco.
+async function queryClassificacoes() {
+    const queryParams = getQueryFilter();
+    try {
+        const response = await fetch(`http://localhost:8080/api/classificacoes?${queryParams}`, { method: "GET" });
+        return await response.json();
+    } catch (error) {
+        console.error('Erro ao buscar classificações:', error);
+    }
+}
+
+async function queryKartodromos() {
+    const filtro = ""; // Status: Quer listar todos kartódromos então não precisa de filtro algum
+
+    try {
+        const response = await fetch(`http://localhost:8080/api/kartodromos?${filtro}`, { method: "GET" });
+        return await response.json();
+    } catch (error) {
+        console.error('Erro ao buscar classificações:', error);
+    }
+}
+
+// Função executada toda vez que clica em procurar com o nome do usuário ou toda vez com um novo filtro de kartódromo. 
+async function listarResultadosIndividuais() {
+    setName(document.getElementById('pilot-name').value)
+
+    const dados = await queryClassificacoes();
+    let existeResultado = false;
     let tdId = 1;
-    const filtro = getFiltros();
+
     limparTabelaBody();
     refreshDivs();
+    showPortal();
 
-    fetch(`http://localhost:8080/api/classificacoes?${filtro}`, { method: "GET" })
-        .then(response => response.json())
-        .then(classificacoes => {
-            showPortal();
+    dados.forEach((classificacao) => {
+        existeResultado = true;
 
-            let existeResultado = false;
-            classificacoes.forEach((classificacao) => {
-                existeResultado = true;
+        // Cria uma nova linha na tabela
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+                <td>${classificacao.nome}</td>
+                <td>${classificacao.peso}</td>
+                <td>${classificacao.kartodromo}</td>
+                <td>${classificacao.tempo}</td>
+            `;
 
-                // Cria uma nova linha na tabela
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td>${classificacao.nome}</td>
-                    <td>${classificacao.peso}</td>
-                    <td>${classificacao.kartodromo}</td>
-                    <td>${classificacao.tempo}</td>
-                `;
+        // Cria o botão separadamente
+        const td = document.createElement('td');
+        const btn = document.createElement('p'); // Usando 'p' como botão
+        btn.className = "mb-3 query-simple-button";
+        btn.style.fontSize = "1em"; // To-do: Dá para remover duas linhas aqui
+        btn.style.marginTop = "16px";
+        btn.textContent = "ANALISAR";
 
-                // Cria o botão separadamente
-                const td = document.createElement('td');
-                const btn = document.createElement('p'); // Usando 'p' como botão
-                btn.className = "mb-3 query-simple-button";
-                btn.style.fontSize = "1em";
-                btn.style.marginTop = "16px";
-                btn.textContent = "ANALISAR";
-
-                // Adiciona o evento 'onclick' corretamente
-                btn.addEventListener('click', function () {
-                    showDashboard(classificacao.kartodromo);
-                });
-
-                // Adiciona o botão na célula e a célula na linha
-                td.appendChild(btn);
-                tr.appendChild(td);
-                tr.className = "align-middle";
-
-                tdId++;
-                tbody.appendChild(tr);
-            });
-
-            if (!existeResultado) {
-                showNothingFound();
-            }
-
-        })
-        .catch(error => {
-            console.error('Erro ao buscar classificações:', error);
+        // Adiciona o evento 'onclick' corretamente
+        btn.addEventListener('click', function () {
+            showDashboard(classificacao.kartodromo);
         });
+
+        // Adiciona o botão na célula e a célula na linha
+        td.appendChild(btn);
+        tr.appendChild(td);
+        tr.className = "align-middle";
+
+        tdId++;
+        tbody.appendChild(tr);
+    });
+
+    if (!existeResultado) {
+        showNothingFound();
+    }
 }
 
 function showNothingFound() {
@@ -85,58 +114,39 @@ function refreshDivs() {
     document.getElementById('nothing-found').style.display = 'none';
 }
 
-async function showDashboard(kartodromoAnalisado) {
-    const newFilter = { "kartodromo": kartodromoAnalisado };
-    const queryParams = new URLSearchParams(newFilter).toString();
+async function showDashboard() {
+    setName(undefined);
+    const classificacoes = await queryClassificacoes();
 
     let tempoPiloto;
-    let pos1Tempo;
-    let pos10Tempo;
     let mediaTempoTotal = 0;
     let mediaTempoParcial = 0;
-    let mediaTempo;
-    let melhorTempo;
-    let piorTempo;
-    let meioMelhorMedia;
-    let meioPiorMedia;
     let i = 0;
 
-    try {
-        // Vai buscar todos os resultados relacionado ao kartódromo em questão
-        const response = await fetch(`http://localhost:8080/api/classificacoes?${queryParams}`, { method: "GET" });
-        const classificacoes = await response.json();
+    let pos10Tempo = classificacoes[9].tempo;
+    let pos1Tempo = classificacoes[0].tempo;
 
-        pos10Tempo = classificacoes[9].tempo;
-        pos1Tempo = classificacoes[0].tempo;
+    // Iterar apenas os 20 primeiros tempos para informações no dashboard
+    const top20Classificacoes = classificacoes.slice(0, 20);
+    top20Classificacoes.forEach((classificacao) => {
+        mediaTempoParcial += timeToMilliseconds(classificacao.tempo);
+    });
 
-        // Iterar apenas os 20 primeiros tempos para informações no dashboard
-        const top20Classificacoes = classificacoes.slice(0, 20);
-        top20Classificacoes.forEach((classificacao) => {
-            mediaTempoParcial += timeToMilliseconds(classificacao.tempo);
-        });
+    let mediaTempo = mediaTempoParcial / top20Classificacoes.length;
+    let melhorTempo = timeToMilliseconds(top20Classificacoes[0].tempo);
+    let piorTempo = timeToMilliseconds(top20Classificacoes[top20Classificacoes.length - 1].tempo);
+    let meioMelhorMedia = (melhorTempo + mediaTempo) / 2;
+    let meioPiorMedia = (piorTempo + mediaTempo) / 2;
 
-        mediaTempo = mediaTempoParcial / top20Classificacoes.length;
-        melhorTempo = timeToMilliseconds(top20Classificacoes[0].tempo);
-        piorTempo = timeToMilliseconds(top20Classificacoes[top20Classificacoes.length - 1].tempo);
-        meioMelhorMedia = (melhorTempo + mediaTempo) / 2;
-        meioPiorMedia = (piorTempo + mediaTempo) / 2;
+    // Processa os demais tempos para conseguir a média total
+    classificacoes.forEach((classificacao) => {
+        if (classificacao.nome === document.getElementById('pilot-name').value) {
+            tempoPiloto = classificacao.tempo;
+        }
 
-        // Processa os demais tempos para conseguir a média total
-        classificacoes.forEach((classificacao) => {
-            if (classificacao.nome === document.getElementById('pilot-name').value) {
-                tempoPiloto = classificacao.tempo;
-            }
-
-            i++;
-            mediaTempoTotal += timeToMilliseconds(classificacao.tempo);
-        });
-
-    } catch (error) {
-        // Captura erros no fetch ou no processamento
-        console.error('Erro ao buscar classificações:', error);
-        // TO-DO: FAZER UM ERRO NO SITE
-        return;
-    }
+        i++;
+        mediaTempoTotal += timeToMilliseconds(classificacao.tempo);
+    });
 
     mediaTempoTotal = millisecondsToTime((mediaTempoTotal / i));
     const diferencaPrimeiro = getDifTime(tempoPiloto, pos1Tempo);
@@ -145,15 +155,15 @@ async function showDashboard(kartodromoAnalisado) {
     document.getElementById('dif-first').innerHTML = diferencaPrimeiro;
     document.getElementById('dif-top10').innerHTML = diferencaTop10;
     document.getElementById('dif-media').innerHTML = diferencaDaMedia;
-    document.getElementById('dif-first-icon').innerHTML = getRespectiveIcon(diferencaPrimeiro);
-    document.getElementById('dif-top10-icon').innerHTML = getRespectiveIcon(diferencaTop10);
-    document.getElementById('dif-media-icon').innerHTML = getRespectiveIcon(diferencaDaMedia);
-    document.getElementById('dif-first-icon').style.backgroundColor = getRespectiveColor(diferencaPrimeiro);
-    document.getElementById('dif-top10-icon').style.backgroundColor = getRespectiveColor(diferencaTop10);
-    document.getElementById('dif-media-icon').style.backgroundColor = getRespectiveColor(diferencaDaMedia);
+    document.getElementById('dif-first-icon').innerHTML = getRespectiveStyle(diferencaPrimeiro, 'icon');
+    document.getElementById('dif-top10-icon').innerHTML = getRespectiveStyle(diferencaTop10, 'icon');
+    document.getElementById('dif-media-icon').innerHTML = getRespectiveStyle(diferencaDaMedia, 'icon');
+    document.getElementById('dif-first-icon').style.backgroundColor = getRespectiveStyle(diferencaPrimeiro, 'color');
+    document.getElementById('dif-top10-icon').style.backgroundColor = getRespectiveStyle(diferencaTop10, 'color');
+    document.getElementById('dif-media-icon').style.backgroundColor = getRespectiveStyle(diferencaDaMedia, 'color');
 
 
-    definirVelocimetro(melhorTempo, piorTempo, mediaTempo, meioMelhorMedia, meioPiorMedia, tempoPiloto);
+    definirVelocimetro(piorTempo, mediaTempo, meioMelhorMedia, meioPiorMedia, tempoPiloto);
 
     // Confere se já não está exibido para não exibir novamente ou esconder
     const content = document.getElementById('dashboard-portal');
@@ -165,38 +175,27 @@ async function showDashboard(kartodromoAnalisado) {
     scrollToBottom();
 }
 
-function getRespectiveIcon(time) {
+// Função que resgata os estilos que serão usados para os ícones do dashboard, aqueles que indicam positivo, negativo ou neutro em relação ao tempo
+function getRespectiveStyle(time, type) {
     const compare = timeToMilliseconds(time);
+    let icon = "trending_down";
+    let color = "#de3b26";
 
     // Precisa comparar com sinal de negativo pois a diferença em milissegundos não consegue reconher o negativo
     if (time.includes("-") || compare === 0) {
-        return "trending_up";
+        icon = "trending_up";
+        color = "#8dfa4d";
+    } else if (compare < 1000) {
+        icon = "timeline";
+        color = "#fae039";
     }
 
-    if (compare < 1000) {
-        return "timeline";
-    }
-
-    return "trending_down";
+    if (type === 'color') return color;
+    if (type === 'icon') return icon;
 }
 
-function getRespectiveColor(time) {
-    const compare = timeToMilliseconds(time);
 
-    // Precisa comparar com sinal de negativo pois a diferença em milissegundos não consegue reconher o negativo
-    if (time.includes("-") || compare === 0) {
-        return "#8dfa4d";
-    }
-
-    if (compare < 1000) {
-        return "#fae039";
-    }
-
-    return "#de3b26";
-}
-
-// to-do: improve
-function definirVelocimetro(melhorTempo, piorTempo, mediaTempo, meioMelhorMedia, meioPiorMedia, tempoPiloto) {
+function definirVelocimetro(piorTempo, mediaTempo, meioMelhorMedia, meioPiorMedia, tempoPiloto) {
     tempoPiloto = timeToMilliseconds(tempoPiloto);
 
     switch (true) {
@@ -234,8 +233,6 @@ function getDifTime(tempo1, tempo2) {
 
 function timeToMilliseconds(timeString) {
     const [minutes, seconds, milliseconds] = timeString.split(':').map(Number);
-
-    // Converte minutos, segundos e milissegundos para milissegundos totais
     const totalMilliseconds = (minutes * 60 * 1000) + (seconds * 1000) + milliseconds;
 
     return totalMilliseconds;
@@ -248,31 +245,18 @@ function millisecondsToTime(milliseconds) {
     const seconds = Math.floor(milliseconds / 1000);
     const remainingMilliseconds = Math.abs(Math.round(milliseconds % 1000)); // Arredonda milissegundos e garante que seja positivo
 
-    // Formata o tempo para que sempre tenha dois dígitos em segundos e três em milissegundos
+    // Formatação usada no return: M:SS:mmm
     return `${minutes}:${seconds.toString().padStart(2, '0')}:${remainingMilliseconds.toString().padStart(3, '0')}`;
 }
-
-
-
-
 
 // Seleção de opções
 // Executado toda vez ao clicar em uma categoria, vai adicionar os estilos necessários e buscar resultados baseado nos filtros
 function filtrarCategoria(element) {
     setKartodromo(element);
     limparSelecaoCategoria();
-    buscarClassificacoes();
+    listarResultadosIndividuais();
 
     element.classList.add('option-button-selected');
-}
-
-function setKartodromo(element) {
-    const kartodromoSelecionado = (element.id).replace('kart-', '');
-    if (kartodromoSelecionado === 'all') {
-        kartFilter = undefined;
-    } else {
-        kartFilter = kartodromoSelecionado;
-    }
 }
 
 // Funções auxiliares para alterar manipulação visual da página e criar imersão
@@ -297,6 +281,28 @@ function showPortal() {
         content.classList.add('show');
     }
 }
+
+// Recebe todos os kartódromos registrados no banco de dados e impreme todos em lista para o usuário usar como filtro na tabela
+async function listarKartodromos() {
+    const dados = await queryKartodromos();
+    const container = document.getElementById('kartodromos-filtro');
+
+    dados.forEach(kartodromo => {
+        const button = document.createElement('button');
+        button.type = 'submit';
+        button.className = 'btn btn-primary card-submit-button';
+        button.textContent = kartodromo.nome;
+        button.id = `kart-${kartodromo.nome.replace(/\s+/g, '')}`; // Define o ID do botão baseado no nome do kartódromo
+
+        // Adicionar o evento de clique em cada botão (que é cada kartódromo)
+        button.addEventListener('click', function () {
+            filtrarCategoria(this);
+        });
+
+        container.appendChild(button);
+    });
+}
+
 
 // Velocímetro
 const speedometerNeedle = document.querySelector('.speedometer-needle');
@@ -369,31 +375,4 @@ function scrollToBottom() {
     });
 }
 
-function listarKartodromos() {
-    fetch('http://localhost:8080/api/kartodromos')
-        .then(response => response.json())
-        .then(kartodromos => {
-            const container = document.getElementById('kartodromos-filtro');
-
-            kartodromos.forEach(kartodromo => {
-                const button = document.createElement('button');
-                button.type = 'submit';
-                button.className = 'btn btn-primary card-submit-button';
-                button.textContent = kartodromo.nome;
-                button.id = `kart-${kartodromo.nome.replace(/\s+/g, '')}`; // Define o ID do botão baseado no nome do kartódromo
-
-                // Adicionar o evento de clique em cada botão (que é cada kartódromo)
-                button.addEventListener('click', function() {
-                    filtrarCategoria(this);
-                });
-
-                container.appendChild(button);
-            });
-        })
-        .catch(error => {
-            console.error('Erro ao buscar kartódromos:', error);
-        });
-}
-
 listarKartodromos();
-
