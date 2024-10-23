@@ -158,36 +158,34 @@ footer {
 }
 
 .info-pages {
-    margin-top: 70px;
-    margin-bottom: 100px;
-}
+    
+    & .white-button {
+        color: #1E1F25 !important;
+        background-color: var(--secondary-button-color);
+        border-color: var(--secondary-button-color);
+    }
 
-.info-pages h1 {
-    color: var(--main-font-color);
-    font-size: 50px;
-    font-family: 'ChakraPetchBold', sans-serif;
-}
+    & h1 {
+        color: var(--main-font-color);
+        font-size: 50px;
+        font-family: 'ChakraPetchBold', sans-serif;
+    }
 
-.info-pages p {
-    color: var(--main-font-color);
-}
+    & p {
+        color: var(--main-font-color);
+    }
 
-.info-pages button {
-    color: var(--main-font-color);
-    font-family: 'ChakraPetchMedium', sans-serif;
-    letter-spacing: 0.8px;
-    font-weight: bold;
-}
+    & button {
+        color: var(--main-font-color);
+        font-family: 'ChakraPetchMedium', sans-serif;
+        letter-spacing: 0.8px;
+        font-weight: bold;
+    }
 
-.info-pages a {
-    text-decoration: none;
-    color: inherit;
-}
-
-.info-pages-white-button {
-    color: #1E1F25 !important;
-    background-color: var(--secondary-button-color);
-    border-color: var(--secondary-button-color);
+    & a {
+        text-decoration: none;
+        color: inherit;
+    }
 }
 
 .page-title {
