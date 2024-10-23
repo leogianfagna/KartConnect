@@ -25,22 +25,24 @@
 
   <div class="container" style="margin-bottom: 100px;">
 
-    <h1 class="text-center page-title" style="margin: 50px;">KARTÓDROMOS</h1>
-    <p id="not-found" class="text-center not-found-message">Não foi encontrado nenhum kartódromo com a sua busca. Que tal tentar outra busca?</p>
-    
-    <form class="row g-3 justify-content-center text-center needs-validation" novalidate>
-      <div class="col-4">
-        <label for="user-query" class="visually-hidden">Buscar</label>
-        <input type="text" class="form-control" id="user-query" placeholder="Nome do kartódromo" required>
-        <div class="invalid-feedback">
-          Insira algo na sua busca.
+    <div class="new-content has-secondary-content">
+      <h1 class="text-center page-title">KARTÓDROMOS</h1>
+      <p id="not-found" class="text-center not-found-message">Não foi encontrado nenhum kartódromo com a sua busca. Que tal tentar outra busca?</p>
+      
+      <form class="row g-3 justify-content-center text-center needs-validation" novalidate>
+        <div class="col-4">
+          <label for="user-query" class="visually-hidden">Buscar</label>
+          <input type="text" class="form-control" id="user-query" placeholder="Nome do kartódromo" required>
+          <div class="invalid-feedback">
+            Insira algo na sua busca.
+          </div>
         </div>
-      </div>
-      <div class="row-auto" style="display: inline-block;">
-        <p type="button" class="mb-3 query-simple-button" onclick="removerFiltro();" id="remove-filters" style="display: none;">Remover filtro</p>
-        <p type="button" class="mb-3 query-simple-button" onclick="filtrarLista();">Buscar</p>
-      </div>
-    </form>
+        <div class="row-auto" style="display: inline-block;">
+          <p type="button" class="mb-3 query-simple-button" onclick="removerFiltro();" id="remove-filters" style="display: none;">Remover filtro</p>
+          <p type="button" class="mb-3 query-simple-button" onclick="filtrarLista();">Buscar</p>
+        </div>
+      </form>
+    </div>
     
 
     <div id="lista-kartodromos">
