@@ -47,21 +47,28 @@ public class GeradorClassificacao {
                 System.out.print(erro + "Digite novamente: ");
             }
         }
+
         Classificacao[] classificacoes = new Classificacao[qtd];
         final String[] kartodromos = {"VeloMax","TurboKart","NitroRace","ThunderSpeed","Velocitá"};
         final String[] estados = {"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MS", "MT", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"};
+
         System.out.println("Populando vetor de nomes");
         final String[] nomes = popularVetor();
+
         System.out.println("Populando vetor de sobrenomes");
         final String[] sobrenomes = popularVetor();
+
         System.out.print("Tempo minimo em segundos: ");
-        final int tempoMin = Teclado.getInt();
+        final int tempoMin = validarIntPositivo();
+
         System.out.print("Tempo maximo em segundos: ");
-        final int tempoMax = Teclado.getInt();
+        final int tempoMax = validarIntPositivo();
+
         System.out.print("Peso minimo: ");
-        final int pesoMin = Teclado.getInt();
+        final int pesoMin = validarIntPositivo();
+
         System.out.print("Peso maximo: ");
-        final int pesoMax = Teclado.getInt();
+        final int pesoMax = validarIntPositivo();
 
         for (int i = 0; i < qtd; i++){
             final String nome = nomes[new Random().nextInt(nomes.length)] + " " + sobrenomes[new Random().nextInt(sobrenomes.length)];
@@ -75,6 +82,24 @@ public class GeradorClassificacao {
         }
 
         return classificacoes;
+    }
+
+    private static int validarIntPositivo() {
+        int ret = 0;
+
+        while (ret <= 0) {
+            try{
+                ret = Teclado.getInt();
+                if (ret > 0)
+                    break;
+                else
+                    System.out.print("Quantidade inválida! Digite novamente: ");
+            } catch (Exception erro){
+                System.out.print(erro + "Digite novamente: ");
+            }
+        }
+
+        return ret;
     }
 
 }
