@@ -35,7 +35,7 @@ public class GeradorClassificacao {
         return str;
     }
 
-    public static void gerarClassificacoes(int qtd) throws Exception {
+    public static Classificacao[] gerarClassificacoes(int qtd) throws Exception {
         if (qtd <= 0)
             System.out.print("Quantidade inválida! Digite novamente: ");
         while (qtd <= 0){
@@ -47,6 +47,7 @@ public class GeradorClassificacao {
                 System.out.print(erro + "Digite novamente: ");
             }
         }
+        Classificacao[] classificacoes = new Classificacao[qtd];
         final String[] kartodromos = {"VeloMax","TurboKart","NitroRace","ThunderSpeed","Velocitá"};
         final String[] estados = {"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MS", "MT", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"};
         System.out.println("Populando vetor de nomes");
@@ -70,11 +71,10 @@ public class GeradorClassificacao {
             final String estado = estados[new Random().nextInt(estados.length)];
 
             Classificacao c = new Classificacao(nome,peso,tempo,kartodromo,estado);
-
-            System.out.println("["+i+"] "+c);
+            classificacoes[i] = c;
         }
 
-
+        return classificacoes;
     }
 
 }
