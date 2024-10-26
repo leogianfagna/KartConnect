@@ -43,8 +43,8 @@ public class Tempo implements Cloneable{
     @Override
     public String toString() {
         return "Tempo: " + (this.minutos<10?"0":"") + this.minutos + ":"
-                         + (this.segundos<10?"0":"") + this.segundos + "."
-                         + (this.milissegundos<100?"0":"") + (this.milissegundos<10?"0":"") + this.milissegundos;
+                + (this.segundos<10?"0":"") + this.segundos + "."
+                + (this.milissegundos<100?"0":"") + (this.milissegundos<10?"0":"") + this.milissegundos;
     }
 
     @Override
@@ -87,7 +87,8 @@ public class Tempo implements Cloneable{
     public static Tempo randomPorSegundos(int minSeg,int maxSeg) throws Exception {
         if (minSeg < 0) throw new Exception("Segundos negativos");
         if (maxSeg < 0) throw new Exception("Segundos negativos");
-        if (minSeg > maxSeg) throw new Exception("Mínimo maior que máximo");;
+        if (minSeg > maxSeg) throw new Exception("Valor mínimo maior que máximo");;
+        if (maxSeg - minSeg == 0) throw new Exception("Valores não devem ser iguais");
 
         int minMilisseg = minSeg * 1000;
         int maxMilisseg = maxSeg * 1000;

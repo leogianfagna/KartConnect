@@ -9,8 +9,6 @@ import grupopi4.kartconnect.model.Classificacao;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpExchange;
 import org.bson.conversions.Bson;
-import org.bson.*;
-import org.bson.json.JsonObject;
 
 import java.io.*;
 import java.net.URI;
