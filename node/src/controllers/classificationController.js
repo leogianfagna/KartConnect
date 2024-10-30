@@ -7,7 +7,7 @@ export const postClassification = async (req, res) => {
 
         const client = new net.Socket()
 
-        client.connect(8080, 'localhost', () => {
+        client.connect(8000, 'localhost', () => {
             console.log('Connected to Java server')
             client.write(`${qtd}\n`)
         });
@@ -41,7 +41,7 @@ export const getClassification = async (req, res) => {
 
         const filter = {}
         if (karttrack != "null") {filter.kartodromo = karttrack}
-        if (weight != "null") {filter.peso = { $gte: parseInt(weight), $lte: parseInt(weight) + 10 }}
+        if (weight != "null") {filter.peso = { $gte: parseInt(weight), $lte: parseInt(weight) + 9 }}
 
         const classifications = await Classification.find(filter).sort({ "tempo.totalEmMs": 1 })
 
