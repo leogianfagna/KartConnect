@@ -40,7 +40,7 @@ export const getClassification = async (req, res) => {
         const { weight, karttrack } = req.params
 
         const filter = {}
-        if (karttrack != "null") {filter.kartodromo = karttrack;}
+        if (karttrack != "null") {filter.kartodromo = karttrack}
         if (weight != "null") {filter.peso = { $gte: parseInt(weight), $lte: parseInt(weight) + 10 }}
 
         const classifications = await Classification.find(filter).sort({ "tempo.totalEmMs": 1 })

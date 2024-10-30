@@ -1,4 +1,4 @@
-package grupopi4.kartconnect.model;
+package model;
 
 import java.util.Random;
 
@@ -8,6 +8,28 @@ public class Tempo implements Cloneable{
     private int segundos;
     private int milissegundos;
     private int totalEmMs;
+
+    public static Tempo randomPorSegundos(int minSeg,int maxSeg) throws Exception {
+        if (minSeg < 0) throw new Exception("Segundos negativos");
+        if (maxSeg < 0) throw new Exception("Segundos negativos");
+        if (minSeg > maxSeg) throw new Exception("Valor mínimo maior que máximo");;
+        if (maxSeg - minSeg == 0) throw new Exception("Valores não devem ser iguais");
+
+        int minMilisseg = minSeg * 1000;
+        int maxMilisseg = maxSeg * 1000;
+
+        int total = new Random().nextInt(maxMilisseg - minMilisseg) + minMilisseg;
+
+        int milissegundos = total % 1000;
+        total = (total - milissegundos) / 1000;
+
+        int segundos = total % 60;
+        total = (total - segundos) / 60;
+
+        int minutos = total % 60;
+
+        return new Tempo(minutos, segundos, milissegundos);
+    }
 
     public Tempo(int minutos, int segundos, int milissegundos) {
         this.minutos = minutos;
@@ -24,20 +46,20 @@ public class Tempo implements Cloneable{
         this.milissegundos = modelo.milissegundos;
         this.totalEmMs = modelo.totalEmMs;
     }
-
     public int getMinutos() { return this.minutos; }
+
     private void setMinutos(int minutos) throws Exception {
         if (minutos<0 || minutos>59) throw new Exception ("Quantidade de minutos inválida");
         this.minutos = minutos;
     }
-
     public int getSegundos() { return this.segundos; }
+
     private void setSegundos(int segundos) throws Exception{
         if (segundos<0 || segundos>59) throw new Exception ("Quantidade de segundos inválida");
         this.segundos = segundos;
     }
-
     public int getMilissegundos() { return this.milissegundos; }
+
     private void setMilissegundos(int milissegundos) throws Exception {
         if (milissegundos<0 || milissegundos>999) throw new Exception ("Quantidade de milissegundos inválida");
         this.milissegundos = milissegundos;
@@ -88,27 +110,4 @@ public class Tempo implements Cloneable{
 
         return ret;
     }
-
-    public static Tempo randomPorSegundos(int minSeg,int maxSeg) throws Exception {
-        if (minSeg < 0) throw new Exception("Segundos negativos");
-        if (maxSeg < 0) throw new Exception("Segundos negativos");
-        if (minSeg > maxSeg) throw new Exception("Valor mínimo maior que máximo");;
-        if (maxSeg - minSeg == 0) throw new Exception("Valores não devem ser iguais");
-
-        int minMilisseg = minSeg * 1000;
-        int maxMilisseg = maxSeg * 1000;
-
-        int total = new Random().nextInt(maxMilisseg - minMilisseg) + minMilisseg;
-
-        int milissegundos = total % 1000;
-        total = (total - milissegundos) / 1000;
-
-        int segundos = total % 60;
-        total = (total - segundos) / 60;
-
-        int minutos = total % 60;
-
-        return new Tempo(minutos, segundos, milissegundos);
-    }
-
 }

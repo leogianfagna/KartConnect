@@ -4,6 +4,6 @@ import { getKartTracks } from "../controllers/kartTrackController.js"
 
 const kartTrackRoutes = Router()
 
-kartTrackRoutes.get("/kartTracks/:nome", getKartTracks)
+kartTrackRoutes.get("/kartTracks/:name", getKartTracks)
 
 export default kartTrackRoutes

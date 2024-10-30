@@ -1,6 +1,4 @@
-package grupopi4.kartconnect;
-
-import grupopi4.kartconnect.model.Classificacao;
+import model.Classificacao;
 
 import java.net.*;
 import java.io.*;
@@ -25,7 +23,7 @@ public class GeradorServer {
 
                 try {
                     int qtd = Integer.parseInt(reader.readLine());
-                    Classificacao[] ret = GeradorClassificacao.gerarClassificacoes(qtd);
+                    Classificacao[] ret = Classificacao.gerarClassificacoes(qtd);
 
                     ObjectMapper mapper = new ObjectMapper();
                     String jsonData = mapper.writeValueAsString(ret);

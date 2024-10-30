@@ -3,8 +3,12 @@ import KartTrack from "../models/kart_track.js"
 
 export const getKartTracks = async (req, res) => {
     try {
-        const { nome } = req.params
-        const classifications = await KartTrack.find({nome:"Velocitá"})
+        const { name } = req.params
+
+        const filter = {}
+        if (karttrack != "null") {filter.nome = name;}
+
+        const classifications = await KartTrack.find(filter)
         res.json(classifications)
     } catch (error) {
         console.error(error)
