@@ -1,5 +1,7 @@
 package grupopi4.kartconnect.model;
 
+//Marcado para remoção
+
 public class Classificacao implements Cloneable{
     private String nome;
     private int peso;

@@ -1,8 +1,5 @@
 package grupopi4.kartconnect.model;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(collection = "Kartodromo")
 public class Kartodromo implements Cloneable{
     private String nome;
     private String email;

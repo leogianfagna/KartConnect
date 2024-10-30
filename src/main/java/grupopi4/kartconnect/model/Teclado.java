@@ -1,5 +1,7 @@
 package grupopi4.kartconnect.model;
 
+//Marcado para remoção
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;

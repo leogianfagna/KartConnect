@@ -7,11 +7,13 @@ public class Tempo implements Cloneable{
     private int minutos;
     private int segundos;
     private int milissegundos;
+    private int totalEmMs;
 
     public Tempo(int minutos, int segundos, int milissegundos) {
         this.minutos = minutos;
         this.segundos = segundos;
         this.milissegundos = milissegundos;
+        this.totalEmMs = (minutos * 60000) + (segundos * 1000) + milissegundos;
     }
 
     public Tempo(Tempo modelo) throws Exception {
@@ -20,25 +22,28 @@ public class Tempo implements Cloneable{
         this.minutos = modelo.minutos;
         this.segundos = modelo.segundos;
         this.milissegundos = modelo.milissegundos;
+        this.totalEmMs = modelo.totalEmMs;
     }
 
     public int getMinutos() { return this.minutos; }
-    public void setMinutos(int minutos) throws Exception {
+    private void setMinutos(int minutos) throws Exception {
         if (minutos<0 || minutos>59) throw new Exception ("Quantidade de minutos inválida");
         this.minutos = minutos;
     }
 
     public int getSegundos() { return this.segundos; }
-    public void setSegundos(int segundos) throws Exception{
+    private void setSegundos(int segundos) throws Exception{
         if (segundos<0 || segundos>59) throw new Exception ("Quantidade de segundos inválida");
         this.segundos = segundos;
     }
 
     public int getMilissegundos() { return this.milissegundos; }
-    public void setMilissegundos(int milissegundos) throws Exception {
+    private void setMilissegundos(int milissegundos) throws Exception {
         if (milissegundos<0 || milissegundos>999) throw new Exception ("Quantidade de milissegundos inválida");
         this.milissegundos = milissegundos;
     }
+
+    public int getTotalEmMs() { return this.totalEmMs; }
 
     @Override
     public String toString() {

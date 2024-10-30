@@ -7,4 +7,5 @@ export const app = express()
 app.use(express.json())
 
 connectDB()
+
 app.use("/", classificationRoutes, kartTrackRoutes)
