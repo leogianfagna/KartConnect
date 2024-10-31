@@ -64,9 +64,11 @@ function buscarClassificacoes() {
     fetch(`http://localhost:3000/classifications/${selectedKartodromo}/${selectedCategoria}/${null}`, { method: "GET" })
         .then(response => response.json())
         .then(classificacoes => {
+
+            classificacoes.length > 0 ? showNoResults(true) : showNoResults(false);
+
             showPortal();
             limparTabelaBody(tbody);
-
             resultadosBuscados = classificacoes;
 
             classificacoes.forEach((classificacao) => {
@@ -91,6 +93,20 @@ function buscarClassificacoes() {
         .catch(error => {
             console.error('Erro ao buscar classificações:', error);
         });
+}
+
+function showNoResults(status) {
+    console.log("Entrou como: " + status);
+    if (status === true) {
+        document.getElementById('no-results').style.display = 'none';
+        document.getElementById('results-table').style.visibility = 'visible';
+        document.getElementById('pagination-button').style.visibility = 'visible';
+    } else {
+        document.getElementById('no-results').style.display = 'block';
+        document.getElementById('results-table').style.visibility = 'hidden';
+        document.getElementById('pagination-button').style.visibility = 'hidden';
+    }
+    
 }
 
 // Funções auxiliares para alterar manipulação visual da página e criar imersão
