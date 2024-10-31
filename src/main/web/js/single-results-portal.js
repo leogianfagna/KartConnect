@@ -1,21 +1,6 @@
 const tbody = document.getElementById('tempos-banco');
-let kartFilter, nameFilter;
-
-// Função que vai transformar as variáveis "kartFilter" e "nameFilter" (que são definidas dinâmicamente ao longo do uso da página) em um object, e tranformar esse
-// object em um filtro para usar na busca da API no banco de dados, já passando vazio caso o filtro não exista, que faz com que busque todos os resultados. 
-function getQueryFilter() {
-    let filter = { "nome": nameFilter, "kartodromo": kartFilter };
-    
-    if (nameFilter === undefined) {
-        delete filter.nome;
-    }
-
-    if (kartFilter === undefined) {
-        delete filter.kartodromo;
-    }
-
-    return new URLSearchParams(filter).toString();
-}
+let kartFilter = null;
+let nameFilter = null;
 
 // Setters de filtro: vão setar a variável global para o filtro selecionado dinamicamente durante o uso da página.
 function setName(value) {
@@ -25,7 +10,7 @@ function setName(value) {
 function setKartodromo(element) {
     const kartodromoSelecionado = (element.id).replace('kart-', '');
     if (kartodromoSelecionado === 'all') {
-        kartFilter = undefined;
+        kartFilter = null;
     } else {
         kartFilter = kartodromoSelecionado;
     }
@@ -33,7 +18,6 @@ function setKartodromo(element) {
 
 // Busca todos os dados no banco da coleção classificacoes baseado no que está no filtro. Passar como parâmetro um filtro vazio (filter = {}) vai buscar todos os dados do banco.
 async function queryClassificacoes() {
-    const queryParams = getQueryFilter();
     try {
         const response = await fetch(`http://localhost:3000/classifications/${kartFilter}/${null}/${nameFilter}`, { method: "GET" });
         return await response.json();

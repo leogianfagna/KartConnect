@@ -4,8 +4,8 @@
 
 // Variáveis globais para identificar os filtros de resultados
 const resultsPerPage = 20;
-let selectedKartodromo = '';
-let selectedCategoria = 'all';
+let selectedKartodromo = null;
+let selectedCategoria = null;
 let selectedPageNumber = 1;
 let resultadosBuscados;
 
@@ -17,8 +17,10 @@ function setKartodromo(element) {
 }
 
 function setCategoria(element) {
-    const categoria = (element.id).replace('cat-', '');
+    let categoria = (element.id).replace('cat-', '');
     selectedPageNumber = 1;
+
+    if (categoria === 'all') categoria = null;
     selectedCategoria = categoria;
 }
 
@@ -45,29 +47,18 @@ function filtrarKartodromo(element) {
 
 // Função para resgatar os valores do banco de dados, já com os filtros aplicados na página pelo usuário
 function buscarClassificacoes() {
+    const tbody = document.getElementById('tempos-banco');
     let tdId = 1;
 
-    //Exemplo de utilização do fetch com um filtro
-
-    //let filter = {nome: "Felipe Almeida"};
-    //const queryParams = new URLSearchParams(filter).toString();
-    //fetch(`http://localhost:8080/api/classificacoes?${queryParams}`, { method: "GET" })
-
-    const pilotName = "Diego Teixeira"
-    fetch(`http://localhost:3000/classifications/${null}/${null}/${null}`, { method: "GET" })
+    fetch(`http://localhost:3000/classifications/${selectedKartodromo}/${selectedCategoria}/${null}`, { method: "GET" })
         .then(response => response.json())
         .then(classificacoes => {
-            console.log(classificacoes);
             showPortal();
-
-            const tbody = document.getElementById('tempos-banco');
             limparTabelaBody(tbody);
 
-            resultadosBuscados = classificacoes.filter(classificacao =>
-                classificacao.kartodromo === selectedKartodromo && pertenceCategoria(classificacao.peso)
-            ).length;
+            resultadosBuscados = classificacoes;
 
-            classificacoes.forEach((classificacao, index) => {
+            classificacoes.forEach((classificacao) => {
 
                 // Cria uma nova linha na tabela
                 const tr = document.createElement('tr');
@@ -79,37 +70,17 @@ function buscarClassificacoes() {
                     <td>${classificacao.tempo}</td>
                 `;
 
-                // Filtragem de resultados baseado nos filtros do usuário
-                if (classificacao.kartodromo === selectedKartodromo && pertenceCategoria(classificacao.peso) === true) {
-                    tdId++;
-                    if (getNumberOfResults(tdId)) {
-                        tbody.appendChild(tr);
-                    }
-
+                tdId++;
+                if (getNumberOfResults(tdId)) {
+                    tbody.appendChild(tr);
                 }
+
             });
         })
         .catch(error => {
             console.error('Erro ao buscar classificações:', error);
         });
 }
-
-function pertenceCategoria(kg) {
-    if (selectedCategoria === 'all') return true; // Todos pertencem
-
-    const pesoPiloto = parseInt(kg);
-    let pesoMinimoPiloto, pesoMaximoPiloto;
-
-    (selectedCategoria === '60' ? pesoMinimoPiloto = 0 : pesoMinimoPiloto = parseInt(selectedCategoria));
-    (selectedCategoria === '100' ? pesoMaximoPiloto = 300 : pesoMaximoPiloto = parseInt(selectedCategoria) + 10);
-
-    if (pesoPiloto >= pesoMinimoPiloto && pesoPiloto < pesoMaximoPiloto) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 
 // Funções auxiliares para alterar manipulação visual da página e criar imersão
 function limparSelecaoCategoria() {
