@@ -6,7 +6,7 @@ export const getKartTracks = async (req, res) => {
         const { name } = req.params
 
         const filter = {}
-        if (name != "null") {filter.nome = name;}
+        if (name != "null") {filter.nome = { $regex: name, $options: "i" }}
 
         const classifications = await KartTrack.find(filter)
         res.json(classifications)

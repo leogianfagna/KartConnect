@@ -2,18 +2,22 @@ package grupopi4.kartconnect.model;
 
 import java.util.Random;
 
-public class Tempo implements Cloneable{
+public class Tempo implements Cloneable {
 
     private int minutos;
     private int segundos;
     private int milissegundos;
     private int totalEmMs;
 
-    public static Tempo randomPorSegundos(int minSeg,int maxSeg) throws Exception {
-        if (minSeg < 0) throw new Exception("Segundos negativos");
-        if (maxSeg < 0) throw new Exception("Segundos negativos");
-        if (minSeg > maxSeg) throw new Exception("Valor mínimo maior que máximo");;
-        if (maxSeg - minSeg == 0) throw new Exception("Valores não devem ser iguais");
+    public static Tempo randomPorSegundos(int minSeg, int maxSeg) throws Exception {
+        if (minSeg < 0)
+            throw new Exception("Segundos negativos");
+        if (maxSeg < 0)
+            throw new Exception("Segundos negativos");
+        if (minSeg > maxSeg)
+            throw new Exception("Valor mínimo maior que máximo");
+        if (maxSeg - minSeg == 0)
+            throw new Exception("Valores não devem ser iguais");
 
         int minMilisseg = minSeg * 1000;
         int maxMilisseg = maxSeg * 1000;
@@ -39,39 +43,60 @@ public class Tempo implements Cloneable{
     }
 
     public Tempo(Tempo modelo) throws Exception {
-        if (modelo == null) throw new Exception("Modelo ausente");
+        if (modelo == null)
+            throw new Exception("Modelo ausente");
 
         this.minutos = modelo.minutos;
         this.segundos = modelo.segundos;
         this.milissegundos = modelo.milissegundos;
         this.totalEmMs = modelo.totalEmMs;
     }
-    public int getMinutos() { return this.minutos; }
 
+    public int getMinutos() {
+        return this.minutos;
+    }
+
+    @SuppressWarnings("unused")
     private void setMinutos(int minutos) throws Exception {
-        if (minutos<0 || minutos>59) throw new Exception ("Quantidade de minutos inválida");
+        if (minutos < 0 || minutos > 59)
+            throw new Exception("Quantidade de minutos inválida");
+        
         this.minutos = minutos;
     }
-    public int getSegundos() { return this.segundos; }
 
-    private void setSegundos(int segundos) throws Exception{
-        if (segundos<0 || segundos>59) throw new Exception ("Quantidade de segundos inválida");
+    public int getSegundos() {
+        return this.segundos;
+    }
+
+    @SuppressWarnings("unused")
+    private void setSegundos(int segundos) throws Exception {
+        if (segundos < 0 || segundos > 59)
+            throw new Exception("Quantidade de segundos inválida");
+        
         this.segundos = segundos;
     }
-    public int getMilissegundos() { return this.milissegundos; }
 
+    public int getMilissegundos() {
+        return this.milissegundos;
+    }
+
+    @SuppressWarnings("unused")
     private void setMilissegundos(int milissegundos) throws Exception {
-        if (milissegundos<0 || milissegundos>999) throw new Exception ("Quantidade de milissegundos inválida");
+        if (milissegundos < 0 || milissegundos > 999)
+            throw new Exception("Quantidade de milissegundos inválida");
+        
         this.milissegundos = milissegundos;
     }
 
-    public int getTotalEmMs() { return this.totalEmMs; }
+    public int getTotalEmMs() {
+        return this.totalEmMs;
+    }
 
     @Override
     public String toString() {
-        return "models.Tempo: " + (this.minutos<10?"0":"") + this.minutos + ":"
-                + (this.segundos<10?"0":"") + this.segundos + "."
-                + (this.milissegundos<100?"0":"") + (this.milissegundos<10?"0":"") + this.milissegundos;
+        return "models.Tempo: " + (this.minutos < 10 ? "0" : "") + this.minutos + ":"
+                + (this.segundos < 10 ? "0" : "") + this.segundos + "."
+                + (this.milissegundos < 100 ? "0" : "") + (this.milissegundos < 10 ? "0" : "") + this.milissegundos;
     }
 
     @Override
@@ -81,7 +106,8 @@ public class Tempo implements Cloneable{
         ret = 3 * ret + Integer.valueOf(segundos).hashCode();
         ret = 7 * ret + Integer.valueOf(milissegundos).hashCode();
 
-        if (ret < 0) ret=-ret;
+        if (ret < 0)
+            ret = -ret;
 
         return ret;
     }

@@ -19,8 +19,7 @@ function setKartodromo(element) {
 // Busca todos os dados no banco da coleção classificacoes baseado no que está no filtro. Passar como parâmetro um filtro vazio (filter = {}) vai buscar todos os dados do banco.
 async function queryClassificacoes() {
     try {
-        console.log("Fiz uma chamada do banco com o kartódromo" + kartFilter + "e o nome do piloto " + nameFilter);
-        const response = await fetch(`http://localhost:3000/classifications/${kartFilter}/${null}/${nameFilter}`, { method: "GET" });
+        const response = await fetch(`http://localhost:3000/classifications/${kartFilter}/${null}/${nameFilter}`);
         return await response.json();
     } catch (error) {
         console.error('Erro ao buscar classificações:', error);
@@ -31,7 +30,7 @@ async function queryKartodromos() {
     const filtro = null; // Status: Quer listar todos kartódromos então não precisa de filtro algum
 
     try {
-        const response = await fetch(`http://localhost:3000/kartTracks/${filtro}`, { method: "GET" });
+        const response = await fetch(`http://localhost:3000/kartTracks/${filtro}`);
         return await response.json();
     } catch (error) {
         console.error('Erro ao buscar classificações:', error);
@@ -40,53 +39,37 @@ async function queryKartodromos() {
 
 // Função executada toda vez que clica em procurar com o nome do usuário ou toda vez com um novo filtro de kartódromo. 
 async function listarResultadosIndividuais() {
-    setName(document.getElementById('pilot-name').value)
+    setName(document.getElementById('pilot-name').value);
 
     const dados = await queryClassificacoes();
-    let existeResultado = false;
-    let tdId = 1;
-
     limparTabelaBody();
     refreshDivs();
     showPortal();
 
-    dados.forEach((classificacao) => {
-        existeResultado = true;
+    if (dados.length === 0) return showNothingFound();
 
-        // Cria uma nova linha na tabela
+    dados.forEach((classificacao) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-                <td>${classificacao.nome}</td>
-                <td>${classificacao.peso}</td>
-                <td>${classificacao.kartodromo}</td>
-                <td>${millisecondsToTime(classificacao.tempo.totalEmMs)}</td>
-            `;
+            <td>${classificacao.nome}</td>
+            <td>${classificacao.peso}</td>
+            <td>${classificacao.kartodromo}</td>
+            <td>${millisecondsToTime(classificacao.tempo.totalEmMs)}</td>
+        `;
 
-        // Cria o botão separadamente
         const td = document.createElement('td');
-        const btn = document.createElement('p'); // Usando 'p' como botão
+        const btn = document.createElement('p');
         btn.className = "mb-3 query-simple-button";
-        btn.style.fontSize = "1em"; // To-do: Dá para remover duas linhas aqui
+        btn.style.fontSize = "1em";
         btn.style.marginTop = "16px";
         btn.textContent = "ANALISAR";
+        btn.addEventListener('click', () => showDashboard(classificacao.kartodromo));
 
-        // Adiciona o evento 'onclick' corretamente
-        btn.addEventListener('click', function () {
-            showDashboard(classificacao.kartodromo);
-        });
-
-        // Adiciona o botão na célula e a célula na linha
         td.appendChild(btn);
         tr.appendChild(td);
         tr.className = "align-middle";
-
-        tdId++;
         tbody.appendChild(tr);
     });
-
-    if (!existeResultado) {
-        showNothingFound();
-    }
 }
 
 function showNothingFound() {
@@ -330,21 +313,8 @@ function setSpeedometerValue(degrees) {
 }
 
 function setScore(score) {
-    var degrees;
-    if (score == 0) {
-        degrees = 0;
-    } else if (score == 1) {
-        degrees = 36;
-    } else if (score >= 2) {
-        degrees = 72;
-    } else if (score == -1) {
-        degrees = -36;
-    } else if (score <= -2) {
-        degrees = -72;
-    } else {
-        alert("Invalid Score");
-    }
-    setSpeedometerValue(degrees);
+    const degreeMap = { "-2": -72, "-1": -36, "0": 0, "1": 36, "2": 72 };
+    setSpeedometerValue(degreeMap[score] ?? 0);
 }
 
 function scrollToBottom() {

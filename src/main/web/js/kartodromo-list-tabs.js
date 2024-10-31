@@ -1,6 +1,6 @@
 // Script que cria "tabs" interativos no header do card, para ver a opção do que quiser ver do kartódromo.
 // O script interativamente exibe os elementos escondidos <p>, assim como também trocar as classes de active nos cards
-let filtro = '';
+let filtro = null;
 
 function filtrarOpcao(element) {
   const cardElement = element.closest('.card'); // Mesma coisa que "element.parentElement.parentElement.parentElement.parentElement"
@@ -34,9 +34,10 @@ function showContent(card, option) {
 }
 
 function buscarKartodromos() {
-  fetch(`http://localhost:3000/kartTracks/${null}`)
+  fetch(`http://localhost:3000/kartTracks/${filtro}`)
     .then(response => response.json())
     .then(kartodromos => {
+      console.log("Resultados encontrados: " + kartodromos);
       criarCardKartodromo(kartodromos);
     })
     .catch(error => {
@@ -49,11 +50,6 @@ function criarCardKartodromo(kartodromosArray) {
   notFoundMessage('none');
 
   kartodromosArray.forEach(kartodromo => {
-
-    let nomeKartodromoBusca = (kartodromo.nome).toLowerCase();
-    if (!nomeKartodromoBusca.includes(filtro) && filtro !== undefined) {
-      return;
-    }
 
     elementosEncontradosFiltro++;
     const divCard = document.createElement('div');
