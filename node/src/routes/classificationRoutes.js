@@ -4,7 +4,7 @@ import { postClassification, getClassification} from "../controllers/classificat
 
 const classificationRoutes = Router()
 
-classificationRoutes.get("/classifications/:karttrack/:weight", getClassification)
+classificationRoutes.get("/classifications/:karttrack/:weight/:name", getClassification)
 
 classificationRoutes.post("/classifications", postClassification)
 

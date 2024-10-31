@@ -37,11 +37,12 @@ export const postClassification = async (req, res) => {
 
 export const getClassification = async (req, res) => {
     try {
-        const { weight, karttrack } = req.params
+        const { weight, karttrack, name } = req.params
 
         const filter = {}
-        if (karttrack != "null") {filter.kartodromo = karttrack}
-        if (weight != "null") {filter.peso = { $gte: parseInt(weight), $lte: parseInt(weight) + 9 }}
+        if (karttrack !== "null") filter.kartodromo = karttrack
+        if (weight !== "null") filter.peso = { $gte: parseInt(weight), $lte: parseInt(weight) + 9 }
+        if (name !== "null") filter.nome = name
 
         const classifications = await Classification.find(filter).sort({ "tempo.totalEmMs": 1 })
 

@@ -1,4 +1,4 @@
-package model;
+package grupopi4.kartconnect.model;
 
 import java.util.Random;
 

@@ -34,3 +34,4 @@ build/
 
 ### Node modules ###
 node/node_modules/
+node_modules/

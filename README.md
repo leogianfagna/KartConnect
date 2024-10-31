@@ -12,6 +12,12 @@ Adicionar nas variáveis do sistema MAVEN_HOME com diretoria na pasta deszipada 
 Adicionar na variável PATH do usuário %MAVEN_HOME%\bin
 > Buildar com VSCode: `mvn exec:java`. O caminho para a main já está especificado em `pom.xml`
 
+Iniciar servidor:
+1. `cd node`
+2. `npm install`
+3. `npm install cors`
+4. `npm start`
+
 # Membros:
 - Enzo Marola 
 - Fitz Arlo Inostroza Nieri

@@ -1,6 +1,6 @@
-import model.Tempo;
-
 import org.junit.jupiter.api.Test;
+
+import grupopi4.kartconnect.model.Tempo;
 
 import static org.junit.jupiter.api.Assertions.*;
 

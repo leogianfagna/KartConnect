@@ -1,8 +1,10 @@
-import model.Classificacao;
+package grupopi4.kartconnect;
 
 import java.net.*;
 import java.io.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import grupopi4.kartconnect.model.Classificacao;
 
 public class GeradorServer {
     public static void main(String[] args) {

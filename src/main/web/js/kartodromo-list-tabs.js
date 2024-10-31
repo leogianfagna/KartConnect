@@ -34,10 +34,9 @@ function showContent(card, option) {
 }
 
 function buscarKartodromos() {
-  fetch('http://localhost:8080/api/kartodromos')
+  fetch(`http://localhost:3000/kartTracks/${null}`)
     .then(response => response.json())
     .then(kartodromos => {
-
       criarCardKartodromo(kartodromos);
     })
     .catch(error => {
@@ -50,7 +49,7 @@ function criarCardKartodromo(kartodromosArray) {
   notFoundMessage('none');
 
   kartodromosArray.forEach(kartodromo => {
-    
+
     let nomeKartodromoBusca = (kartodromo.nome).toLowerCase();
     if (!nomeKartodromoBusca.includes(filtro) && filtro !== undefined) {
       return;
@@ -136,8 +135,8 @@ function criarCardKartodromo(kartodromosArray) {
 
   // Confere se já não está exibido para não exibir novamente ou esconder
   if (!content.classList.contains('show')) {
-      content.style.display = 'block';
-      content.classList.add('show');
+    content.style.display = 'block';
+    content.classList.add('show');
   }
 
 }

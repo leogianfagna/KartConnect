@@ -2,9 +2,11 @@ import express from "express"
 import { connectDB } from "./db.js"
 import classificationRoutes from "./routes/classificationRoutes.js"
 import kartTrackRoutes from "./routes/kartTrackRoutes.js"
+import cors from "cors"
+
 export const app = express()
 
-app.use(express.json())
+app.use(cors())
 
 connectDB()
 

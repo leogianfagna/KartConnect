@@ -35,7 +35,7 @@ function setKartodromo(element) {
 async function queryClassificacoes() {
     const queryParams = getQueryFilter();
     try {
-        const response = await fetch(`http://localhost:8080/api/classificacoes?${queryParams}`, { method: "GET" });
+        const response = await fetch(`http://localhost:3000/classifications/${kartFilter}/${null}/${nameFilter}`, { method: "GET" });
         return await response.json();
     } catch (error) {
         console.error('Erro ao buscar classificações:', error);
@@ -43,10 +43,10 @@ async function queryClassificacoes() {
 }
 
 async function queryKartodromos() {
-    const filtro = ""; // Status: Quer listar todos kartódromos então não precisa de filtro algum
+    const filtro = null; // Status: Quer listar todos kartódromos então não precisa de filtro algum
 
     try {
-        const response = await fetch(`http://localhost:8080/api/kartodromos?${filtro}`, { method: "GET" });
+        const response = await fetch(`http://localhost:3000/kartTracks/${filtro}`, { method: "GET" });
         return await response.json();
     } catch (error) {
         console.error('Erro ao buscar classificações:', error);
@@ -115,7 +115,8 @@ function refreshDivs() {
 }
 
 async function showDashboard() {
-    setName(undefined);
+    // setName(undefined);
+    nameFilter = null;
     const classificacoes = await queryClassificacoes();
 
     let tempoPiloto;
@@ -123,29 +124,30 @@ async function showDashboard() {
     let mediaTempoParcial = 0;
     let i = 0;
 
-    let pos10Tempo = classificacoes[9].tempo;
-    let pos1Tempo = classificacoes[0].tempo;
+    let pos10Tempo = classificacoes[9].tempo.totalEmMs;
+    console.log(pos10Tempo.totalEmMs);
+    let pos1Tempo = classificacoes[0].tempo.totalEmMs;
 
     // Iterar apenas os 20 primeiros tempos para informações no dashboard
     const top20Classificacoes = classificacoes.slice(0, 20);
     top20Classificacoes.forEach((classificacao) => {
-        mediaTempoParcial += timeToMilliseconds(classificacao.tempo);
+        mediaTempoParcial += classificacao.tempo.totalEmMs;
     });
 
     let mediaTempo = mediaTempoParcial / top20Classificacoes.length;
-    let melhorTempo = timeToMilliseconds(top20Classificacoes[0].tempo);
-    let piorTempo = timeToMilliseconds(top20Classificacoes[top20Classificacoes.length - 1].tempo);
+    let melhorTempo = top20Classificacoes[0].tempo.totalEmMs;
+    let piorTempo = top20Classificacoes[top20Classificacoes.length - 1].tempo.totalEmMs;
     let meioMelhorMedia = (melhorTempo + mediaTempo) / 2;
     let meioPiorMedia = (piorTempo + mediaTempo) / 2;
 
     // Processa os demais tempos para conseguir a média total
     classificacoes.forEach((classificacao) => {
         if (classificacao.nome === document.getElementById('pilot-name').value) {
-            tempoPiloto = classificacao.tempo;
+            tempoPiloto = classificacao.tempo.totalEmMs;
         }
 
         i++;
-        mediaTempoTotal += timeToMilliseconds(classificacao.tempo);
+        mediaTempoTotal += classificacao.tempo.totalEmMs;
     });
 
     mediaTempoTotal = millisecondsToTime((mediaTempoTotal / i));
@@ -177,7 +179,7 @@ async function showDashboard() {
 
 // Função que resgata os estilos que serão usados para os ícones do dashboard, aqueles que indicam positivo, negativo ou neutro em relação ao tempo
 function getRespectiveStyle(time, type) {
-    const compare = timeToMilliseconds(time);
+    const compare = time;
     let icon = "trending_down";
     let color = "#de3b26";
 
@@ -196,7 +198,6 @@ function getRespectiveStyle(time, type) {
 
 
 function definirVelocimetro(piorTempo, mediaTempo, meioMelhorMedia, meioPiorMedia, tempoPiloto) {
-    tempoPiloto = timeToMilliseconds(tempoPiloto);
 
     switch (true) {
         case (tempoPiloto < meioMelhorMedia):
@@ -218,8 +219,8 @@ function definirVelocimetro(piorTempo, mediaTempo, meioMelhorMedia, meioPiorMedi
 }
 
 function getDifTime(tempo1, tempo2) {
-    tempo1 = timeToMilliseconds(tempo1);
-    tempo2 = timeToMilliseconds(tempo2);
+    //tempo1 = timeToMilliseconds(tempo1);
+    //tempo2 = timeToMilliseconds(tempo2);
 
     const difference = tempo1 - tempo2;
 

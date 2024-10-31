@@ -53,16 +53,17 @@ function buscarClassificacoes() {
     //const queryParams = new URLSearchParams(filter).toString();
     //fetch(`http://localhost:8080/api/classificacoes?${queryParams}`, { method: "GET" })
 
-    fetch('http://localhost:8080/api/classificacoes', { method: "GET" })
+    const pilotName = "Diego Teixeira"
+    fetch(`http://localhost:3000/classifications/${null}/${null}/${null}`, { method: "GET" })
         .then(response => response.json())
         .then(classificacoes => {
             console.log(classificacoes);
             showPortal();
-            
+
             const tbody = document.getElementById('tempos-banco');
             limparTabelaBody(tbody);
 
-            resultadosBuscados = classificacoes.filter(classificacao => 
+            resultadosBuscados = classificacoes.filter(classificacao =>
                 classificacao.kartodromo === selectedKartodromo && pertenceCategoria(classificacao.peso)
             ).length;
 
@@ -84,7 +85,7 @@ function buscarClassificacoes() {
                     if (getNumberOfResults(tdId)) {
                         tbody.appendChild(tr);
                     }
-                    
+
                 }
             });
         })
@@ -176,7 +177,7 @@ function changePage(i) {
     }
 
     selectedPageNumber = selectedPageNumber + i;
-    buscarClassificacoes();    
+    buscarClassificacoes();
 }
 
 // Função auxiliar que retorna o máximo de páginas de resultados que pode haver, para usar como auxilio para não acessar uma página que não há resultados.
