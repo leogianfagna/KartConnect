@@ -165,6 +165,12 @@ footer {
         border-color: var(--secondary-button-color);
     }
 
+    & .white-button:hover {
+        color: #4a4b53 !important;
+        background-color: var(--secondary-button-color);
+        border-color: var(--secondary-button-color);
+    }
+
     & h1 {
         color: var(--main-font-color);
         font-size: 50px;
