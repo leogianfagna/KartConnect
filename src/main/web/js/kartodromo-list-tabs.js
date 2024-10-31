@@ -37,7 +37,6 @@ function buscarKartodromos() {
   fetch(`http://localhost:3000/kartTracks/${filtro}`)
     .then(response => response.json())
     .then(kartodromos => {
-      console.log("Resultados encontrados: " + kartodromos);
       criarCardKartodromo(kartodromos);
     })
     .catch(error => {
@@ -53,7 +52,7 @@ function criarCardKartodromo(kartodromosArray) {
 
     elementosEncontradosFiltro++;
     const divCard = document.createElement('div');
-    divCard.className = 'card text-center';
+    divCard.className = 'card text-center shadow mb-5 bg-body-tertiary rounded';
     divCard.style.marginTop = '40px';
     divCard.id = `kartodromo-${(kartodromo.nome).replace(/ /g, '')}`;
 
