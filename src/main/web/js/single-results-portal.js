@@ -9,16 +9,18 @@ function setName(value) {
 }
 
 function setKartodromo(element) {
-    const kartodromoSelecionado = (element.id).replace('kart-', '');
-    if (kartodromoSelecionado === 'all') {
-        kartFilter = null;
-    } else {
-        kartFilter = kartodromoSelecionado;
-    }
+    const kartodromoSelecionado = element === null ? 'all' : (element.id).replace('kart-', '');
+    kartFilter = kartodromoSelecionado === 'all' ? null : kartodromoSelecionado;
 }
 
 // Busca todos os dados no banco da coleção classificacoes baseado no que está no filtro. Passar como parâmetro um filtro vazio (filter = {}) vai buscar todos os dados do banco.
 async function queryClassificacoes() {
+
+    console.log("Entrou na query com os seguintes filtros:");
+    console.log(kartFilter);
+    console.log(weightFilter);
+    console.log(nameFilter);
+
     try {
         const response = await fetch(`http://localhost:3000/classifications/${kartFilter}/${weightFilter}/${nameFilter}`);
         return await response.json();
@@ -88,7 +90,6 @@ function refreshDivs() {
 async function dashboardVelocimetroAnalise(tempoPiloto, pesoPiloto) {
     weightFilter = getCategoriaPiloto(pesoPiloto);
     const classificacoesDaCategoria = await queryClassificacoes();
-    console.log("Pilotos da categoria para o Dashboard: " + classificacoesDaCategoria);
 
     let mediaTempoParcial = 0;
 
@@ -187,13 +188,6 @@ function getRespectiveStyle(time, type) {
 
 
 function definirVelocimetro(piorTempo, mediaTempo, meioMelhorMedia, meioPiorMedia, tempoPiloto) {
-
-    console.log("piorTempo: " + piorTempo);
-    console.log("mediaTempo: " + mediaTempo);
-    console.log("meioMelhorMedia: " + meioMelhorMedia);
-    console.log("meioPiorMedia: " + meioPiorMedia);
-    console.log("tempoPiloto: " + tempoPiloto);
-
 
     switch (true) {
         case (tempoPiloto < meioMelhorMedia):
