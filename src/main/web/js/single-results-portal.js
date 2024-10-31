@@ -1,6 +1,7 @@
 const tbody = document.getElementById('tempos-banco');
 let kartFilter = null;
 let nameFilter = null;
+let weightFilter = null;
 
 // Setters de filtro: vão setar a variável global para o filtro selecionado dinamicamente durante o uso da página.
 function setName(value) {
@@ -19,7 +20,7 @@ function setKartodromo(element) {
 // Busca todos os dados no banco da coleção classificacoes baseado no que está no filtro. Passar como parâmetro um filtro vazio (filter = {}) vai buscar todos os dados do banco.
 async function queryClassificacoes() {
     try {
-        const response = await fetch(`http://localhost:3000/classifications/${kartFilter}/${null}/${nameFilter}`);
+        const response = await fetch(`http://localhost:3000/classifications/${kartFilter}/${weightFilter}/${nameFilter}`);
         return await response.json();
     } catch (error) {
         console.error('Erro ao buscar classificações:', error);
@@ -82,21 +83,17 @@ function refreshDivs() {
     document.getElementById('nothing-found').style.display = 'none';
 }
 
-async function showDashboard(kartodromoParaAnalise) {
-    kartFilter = kartodromoParaAnalise;
-    nameFilter = null;
-    const classificacoes = await queryClassificacoes();
+// Função que vai fazer uma nova busca acrescentando um novo filtro: a categoria do piloto.
+// As informações do velocímetro do dashboard serão baseadas entre os competidores da mesma categoria, e não o top20 geral.
+async function dashboardVelocimetroAnalise(tempoPiloto, pesoPiloto) {
+    weightFilter = getCategoriaPiloto(pesoPiloto);
+    const classificacoesDaCategoria = await queryClassificacoes();
+    console.log("Pilotos da categoria para o Dashboard: " + classificacoesDaCategoria);
 
-    let tempoPiloto;
-    let mediaTempoTotal = 0;
     let mediaTempoParcial = 0;
-    let i = 0;
-
-    let pos10Tempo = classificacoes[9].tempo.totalEmMs;
-    let pos1Tempo = classificacoes[0].tempo.totalEmMs;
 
     // Iterar apenas os 20 primeiros tempos para informações no dashboard
-    const top20Classificacoes = classificacoes.slice(0, 20);
+    const top20Classificacoes = classificacoesDaCategoria.slice(0, 20);
     top20Classificacoes.forEach((classificacao) => {
         mediaTempoParcial += classificacao.tempo.totalEmMs;
     });
@@ -107,10 +104,35 @@ async function showDashboard(kartodromoParaAnalise) {
     let meioMelhorMedia = (melhorTempo + mediaTempo) / 2;
     let meioPiorMedia = (piorTempo + mediaTempo) / 2;
 
+    definirVelocimetro(piorTempo, mediaTempo, meioMelhorMedia, meioPiorMedia, tempoPiloto);
+    weightFilter = null;
+}
+
+function getCategoriaPiloto(pesoPiloto) {
+    if (pesoPiloto < 69) return 60;
+    if (pesoPiloto < 79) return 70;
+    if (pesoPiloto < 89) return 80;
+    if (pesoPiloto < 99) return 90;
+    else return 100;
+}
+
+async function showDashboard(kartodromoParaAnalise) {
+    kartFilter = kartodromoParaAnalise;
+    nameFilter = null;
+
+    const classificacoes = await queryClassificacoes();
+    let tempoPiloto;
+    let mediaTempoTotal = 0;
+    let i = 0;
+
+    let pos10Tempo = classificacoes[9].tempo.totalEmMs;
+    let pos1Tempo = classificacoes[0].tempo.totalEmMs;
+    
     // Processa os demais tempos para conseguir a média total
     classificacoes.forEach((classificacao) => {
         if (classificacao.nome === document.getElementById('pilot-name').value) {
             tempoPiloto = classificacao.tempo.totalEmMs;
+            pesoPiloto = classificacao.peso;
         }
 
         i++;
@@ -131,15 +153,15 @@ async function showDashboard(kartodromoParaAnalise) {
     document.getElementById('dif-top10-icon').style.backgroundColor = getRespectiveStyle(diferencaTop10, 'color');
     document.getElementById('dif-media-icon').style.backgroundColor = getRespectiveStyle(diferencaDaMedia, 'color');
 
-
-    definirVelocimetro(piorTempo, mediaTempo, meioMelhorMedia, meioPiorMedia, tempoPiloto);
-
     // Confere se já não está exibido para não exibir novamente ou esconder
     const content = document.getElementById('dashboard-portal');
     if (!content.classList.contains('show')) {
         content.style.display = 'block';
         content.classList.add('show');
     }
+
+    // Faz uma nova análise para montar um velocímetro baseado na categoria apenas 
+    dashboardVelocimetroAnalise(tempoPiloto, pesoPiloto);
 
     scrollToBottom();
 }
@@ -165,6 +187,13 @@ function getRespectiveStyle(time, type) {
 
 
 function definirVelocimetro(piorTempo, mediaTempo, meioMelhorMedia, meioPiorMedia, tempoPiloto) {
+
+    console.log("piorTempo: " + piorTempo);
+    console.log("mediaTempo: " + mediaTempo);
+    console.log("meioMelhorMedia: " + meioMelhorMedia);
+    console.log("meioPiorMedia: " + meioPiorMedia);
+    console.log("tempoPiloto: " + tempoPiloto);
+
 
     switch (true) {
         case (tempoPiloto < meioMelhorMedia):
