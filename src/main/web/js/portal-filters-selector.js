@@ -45,6 +45,17 @@ function filtrarKartodromo(element) {
     element.classList.add('option-button-selected');
 }
 
+function millisecondsToTime(milliseconds) {
+    const minutes = Math.floor(milliseconds / (60 * 1000));
+    milliseconds %= (60 * 1000);
+
+    const seconds = Math.floor(milliseconds / 1000);
+    const remainingMilliseconds = Math.abs(Math.round(milliseconds % 1000));
+
+    // Formatação usada no return: M:SS:mmm
+    return `${minutes}:${seconds.toString().padStart(2, '0')}:${remainingMilliseconds.toString().padStart(3, '0')}`;
+}
+
 // Função para resgatar os valores do banco de dados, já com os filtros aplicados na página pelo usuário
 function buscarClassificacoes() {
     const tbody = document.getElementById('tempos-banco');
@@ -67,7 +78,7 @@ function buscarClassificacoes() {
                     <td>${classificacao.nome}</td>
                     <td>${classificacao.estado}</td>
                     <td>${classificacao.peso}</td>
-                    <td>${classificacao.tempo}</td>
+                    <td>${millisecondsToTime(classificacao.tempo.totalEmMs)}</td>
                 `;
 
                 tdId++;
