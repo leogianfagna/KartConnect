@@ -19,6 +19,7 @@ function setKartodromo(element) {
 // Busca todos os dados no banco da coleção classificacoes baseado no que está no filtro. Passar como parâmetro um filtro vazio (filter = {}) vai buscar todos os dados do banco.
 async function queryClassificacoes() {
     try {
+        console.log("Fiz uma chamada do banco com o kartódromo" + kartFilter + "e o nome do piloto " + nameFilter);
         const response = await fetch(`http://localhost:3000/classifications/${kartFilter}/${null}/${nameFilter}`, { method: "GET" });
         return await response.json();
     } catch (error) {
@@ -58,7 +59,7 @@ async function listarResultadosIndividuais() {
                 <td>${classificacao.nome}</td>
                 <td>${classificacao.peso}</td>
                 <td>${classificacao.kartodromo}</td>
-                <td>${classificacao.tempo}</td>
+                <td>${millisecondsToTime(classificacao.tempo.totalEmMs)}</td>
             `;
 
         // Cria o botão separadamente
@@ -98,8 +99,8 @@ function refreshDivs() {
     document.getElementById('nothing-found').style.display = 'none';
 }
 
-async function showDashboard() {
-    // setName(undefined);
+async function showDashboard(kartodromoParaAnalise) {
+    kartFilter = kartodromoParaAnalise;
     nameFilter = null;
     const classificacoes = await queryClassificacoes();
 
@@ -109,7 +110,6 @@ async function showDashboard() {
     let i = 0;
 
     let pos10Tempo = classificacoes[9].tempo.totalEmMs;
-    console.log(pos10Tempo.totalEmMs);
     let pos1Tempo = classificacoes[0].tempo.totalEmMs;
 
     // Iterar apenas os 20 primeiros tempos para informações no dashboard
@@ -134,13 +134,13 @@ async function showDashboard() {
         mediaTempoTotal += classificacao.tempo.totalEmMs;
     });
 
-    mediaTempoTotal = millisecondsToTime((mediaTempoTotal / i));
+    mediaTempoTotal = mediaTempoTotal / i;
     const diferencaPrimeiro = getDifTime(tempoPiloto, pos1Tempo);
     const diferencaTop10 = getDifTime(tempoPiloto, pos10Tempo);
     const diferencaDaMedia = getDifTime(tempoPiloto, mediaTempoTotal);
-    document.getElementById('dif-first').innerHTML = diferencaPrimeiro;
-    document.getElementById('dif-top10').innerHTML = diferencaTop10;
-    document.getElementById('dif-media').innerHTML = diferencaDaMedia;
+    document.getElementById('dif-first').innerHTML = millisecondsToTime(diferencaPrimeiro);
+    document.getElementById('dif-top10').innerHTML = millisecondsToTime(diferencaTop10);
+    document.getElementById('dif-media').innerHTML = millisecondsToTime(diferencaDaMedia);
     document.getElementById('dif-first-icon').innerHTML = getRespectiveStyle(diferencaPrimeiro, 'icon');
     document.getElementById('dif-top10-icon').innerHTML = getRespectiveStyle(diferencaTop10, 'icon');
     document.getElementById('dif-media-icon').innerHTML = getRespectiveStyle(diferencaDaMedia, 'icon');
@@ -168,7 +168,7 @@ function getRespectiveStyle(time, type) {
     let color = "#de3b26";
 
     // Precisa comparar com sinal de negativo pois a diferença em milissegundos não consegue reconher o negativo
-    if (time.includes("-") || compare === 0) {
+    if (time < 0 || compare === 0) {
         icon = "trending_up";
         color = "#8dfa4d";
     } else if (compare < 1000) {
@@ -203,17 +203,7 @@ function definirVelocimetro(piorTempo, mediaTempo, meioMelhorMedia, meioPiorMedi
 }
 
 function getDifTime(tempo1, tempo2) {
-    //tempo1 = timeToMilliseconds(tempo1);
-    //tempo2 = timeToMilliseconds(tempo2);
-
-    const difference = tempo1 - tempo2;
-
-    // Certifica-se de que estamos lidando com o valor absoluto da diferença e armazenando o sinal
-    const isNegative = difference < 0;
-    const resultTime = millisecondsToTime(Math.abs(difference));
-
-    // Adiciona o sinal negativo ao resultado se for necessário
-    return isNegative ? `-${resultTime}` : resultTime;
+    return tempo1 - tempo2;
 }
 
 function timeToMilliseconds(timeString) {
@@ -224,15 +214,19 @@ function timeToMilliseconds(timeString) {
 }
 
 function millisecondsToTime(milliseconds) {
+    const sign = milliseconds < 0 ? '-' : '';
+    milliseconds = Math.abs(milliseconds); // Torna o valor positivo para cálculo
+
     const minutes = Math.floor(milliseconds / (60 * 1000));
     milliseconds %= (60 * 1000);
 
     const seconds = Math.floor(milliseconds / 1000);
-    const remainingMilliseconds = Math.abs(Math.round(milliseconds % 1000)); // Arredonda milissegundos e garante que seja positivo
+    const remainingMilliseconds = Math.round(milliseconds % 1000);
 
-    // Formatação usada no return: M:SS:mmm
-    return `${minutes}:${seconds.toString().padStart(2, '0')}:${remainingMilliseconds.toString().padStart(3, '0')}`;
+    // Formatação usada no return: -M:SS:mmm
+    return `${sign}${minutes}:${seconds.toString().padStart(2, '0')}:${remainingMilliseconds.toString().padStart(3, '0')}`;
 }
+
 
 // Seleção de opções
 // Executado toda vez ao clicar em uma categoria, vai adicionar os estilos necessários e buscar resultados baseado nos filtros
