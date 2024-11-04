@@ -2,7 +2,7 @@ package grupopi4.kartconnect.model;
 
 import java.util.Random;
 
-public class Classificacao implements Cloneable{
+public class Classificacao implements Cloneable {
     private String nome;
     private int peso;
     private Tempo tempo;
@@ -13,29 +13,29 @@ public class Classificacao implements Cloneable{
 
         Classificacao[] classificacoes = new Classificacao[qtd];
 
-        final String[] kartodromos = {"VeloMax","TurboKart","NitroRace","ThunderSpeed","Velocita"};
-        final String[] estados = {"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MS", "MT", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"};
-        final String[] nomes = {"Gabriel", "Felipe", "Lucas", "Andre", "Bruno", "Thiago", "Mateus", "Rafael", "Ricardo", "Pedro", "Daniel", "Caio", "Vitor", "Gustavo", "Rodrigo", "Fernando", "Eduardo", "Alexandre", "Marcelo", "Igor", "Diego", "Paulo", "Murilo", "Bruno", "Henrique", "Vinícius", "Joao", "Antonio", "Miguel", "Beatriz", "Gabriela"};
-        final String[] sobrenomes = {"Silva", "Santos", "Oliveira", "Pereira", "Souza", "Costa", "Ferreira", "Rodrigues", "Almeida", "Nascimento", "Lima", "Carvalho", "Araujo", "Ribeiro", "Martins", "Rocha", "Mendes", "Barros", "Vieira", "Cavalcanti", "Gomes", "Monteiro", "Correia", "Moura", "Batista", "Freitas", "Andrade", "Dias", "Teixeira", "Barbosa"};
+        final String[] kartodromos = { "VeloMax", "TurboKart", "NitroRace", "ThunderSpeed", "Velocita" };
+        final String[] estados = { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MS", "MT", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" };
+        final String[] nomes = { "Gabriel", "Felipe", "Lucas", "Andre", "Bruno", "Thiago", "Mateus", "Rafael", "Ricardo", "Pedro", "Daniel", "Caio", "Vitor", "Gustavo", "Rodrigo", "Fernando", "Eduardo", "Alexandre", "Marcelo", "Igor", "Diego", "Paulo", "Murilo", "Bruno", "Henrique", "Vinícius", "Joao", "Antonio", "Miguel", "Beatriz", "Gabriela" };
+        final String[] sobrenomes = { "Silva", "Santos", "Oliveira", "Pereira", "Souza", "Costa", "Ferreira", "Rodrigues", "Almeida", "Nascimento", "Lima", "Carvalho", "Araujo", "Ribeiro", "Martins", "Rocha", "Mendes", "Barros", "Vieira", "Cavalcanti", "Gomes", "Monteiro", "Correia", "Moura", "Batista", "Freitas", "Andrade", "Dias", "Teixeira", "Barbosa" };
         final int minimoSegundos = 50;
         final int maximoSegundos = 300;
         final int pesoMin = 60;
         final int pesoMax = 110;
 
-        for (int i = 0; i < qtd; i++){
+        for (int i = 0; i < qtd; i++) {
             final String nome = nomes[new Random().nextInt(nomes.length)] + " " + sobrenomes[new Random().nextInt(sobrenomes.length)];
             final Tempo tempo = Tempo.randomPorSegundos(minimoSegundos, maximoSegundos);
-            final int peso = new Random().nextInt(pesoMax-pesoMin)+pesoMin;
+            final int peso = new Random().nextInt(pesoMax - pesoMin) + pesoMin;
             final String kartodromo = kartodromos[new Random().nextInt(kartodromos.length)];
             final String estado = estados[new Random().nextInt(estados.length)];
 
-            Classificacao c = new Classificacao(nome,peso,tempo,kartodromo,estado);
+            Classificacao c = new Classificacao(nome, peso, tempo, kartodromo, estado);
             classificacoes[i] = c;
         }
         return classificacoes;
     }
 
-    //Verificar com andré
+    // Verificar com andré
     public Classificacao(String nome, int peso, Tempo tempo, String kartodromo, String estado) throws Exception {
         if (tempo == null)
             throw new Exception("models.Tempo não pode ser nulo");
@@ -46,9 +46,10 @@ public class Classificacao implements Cloneable{
         this.estado = estado;
     }
 
-    //Verificar com andré
+    // Verificar com andré
     public Classificacao(Classificacao modelo) throws Exception {
-        if (modelo == null) throw new Exception("Modelo ausente");
+        if (modelo == null)
+            throw new Exception("Modelo ausente");
 
         this.nome = modelo.getNome();
         this.peso = modelo.getPeso();
@@ -56,35 +57,57 @@ public class Classificacao implements Cloneable{
         this.kartodromo = modelo.getKartodromo();
         this.estado = modelo.getEstado();
     }
-    public String getNome() { return this.nome; }
 
-    public void setNome(String nome) { this.nome = nome; }
-    public int getPeso() { return peso; }
+    public String getNome() {
+        return this.nome;
+    }
 
-    public void setPeso(int peso) { this.peso = peso; }
-    //Verificar com André
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getPeso() {
+        return peso;
+    }
+
+    public void setPeso(int peso) {
+        this.peso = peso;
+    }
+
+    // Verificar com André
     public Tempo getTempo() throws Exception {
         return new Tempo(this.tempo);
     }
-    //Verificar com André
+    // Verificar com André
 
     public void setTempo(Tempo tempo) throws Exception {
         if (tempo == null)
             throw new Exception("models.Tempo não pode ser nulo");
         this.tempo = new Tempo(tempo);
     }
-    public String getKartodromo() { return this.kartodromo; }
 
-    public void setKartodromo(String kartodromo) { this.kartodromo = kartodromo;}
-    public String getEstado() { return this.estado; }
+    public String getKartodromo() {
+        return this.kartodromo;
+    }
 
-    public void setEstado(String estado) { this.estado = estado; }
+    public void setKartodromo(String kartodromo) {
+        this.kartodromo = kartodromo;
+    }
+
+    public String getEstado() {
+        return this.estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 
     @Override
     public String toString() {
-        return "models.Classificacao [nome=" + nome + ", peso=" + peso + ", tempo=" + tempo + ", kartodromo=" + kartodromo + ", estado=" + estado + "]";
+        return "models.Classificacao [nome=" + nome + ", peso=" + peso + ", tempo=" + tempo + ", kartodromo="
+                + kartodromo + ", estado=" + estado + "]";
     }
-    //Verificar com André
+    // Verificar com André
 
     @Override
     public int hashCode() {
@@ -96,7 +119,7 @@ public class Classificacao implements Cloneable{
         ret = 31 * ret + this.kartodromo.hashCode();
         ret = 31 * ret + this.estado.hashCode();
 
-        if (ret<0){
+        if (ret < 0) {
             ret = -ret;
         }
 
@@ -126,12 +149,12 @@ public class Classificacao implements Cloneable{
 
         try {
             ret = new Classificacao(this);
-        } catch (Exception erro){}
+        } catch (Exception erro) {}
 
         return ret;
     }
 
-    public int getTempoEmMilissegundos(){
-        return this.tempo.getMilissegundos() +this.tempo.getSegundos() * 1000 + this.tempo.getMinutos() * 60000;
+    public int getTempoEmMilissegundos() {
+        return this.tempo.getMilissegundos() + this.tempo.getSegundos() * 1000 + this.tempo.getMinutos() * 60000;
     }
 }

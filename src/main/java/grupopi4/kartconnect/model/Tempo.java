@@ -12,10 +12,13 @@ public class Tempo implements Cloneable {
     public static Tempo randomPorSegundos(int minSeg, int maxSeg) throws Exception {
         if (minSeg < 0)
             throw new Exception("Segundos negativos");
+
         if (maxSeg < 0)
             throw new Exception("Segundos negativos");
+
         if (minSeg > maxSeg)
             throw new Exception("Valor mínimo maior que máximo");
+
         if (maxSeg - minSeg == 0)
             throw new Exception("Valores não devem ser iguais");
 
@@ -56,11 +59,10 @@ public class Tempo implements Cloneable {
         return this.minutos;
     }
 
-    @SuppressWarnings("unused")
-    private void setMinutos(int minutos) throws Exception {
+    public void setMinutos(int minutos) throws Exception {
         if (minutos < 0 || minutos > 59)
             throw new Exception("Quantidade de minutos inválida");
-        
+
         this.minutos = minutos;
     }
 
@@ -68,11 +70,10 @@ public class Tempo implements Cloneable {
         return this.segundos;
     }
 
-    @SuppressWarnings("unused")
-    private void setSegundos(int segundos) throws Exception {
+    public void setSegundos(int segundos) throws Exception {
         if (segundos < 0 || segundos > 59)
             throw new Exception("Quantidade de segundos inválida");
-        
+
         this.segundos = segundos;
     }
 
@@ -80,11 +81,10 @@ public class Tempo implements Cloneable {
         return this.milissegundos;
     }
 
-    @SuppressWarnings("unused")
-    private void setMilissegundos(int milissegundos) throws Exception {
+    public void setMilissegundos(int milissegundos) throws Exception {
         if (milissegundos < 0 || milissegundos > 999)
             throw new Exception("Quantidade de milissegundos inválida");
-        
+
         this.milissegundos = milissegundos;
     }
 
