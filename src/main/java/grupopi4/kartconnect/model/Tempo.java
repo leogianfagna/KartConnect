@@ -94,7 +94,7 @@ public class Tempo implements Cloneable {
 
     @Override
     public String toString() {
-        return "models.Tempo: " + (this.minutos < 10 ? "0" : "") + this.minutos + ":"
+        return "Tempo: " + (this.minutos < 10 ? "0" : "") + this.minutos + ":"
                 + (this.segundos < 10 ? "0" : "") + this.segundos + "."
                 + (this.milissegundos < 100 ? "0" : "") + (this.milissegundos < 10 ? "0" : "") + this.milissegundos;
     }

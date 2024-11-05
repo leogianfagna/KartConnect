@@ -13,10 +13,10 @@ public class Classificacao implements Cloneable {
 
         Classificacao[] classificacoes = new Classificacao[qtd];
 
-        final String[] kartodromos = { "VeloMax", "TurboKart", "NitroRace", "ThunderSpeed", "Velocita" };
-        final String[] estados = { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MS", "MT", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" };
-        final String[] nomes = { "Gabriel", "Felipe", "Lucas", "Andre", "Bruno", "Thiago", "Mateus", "Rafael", "Ricardo", "Pedro", "Daniel", "Caio", "Vitor", "Gustavo", "Rodrigo", "Fernando", "Eduardo", "Alexandre", "Marcelo", "Igor", "Diego", "Paulo", "Murilo", "Bruno", "Henrique", "Vinícius", "Joao", "Antonio", "Miguel", "Beatriz", "Gabriela" };
-        final String[] sobrenomes = { "Silva", "Santos", "Oliveira", "Pereira", "Souza", "Costa", "Ferreira", "Rodrigues", "Almeida", "Nascimento", "Lima", "Carvalho", "Araujo", "Ribeiro", "Martins", "Rocha", "Mendes", "Barros", "Vieira", "Cavalcanti", "Gomes", "Monteiro", "Correia", "Moura", "Batista", "Freitas", "Andrade", "Dias", "Teixeira", "Barbosa" };
+        final String[] kartodromos = {"VeloMax", "TurboKart", "NitroRace", "ThunderSpeed", "Velocita"};
+        final String[] estados = {"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MS", "MT", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"};
+        final String[] nomes = {"Gabriel", "Felipe", "Lucas", "Andre", "Bruno", "Thiago", "Mateus", "Rafael", "Ricardo", "Pedro", "Daniel", "Caio", "Vitor", "Gustavo", "Rodrigo", "Fernando", "Eduardo", "Alexandre", "Marcelo", "Igor", "Diego", "Paulo", "Murilo", "Bruno", "Henrique", "Vinícius", "Joao", "Antonio", "Miguel", "Beatriz", "Gabriela"};
+        final String[] sobrenomes = {"Silva", "Santos", "Oliveira", "Pereira", "Souza", "Costa", "Ferreira", "Rodrigues", "Almeida", "Nascimento", "Lima", "Carvalho", "Araujo", "Ribeiro", "Martins", "Rocha", "Mendes", "Barros", "Vieira", "Cavalcanti", "Gomes", "Monteiro", "Correia", "Moura", "Batista", "Freitas", "Andrade", "Dias", "Teixeira", "Barbosa"};
         final int minimoSegundos = 50;
         final int maximoSegundos = 300;
         final int pesoMin = 60;
@@ -41,7 +41,7 @@ public class Classificacao implements Cloneable {
             throw new Exception("models.Tempo não pode ser nulo");
         this.nome = nome;
         this.peso = peso;
-        this.tempo = new Tempo(tempo);
+        this.tempo = tempo.clone();
         this.kartodromo = kartodromo;
         this.estado = estado;
     }
@@ -76,14 +76,14 @@ public class Classificacao implements Cloneable {
 
     // Verificar com André
     public Tempo getTempo() throws Exception {
-        return new Tempo(this.tempo);
+        return this.tempo.clone();
     }
     // Verificar com André
 
     public void setTempo(Tempo tempo) throws Exception {
         if (tempo == null)
             throw new Exception("models.Tempo não pode ser nulo");
-        this.tempo = new Tempo(tempo);
+        this.tempo = tempo.clone();
     }
 
     public String getKartodromo() {
@@ -104,8 +104,8 @@ public class Classificacao implements Cloneable {
 
     @Override
     public String toString() {
-        return "models.Classificacao [nome=" + nome + ", peso=" + peso + ", tempo=" + tempo + ", kartodromo="
-                + kartodromo + ", estado=" + estado + "]";
+        return "Classificacao: { nome=" + nome + ", peso=" + peso + ", tempo=" + tempo + ", kartodromo="
+                + kartodromo + ", estado=" + estado + " }";
     }
     // Verificar com André
 
@@ -115,7 +115,7 @@ public class Classificacao implements Cloneable {
 
         ret = 31 * ret + this.nome.hashCode();
         ret = 31 * ret + Integer.valueOf(peso).hashCode();
-        ret = 31 * ret + tempo.hashCode();
+        ret = 31 * ret + this.tempo.hashCode();
         ret = 31 * ret + this.kartodromo.hashCode();
         ret = 31 * ret + this.estado.hashCode();
 
@@ -149,7 +149,8 @@ public class Classificacao implements Cloneable {
 
         try {
             ret = new Classificacao(this);
-        } catch (Exception erro) {}
+        } catch (Exception erro) {
+        }
 
         return ret;
     }

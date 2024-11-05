@@ -1,10 +1,14 @@
 package grupopi4.kartconnect;
 
-import java.net.*;
-import java.io.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import grupopi4.kartconnect.model.Classificacao;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 public class GeradorServer {
     public static void main(String[] args) {
@@ -13,15 +17,17 @@ public class GeradorServer {
 
         try (ServerSocket serverSocket = new ServerSocket(port)) {
 
-            System.out.println("Server is listening on port " + port);
+            System.out.println("Server listening on port " + port);
 
             while (true) {
-                Socket socket = serverSocket.accept();
+                Socket conexao = serverSocket.accept();
                 System.out.println("New client connected");
 
-                BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conexao.getInputStream()));
 
-                PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
+                PrintWriter writer = new PrintWriter(conexao.getOutputStream());
+
+                //IMPLEMENTAR THREADS PARA A ENTREGA
 
                 try {
                     int qtd = Integer.parseInt(reader.readLine());
@@ -31,15 +37,13 @@ public class GeradorServer {
                     String jsonData = mapper.writeValueAsString(ret);
 
                     writer.println(jsonData);
-                    System.out.println("Sent classification data: " + jsonData);
+                    System.out.println("Sent Classificacao data: " + jsonData);
                 } catch (Exception e) {
-                    System.out.println("Gerador exception: " + e.getMessage());
-                    e.printStackTrace();
+                    System.err.println("Gerador exception: " + e.getMessage());
                 }
             }
         } catch (IOException e) {
-            System.out.println("Server exception: " + e.getMessage());
-            e.printStackTrace();
+            System.err.println("Gerador exception: " + e.getMessage());
         }
     }
 }
