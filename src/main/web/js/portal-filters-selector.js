@@ -95,8 +95,8 @@ function buscarClassificacoes() {
         });
 }
 
+// É chamado caso a busca em buscarClassificacoes() retorne zero resultados
 function showNoResults(status) {
-    console.log("Entrou como: " + status);
     if (status === true) {
         document.getElementById('no-results').style.display = 'none';
         document.getElementById('results-table').style.visibility = 'visible';

@@ -2,6 +2,7 @@
 // O script interativamente exibe os elementos escondidos <p>, assim como também trocar as classes de active nos cards
 let filtro = null;
 
+// Element recebe um this, que significa cada "tab" para as opções de filtros (Principal, endereço, funcionamento e contato).
 function filtrarOpcao(element) {
   const cardElement = element.closest('.card'); // Mesma coisa que "element.parentElement.parentElement.parentElement.parentElement"
   clearSelection(cardElement);
@@ -25,6 +26,7 @@ function clearSelection(element) {
   });
 }
 
+// Esse elemento é a opção filtrada em filtrarOpcao()
 function showContent(card, option) {
   const elementoParaExibir = "kartodromo-" + option;
   const divKartodromoSelecionado = card;
@@ -48,6 +50,7 @@ function criarCardKartodromo(kartodromosArray) {
   let elementosEncontradosFiltro = 0;
   notFoundMessage('none');
 
+  // KartodromosArray é o resultado da busca do banco de dados
   kartodromosArray.forEach(kartodromo => {
 
     elementosEncontradosFiltro++;
@@ -136,6 +139,7 @@ function criarCardKartodromo(kartodromosArray) {
 
 }
 
+// Função chamada ao clicar no botão "Buscar", que inicia todo o sistema de busca
 function filtrarLista() {
   const form = document.querySelector('.needs-validation');
   const buscaUsuario = document.getElementById('user-query').value;
@@ -167,6 +171,7 @@ function mostrarElemento() {
   form.classList.remove('was-validated');
 }
 
+// Botão estático na página que ao clicado, volta a mostrar todos os kartódromos
 function removerFiltro() {
   document.getElementById('user-query').value = '';
   document.getElementById('remove-filters').style.display = 'none';

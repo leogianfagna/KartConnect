@@ -15,12 +15,6 @@ function setKartodromo(element) {
 
 // Busca todos os dados no banco da coleção classificacoes baseado no que está no filtro. Passar como parâmetro um filtro vazio (filter = {}) vai buscar todos os dados do banco.
 async function queryClassificacoes() {
-
-    console.log("Entrou na query com os seguintes filtros:");
-    console.log(kartFilter);
-    console.log(weightFilter);
-    console.log(nameFilter);
-
     try {
         const response = await fetch(`http://localhost:3000/classifications/${kartFilter}/${weightFilter}/${nameFilter}`);
         return await response.json();
