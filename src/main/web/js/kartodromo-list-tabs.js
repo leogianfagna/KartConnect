@@ -175,7 +175,7 @@ function mostrarElemento() {
 function removerFiltro() {
   document.getElementById('user-query').value = '';
   document.getElementById('remove-filters').style.display = 'none';
-  filtro = undefined;
+  filtro = null;
 
   notFoundMessage('none');
   limparConteudo();
