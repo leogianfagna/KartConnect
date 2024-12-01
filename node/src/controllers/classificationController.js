@@ -13,9 +13,11 @@ export const postClassification = async (req, res) => {
         });
 
         client.on('data', async (data) => {
+            console.log("Received data from Java server:", data.toString());
             try {
                 const classificationArray = JSON.parse(data.toString())
                 await Classification.insertMany(classificationArray)
+                //console.log("dados inseridos")
                 res.json("Classificações inseridas")
             } catch (error) {
                 console.error('Error parsing or inserting data:', error)

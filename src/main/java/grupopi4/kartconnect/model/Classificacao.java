@@ -15,10 +15,10 @@ public class Classificacao implements Cloneable {
 
         final String[] kartodromos = {"VeloMax", "TurboKart", "NitroRace", "ThunderSpeed", "Velocita"};
         final String[] estados = {"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MS", "MT", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"};
-        final String[] nomes = {"Gabriel", "Felipe", "Lucas", "Andre", "Bruno", "Thiago", "Mateus", "Rafael", "Ricardo", "Pedro", "Daniel", "Caio", "Vitor", "Gustavo", "Rodrigo", "Fernando", "Eduardo", "Alexandre", "Marcelo", "Igor", "Diego", "Paulo", "Murilo", "Bruno", "Henrique", "Vinícius", "Joao", "Antonio", "Miguel", "Beatriz", "Gabriela"};
+        final String[] nomes = {"Gabriel", "Felipe", "Lucas", "Andre", "Bruno", "Thiago", "Mateus", "Rafael", "Ricardo", "Pedro", "Daniel", "Caio", "Vitor", "Gustavo", "Rodrigo", "Fernando", "Eduardo", "Alexandre", "Marcelo", "Igor", "Diego", "Paulo", "Murilo", "Bruno", "Henrique", "Vinicius", "Joao", "Antonio", "Miguel", "Beatriz", "Gabriela"};
         final String[] sobrenomes = {"Silva", "Santos", "Oliveira", "Pereira", "Souza", "Costa", "Ferreira", "Rodrigues", "Almeida", "Nascimento", "Lima", "Carvalho", "Araujo", "Ribeiro", "Martins", "Rocha", "Mendes", "Barros", "Vieira", "Cavalcanti", "Gomes", "Monteiro", "Correia", "Moura", "Batista", "Freitas", "Andrade", "Dias", "Teixeira", "Barbosa"};
         final int minimoSegundos = 50;
-        final int maximoSegundos = 300;
+        final int maximoSegundos = 120;
         final int pesoMin = 60;
         final int pesoMax = 110;
 
@@ -35,7 +35,6 @@ public class Classificacao implements Cloneable {
         return classificacoes;
     }
 
-    // Verificar com andré
     public Classificacao(String nome, int peso, Tempo tempo, String kartodromo, String estado) throws Exception {
         if (tempo == null)
             throw new Exception("models.Tempo não pode ser nulo");
@@ -46,7 +45,6 @@ public class Classificacao implements Cloneable {
         this.estado = estado;
     }
 
-    // Verificar com andré
     public Classificacao(Classificacao modelo) throws Exception {
         if (modelo == null)
             throw new Exception("Modelo ausente");
@@ -74,11 +72,9 @@ public class Classificacao implements Cloneable {
         this.peso = peso;
     }
 
-    // Verificar com André
     public Tempo getTempo() throws Exception {
         return this.tempo.clone();
     }
-    // Verificar com André
 
     public void setTempo(Tempo tempo) throws Exception {
         if (tempo == null)
@@ -107,7 +103,6 @@ public class Classificacao implements Cloneable {
         return "Classificacao: { nome=" + nome + ", peso=" + peso + ", tempo=" + tempo + ", kartodromo="
                 + kartodromo + ", estado=" + estado + " }";
     }
-    // Verificar com André
 
     @Override
     public int hashCode() {

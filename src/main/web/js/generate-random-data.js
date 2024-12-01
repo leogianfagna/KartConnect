@@ -111,7 +111,7 @@ function inserirNovaClassificacao(novaClassificacao) {
 }
 
 
-function generateRandomData() {
+/*function generateRandomData() {
     const totalSimulations = document.getElementById('input-simulations-total').value || 3;
 
     for (let i = 0; i < totalSimulations; i++) {
@@ -125,4 +125,30 @@ function generateRandomData() {
 
         inserirNovaClassificacao(novaClassificacao);
     }
+}*/
+
+function generateRandomData() {
+    const qtd = document.getElementById('input-simulations-total').value || 3;
+    fetch('http://localhost:3000/classifications', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ qtd: Number(qtd) })
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Erro ao inserir a classificação');
+            }
+        })
+        .then(data => {
+            console.log('Classificação inserida com sucesso:', data);
+            document.getElementById('success-message').style.display = 'block';
+        })
+        .catch(error => {
+            console.error('Erro ao inserir classificação:', error);
+            document.getElementById('fail-message').style.display = 'block';
+        });
 }
