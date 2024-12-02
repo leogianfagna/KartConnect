@@ -2,7 +2,9 @@
 
 // Importações de bibliotecas
 import mongoose from "mongoose" // Api para manipulação de dados com MongoDB
-const dotenv = require('dotenv');
+import dotenv from "dotenv"
+
+dotenv.config();
 
 // Exporta a função de conexão para ser usado no app.js
 export const connectDB = async () => {
