@@ -1,3 +1,5 @@
+// Modelo para a coleção de classificações
+
 import mongoose from 'mongoose';
 
 const Schema = new mongoose.Schema({
@@ -15,4 +17,5 @@ const Schema = new mongoose.Schema({
 
 const Classification = mongoose.model('Classification', Schema);
 
+// Exporta para ser usado por um controlador
 export default Classification;
