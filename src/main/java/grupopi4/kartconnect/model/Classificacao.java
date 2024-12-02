@@ -22,16 +22,16 @@ public class Classificacao implements Cloneable {
         final int pesoMin = 60;
         final int pesoMax = 110;
 
-        for (int i = 0; i < qtd; i++) {
+        for (int i = 0; i < qtd; i++){
             final String nome = nomes[new Random().nextInt(nomes.length)] + " " + sobrenomes[new Random().nextInt(sobrenomes.length)];
-            final Tempo tempo = Tempo.randomPorSegundos(minimoSegundos, maximoSegundos);
             final int peso = new Random().nextInt(pesoMax - pesoMin) + pesoMin;
+            final Tempo tempo = Tempo.randomPorSegundos(minimoSegundos, maximoSegundos);
             final String kartodromo = kartodromos[new Random().nextInt(kartodromos.length)];
             final String estado = estados[new Random().nextInt(estados.length)];
 
-            Classificacao c = new Classificacao(nome, peso, tempo, kartodromo, estado);
-            classificacoes[i] = c;
+            classificacoes[i] = new Classificacao(nome, peso, tempo, kartodromo, estado);
         }
+
         return classificacoes;
     }
 

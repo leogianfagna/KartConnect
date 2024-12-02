@@ -1,4 +1,4 @@
-import KartTrack from "../models/kart_track.js"
+import Kart_Track from "../models/kart_track.js"
 
 
 export const getKartTracks = async (req, res) => {
@@ -8,7 +8,7 @@ export const getKartTracks = async (req, res) => {
         const filter = {}
         if (name != "null") {filter.nome = { $regex: name, $options: "i" }}
 
-        const classifications = await KartTrack.find(filter)
+        const classifications = await Kart_Track.find(filter)
         res.json(classifications)
     } catch (error) {
         console.error(error)
