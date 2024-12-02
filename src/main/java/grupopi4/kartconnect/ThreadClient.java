@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.concurrent.TimeUnit;
 
 public class ThreadClient extends Thread {
 
@@ -34,6 +35,9 @@ public class ThreadClient extends Thread {
             // Usa a biblioteca jackson para conversão de tipos
             ObjectMapper mapper = new ObjectMapper();
             String classificacoesJson = mapper.writeValueAsString(classificacoes);
+
+
+            //TimeUnit.SECONDS.sleep(10);
 
             // Forma de se comunicar com o node
             writer.println(classificacoesJson);

@@ -9,6 +9,7 @@ export const postClassification = async (req, res) => {
     try {
         const { qtd } = req.body
         const client = new net.Socket()
+        let receivedData = "";
 
         client.connect(8000, 'localhost', () => {
             console.log('Connected to Java server')
@@ -16,16 +17,20 @@ export const postClassification = async (req, res) => {
         });
 
         // Fica esperando uma informação do Java. (data) é o resultado inteiro do Java que contém as classificações geradas
-        client.on('data', async (data) => {
-            console.log("Received data from Java server:", data.toString());
+        client.on('data', async (chunk) => {
+            receivedData += chunk.toString();
             try {
                 // No Java, o tipo da variável é String, precisa converter para JSON
-                const classificationArray = JSON.parse(data.toString())
+                const classificationArray = JSON.parse(receivedData)
                 await Classification.insertMany(classificationArray)
-                //console.log("dados inseridos")
+                console.log("dados inseridos: " + receivedData)
                 res.json("Classificações inseridas")
             } catch (error) {
-                console.error('Error parsing or inserting data:', error)
+                if (error.name === "SyntaxError"){
+                    return
+                }else{
+                   console.error('Error parsing or inserting data:', error) 
+                }
             }
 
             client.destroy()
