@@ -18,7 +18,7 @@ export const app = express()
 // Middleware que vai permitir compartilhamento de recursos de
 // diferentes domínios
 app.use(cors())
-
+app.use(express.json());
 connectDB()
 
 // Registra middlewares ou rotas para lidar com requisições, conectando os arquivos

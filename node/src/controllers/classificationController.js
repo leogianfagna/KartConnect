@@ -17,10 +17,12 @@ export const postClassification = async (req, res) => {
 
         // Fica esperando uma informação do Java. (data) é o resultado inteiro do Java que contém as classificações geradas
         client.on('data', async (data) => {
+            console.log("Received data from Java server:", data.toString());
             try {
                 // No Java, o tipo da variável é String, precisa converter para JSON
                 const classificationArray = JSON.parse(data.toString())
                 await Classification.insertMany(classificationArray)
+                //console.log("dados inseridos")
                 res.json("Classificações inseridas")
             } catch (error) {
                 console.error('Error parsing or inserting data:', error)
