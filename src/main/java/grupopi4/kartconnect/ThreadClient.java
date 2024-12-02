@@ -26,13 +26,16 @@ public class ThreadClient extends Thread {
             BufferedReader reader = new BufferedReader(new InputStreamReader(conexao.getInputStream()));
             PrintWriter writer = new PrintWriter(conexao.getOutputStream());
 
+            // Reader lê o que aparece no próprio terminal
             int qtd = Integer.parseInt(reader.readLine());
 
             Classificacao[] classificacoes = Classificacao.gerarClassificacoes(qtd);
 
+            // Usa a biblioteca jackson para conversão de tipos
             ObjectMapper mapper = new ObjectMapper();
             String classificacoesJson = mapper.writeValueAsString(classificacoes);
 
+            // Forma de se comunicar com o node
             writer.println(classificacoesJson);
             System.out.println(classificacoesJson);
 
