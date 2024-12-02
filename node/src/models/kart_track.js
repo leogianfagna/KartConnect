@@ -1,3 +1,5 @@
+// Modelo para a coleção de kartódromos
+
 import mongoose from 'mongoose';
 
 const Schema = new mongoose.Schema({
@@ -12,4 +14,5 @@ const Schema = new mongoose.Schema({
 
 const Kart_Track = mongoose.model('Kart_Track', Schema);
 
+// Exporta para ser usado por um controlador
 export default Kart_Track;
