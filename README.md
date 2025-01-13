@@ -1,7 +1,10 @@
-# Introdução
-Repositório do **time 2** do Projeto Integrador IV, realizado em 2024 pela universidade PUC Campinas.
+<div align="center">
+  <h1>🛜 KartConnect</h1>
+  <p>Portal de resultados em competições automobilísticas.</p>
 
-![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=CONCLUÍDO&color=GREEN&style=for-the-badge)
+  ![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=CONCLUÍDO&color=GREEN&style=for-the-badge)
+  
+</div>
 
 # Descrição:
 Esse projeto cria um servidor em Java que hospeda uma aplicação web que consiste em um portal dos melhores resultados mensais de kartódromos em tempo real em uma interface interativa e amigável usando o MongoDB como banco de dados não relacional.
